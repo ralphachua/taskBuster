@@ -1,4 +1,8 @@
 .main {
+  .main-header__menu-trigger {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+  }
   .sidebar {
     transition: transform 0.3s ease;
     transform: translateX(-100%);
@@ -14,8 +18,30 @@
     .app-content {
       transform: translateX(320px);
     }
+    .main-header__menu-trigger {
+      opacity: 0;
+    }
   }
 }
+
+/**
+
+  #MYTASKS
+
+*/
+
+.battlefield-section {
+  min-height: 300px;
+  background-color: $ash-blue;
+  position: relative;
+}
+  .battlefield-section__fg { //foreground
+    position: absolute;
+  }
+
+  .battlefield-section__mg { //middleground
+    position: absolute;
+  }
 
 .task-table {
   background-color: $task-table-bgcolor;
@@ -24,7 +50,6 @@
   padding-top: 12px;
   padding-left: 17px;
   padding-right: 17px;
-  margin-top: 5%;
 }
 
 .task-table__header {
@@ -75,6 +100,12 @@
   @include omega;
 }
 
+/**
+
+  #MYPROJECTS
+
+*/
+
 .project-list__item {
   border: 1px solid $light-blue;
   padding: 14px;
@@ -104,9 +135,16 @@
 .project-details-section {
 
 }
+
+.end-sprint-box {
+  padding: 10px;
+  border: 1px solid $light-blue;
+}
+
 .project__action-bar {
   padding: 20px 0;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .project__action-bar__item:first-child {
   text-align: right;
@@ -123,6 +161,10 @@
   margin-top: 14px;
 }
 
+.myprojects-section, .project-details-section {
+  padding-top: 50px !important;
+}
+
 /* always present */
 .expand-transition {
   transition: all .3s ease;
@@ -135,4 +177,12 @@
   height: 0;
   padding: 0 10px;
   opacity: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .project__information {
+    .project__summary,.project__team {
+      @include span-columns(12);
+    }
+  }
 }

@@ -26,16 +26,22 @@
       <div class="sidebar__avatar">
 
       </div>
-      <progress-bar
-        :progress="25"
-        :min="0"
-        :max="100"
-        text="EXP 14/20"></progress-bar>
-      <progress-bar
-        :progress="40"
-        :min="0"
-        :max="100"
-        text="TASK 3/8"></progress-bar>
+      <div class="exp-progress-bar">
+        <div class="user-level">
+        </div>
+        <progress-bar
+          :progress="14"
+          :min="0"
+          :max="20"
+          text="EXP "></progress-bar>
+      </div>
+      <div class="task-progress-bar">
+        <progress-bar
+          :progress="3"
+          :min="0"
+          :max="8"
+          text="TASK "></progress-bar>
+      </div>
     </div>
     <ul id="sidebar-menu" class="sidebar__menu" @click="toggleSidebar">
       <li class="sidebar__menu__item">

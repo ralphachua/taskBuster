@@ -1,15 +1,17 @@
-<section class="section project-details-section">
+<section class="section project-details-section grid">
   <header class="section__header">
-    <h1 class="project__title primary centered">
+    <h1 class="project__title title primary centered">
       PROJECT NAME: {{projectData.projectName}}
     </h1>
 
     <div class="project__action-bar grid">
-      <div class="project__action-bar__item col-6 primary">
+      <div class="project__action-bar__item col-6 primary light">
         Add due date
       </div>
       <div class="project__action-bar__item col-6 primary">
-        End Sprint
+        <span class="end-sprint-box light">
+          End Sprint
+        </span>
       </div>
     </div>
   </header>
@@ -25,7 +27,7 @@
           </div>
         </div>
         <div class="task-summary">
-          <h2 class="label">
+          <h2 class="label title">
             Summary
           </h2>
           <div class="primary tasks-todo">

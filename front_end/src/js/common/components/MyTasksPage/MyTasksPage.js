@@ -41,7 +41,10 @@ define([
         console.log(todoColumn);
 
         dragula([todoColumn, ongoingColumn, doneColumn]).on('drag', function (el) {
-          console.log(el);
+          console.dir(el);
+          if (el.hasOwnProperty(('__vue__'))) {
+            el.__vue__.$dispatch('taskDragged', el.__vue__);
+          }
         });
 
 

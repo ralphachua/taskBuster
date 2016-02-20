@@ -1,6 +1,10 @@
 .main-header {
   height: 50px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
+
   .main-header__inner {
     padding: 14px 0;
   }

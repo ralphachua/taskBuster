@@ -17,6 +17,11 @@ define(['vue', 'text!./progressBar.html'], function (Vue, Template){
         type: Number,
         required: true
       }
+    },
+    computed: {
+      percentage: function () {
+        return (this.progress/this.max)*100;
+      }
     }
   });
 });
