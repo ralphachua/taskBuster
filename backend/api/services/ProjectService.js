@@ -13,21 +13,18 @@ module.exports = {
       },
       member: ["project", function(next, cres) {
         var members = cres.project.members
-        console.log(members)
         var mergedMembers = []
         members.forEach(function(member){
           var params = {
-            userId : member.userId
+            userId : member
           }
           User.findOne(params, function(err, user){
             mergedMembers.push({
-              userName: user.userName,
+              userName: user.name,
               gender: user.gender,
               avatarUrl: user.avatarUrl
             })
-
             if (member == members[members.length - 1]) {
-              console.log(mergedMembers)
               return next(null, mergedMembers)
             }
           })
@@ -53,27 +50,32 @@ module.exports = {
         } else {
           return next(null, tasksDone)
         }
+      }], 
+      tasksTotal: ["project", function(next, cres) {
+        var tasks = cres.project.tasks
+        if (tasks) {
+          return next(null, tasks.length)
+        } else {
+          return next(null, 0)
+        }
       }]
     }
 
     async.auto(tasks, function(err, result) {
       if (err) {
-      	console.log("Error Generating User JSON")
-      	return new Errors.UnknownError()
-      } else if (_.isEmpty(result.user)) {
-      	console.log("User does not exist")
-        return new Errors.RecordNotFound();
+      	callback(new Errors.UnknownError())
+      } else if (_.isEmpty(result.project)) {
+      	callback(new Errors.RecordNotFound())
       } else {
         var data = {
           projectName:   result.project.projectName,
           tasksDone:     result.tasksDone,
-          tasksTotal:    result.project.tasks.length,
-          members:       result.members
+          tasksTotal:    result.tasksTotal,
+          members:       result.member
         };
         if (typeof callBack === "function") {
-    		  callBack(data)
+    		  callBack(null,data)
 		    }
-        return data
       }
     });
   }
