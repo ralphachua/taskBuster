@@ -1,11 +1,21 @@
+/**
+  REGISTER PAGES TO BE USED HERE
+*/
 define([
   'common/components/MyTasksPage/MyTasksPage',
   'common/components/ProjectDetailsPage/ProjectDetailsPage',
+  'common/components/BadgeCapsulePage/BadgeCapsule',
   'common/components/MyProjectsPage/MyProjectsPage'
-], function (MyTasks, ProjectDetails, MyProjects) {
+], function (
+    MyTasks,
+    ProjectDetails,
+    BadgeCapsule,
+    MyProjects
+  ) {
   return {
     'my-tasks-page' : MyTasks,
     'project-details-page' : ProjectDetails,
-    'my-projects-page': MyProjects
+    'badge-capsule-page' : BadgeCapsule,
+    'my-projects-page' : MyProjects
   };
 });
