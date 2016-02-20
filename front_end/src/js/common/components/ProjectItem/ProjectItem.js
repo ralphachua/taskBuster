@@ -1,4 +1,4 @@
-define(['vue', 'text!./projectentry.html'],function(Vue, Template){
+define(['vue', 'text!./ProjectItem.html'],function(Vue, Template){
   return Vue.extend({
     template: Template,
     props: {
