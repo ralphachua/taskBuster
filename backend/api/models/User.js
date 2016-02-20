@@ -8,49 +8,41 @@ module.exports = {
 
     userId: {
       type: "string",
-      required: true,
-      columnName: "user_id"
+      required: true
     },
 
     name: {
       type: "string",
-      required: true,
-      columnName: "name"
+      required: true
     },
 
     gender: {
       type: "string",
-      required: true,
-      columnName: "gender"
+      required: true
     },
 
     avatarUrl: {
       type: "string",
-      required: true,
-      columnName: "avatar_url"
+      required: true
     },
 
     levelId: {
       type: "string",
-      required: true,
-      columnName: "level_id"
+      required: true
     },
 
     activeBadge: {
       type: "string",
-      required: true,
-      columnName: "active_badge"
+      required: true
     },
 
     badges: {
       type: "array",
-      columnName: "badges"
     },
 
     totalPointsDone: {
       type: "integer",
-      defaultsTo: 0,
-      columnName: "total_points_done"
+      defaultsTo: 0
     },
 
     toJSON: function() {
