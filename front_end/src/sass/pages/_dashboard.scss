@@ -47,7 +47,18 @@
   }
 
 .task-table__columns {
+  @include outer-container;
   margin-top: 20px;
+
+}
+/**
+  Some hacks
+  [1] Used to retain column width if there are no child elements.
+  [2] Dragging from one column to another is impossible for 0 height columns
+*/
+.task-table__column {
+  padding: 1px; //[1]
+  min-height: 80px; //[2]
 }
 
 .task-table__item {
@@ -56,6 +67,7 @@
   border: 1px solid #ccc;
   padding: 22px;
   margin-bottom: 14px;
+  cursor: pointer;
 }
 .task-table__item[data-col="3"] {
   @include omega;
