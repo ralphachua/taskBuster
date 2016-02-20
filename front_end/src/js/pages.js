@@ -13,7 +13,8 @@ define([
   return {
     'my-tasks-page' : MyTasks,
     'project-details-page' : ProjectDetails,
-    'badge-capsule-page' : BadgeCapsule
+    'badge-capsule-page' : BadgeCapsule,
+    'leaderboard': '<p>This is Leaderboard, yeah!</p>'
 
   };
 });
