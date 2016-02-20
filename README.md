@@ -283,17 +283,7 @@ Endpoint for Creating projects
 	status: “success”,
 	data: {
 		projectName: “Project Name 2”, status: “TODO”
-		members:[
-			{
-				name: “Fountain”,
-				gender: “male”,
-				activeBadge: {
-					imageUrl: “/img/123”,
-					badgeName: “Bug Crusher”
-				},
-				tasks: {} 
-			}
-		]
+		members: ["id123", "ad123", "eq678"],
 		due_date:”2016-02-17T08:33:23.257Z”
 	}
 }
@@ -358,30 +348,8 @@ Endpoint for updating project entry
 	data: {
 		projectName: “Project Name ”,
 		status: “TODO”
-		members:[{
-				name: “Fountain”,
-				gender: “male”,
-				activeBadge: {
-					imageUrl: “/img/123”,
-					badgeName: “Bug Crusher” 
-				},
-				tasks: {}
-			}
-		]
-		dueDate:”2016-02-17T08:33:23.257Z”,
-		tasks: [{
-				taskId: “a1bvc3”,
-				taskName: “Battlefields UI”,
-				taskDescription: “Create assets for the battlefield screen”,
-				taskPoint: 3
-			},
-			{
-				taskId: “a1bvjk”,
-				taskName: “Create Tasks API”,
-				taskDescription: “Expose a task API”,
-				taskPoint: 3
-			}
-		}]
+		members: ["sda123", "asd123", "eqw687", "agh982"]
+		dueDate:”2016-02-17T08:33:23.257Z”
 	}
 }
 ```
