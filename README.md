@@ -3,7 +3,7 @@
 ## GET /users/:user_id
 Endpoint for retrieving user details
 
-### Response
+**Response**
 ```javascript
 // HTTP status code: 200
 {
@@ -50,7 +50,7 @@ Endpoint for retrieving user details
 ## GET /users/:user_id/tasks
 Endpoint for retrieving user's tasks
 
-### Response
+**Response**
 ```javascript
 // HTTP status code: 200
 {
@@ -111,7 +111,7 @@ Endpoint for Creating Tasks
 }
 ```
 
-### Response
+**Response**
 ```javascript
 // HTTP Status Code: 200
 {
@@ -185,7 +185,7 @@ Endpoint for updating tasks details (updating status)
 }
 ```
 
-### Response
+**Response**
 ```javascript
 // HTTP Status Code: 200
 {
@@ -218,5 +218,158 @@ Endpoint for updating tasks details (updating status)
 	data: {
 		message: “An unknown error occurred”
 	}
+}
+```
+
+## GET /projects/:project_id
+Endpoint for retrieving project details
+
+**Response**
+```javascript
+// HTTP status code: 200
+{
+	status: “success”,
+	data: {
+		project_name: “Project Name 2”,
+		tasks_todo: 5,
+		tasks_ongoing: 1,
+		tasks_done: 2,
+		due_date: “2016-02-17T08:33:23.257Z”
+	}
+}
+```
+```javascript
+//ProjectNotFound
+{
+	status: “error”,
+	data: {
+		message: “Project does not exist”
+	}
+}
+```
+```javascript
+// UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+}
+```
+
+## GET /users/:user_id/projects
+Endpoint for retrieving user's projects
+
+**Response**
+```javascript
+// HTTP status code: 200
+{
+	status: “success”,
+	data: [{
+		project_id: “hja12”,
+		project_name: “Project Name 2”,
+		due_date: “2016-02-17T08:33:23.257Z”
+	}]
+}
+```
+```javascript
+//UserNotFound
+{
+	status: “error”,
+	data: {
+		message: “User does not exist”
+	}
+}
+```
+```javascript
+//UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+
+}
+```
+
+## GET /projects/:project_id/members
+Endpoint for retrieving project members
+
+**Response**
+```javascript
+// HTTP status code: 200
+{
+	status: “success”,
+	data: [
+		{
+			name: “Fountain”,
+			gender: “male”,
+			active_badge: {
+				image_url: “/img/123”,
+				badge_name: “Bug Crusher”
+			},
+			task: {
+				todo: [
+					{
+						task_id: “a1bvc3”,
+						task_name: “Battlefields UI”,
+						task_description: “Create assets for the battlefield screen”
+						task_point: 3
+		
+					},
+					{
+						task_id: “a1bvjk”,
+						task_name: “Create Tasks API”,
+						task_description: “Expose a task API”
+						task_point: 3
+		
+					}
+				],
+				ongoing: [],
+				done: [
+					{
+						task_id: “ybhv213s”,
+						task_name: “Create Login API”,
+						task_description: “Expose a login API”
+						task_point: 1
+					}
+				]
+
+			}
+		},
+		{
+			name: “Pen”,
+			gender: “female”,
+			active_badge: {
+				image_url: “/img/456”,
+				badge_name: “Space Trainee”
+			},
+			task: {
+				todo: [],
+				ongoing: [],
+				done: []
+			}
+		}
+
+	]
+}
+```
+```javascript
+//ProjectNotFound
+{
+	status: “error”,
+	data: {
+		message: “Project does not exist”
+	}
+}
+```
+```javascript
+//UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+
 }
 ```
