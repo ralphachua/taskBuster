@@ -1,7 +1,20 @@
 <aside class="sidebar">
   <div class="sidebar__inner">
     <div class="sidebar__trigger" @click="toggleSidebar">
-      X
+      <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+      <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+
+          <g id="Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+              <g id="My-Tasks-+-sidebar" sketch:type="MSArtboardGroup" transform="translate(-365.000000, -21.000000)" fill="#E747A8">
+                  <g id="icon/close" sketch:type="MSLayerGroup" transform="translate(364.000000, 20.000000)">
+                      <g id="close-copy-9" transform="translate(1.000000, 1.000000)" sketch:type="MSShapeGroup">
+                          <rect id="Rectangle-723-Copy" transform="translate(7.000000, 7.000000) rotate(-45.000000) translate(-7.000000, -7.000000) " x="-1" y="6" width="16" height="2"></rect>
+                          <rect id="Rectangle-723-Copy-2" transform="translate(7.000000, 7.000000) rotate(-315.000000) translate(-7.000000, -7.000000) " x="-1" y="6" width="16" height="2"></rect>
+                      </g>
+                  </g>
+              </g>
+          </g>
+      </svg>
     </div>
     <div class="sidebar__account-info">
       <div class="sidebar__name centered">
@@ -25,18 +38,18 @@
         :foo="hello"></progress-bar>
         Tasks 3/8
     </div>
-    <ul class="sidebar__menu">
+    <ul id="sidebar-menu" class="sidebar__menu">
       <li class="sidebar__menu__item">
-        <a href="">My Tasks</a>
+        <a v-link="{ path: '/' }">My Tasks</a>
       </li>
       <li class="sidebar__menu__item">
-        <a href="">My Project</a>
+        <a v-link="{ path: '/my-project' }">My Project</a>
       </li>
       <li class="sidebar__menu__item">
-        <a href="">Badge Capsule</a>
+        <a v-link="{ path: '/badge-capsule' }">Badge Capsule</a>
       </li>
       <li class="sidebar__menu__item">
-        <a href="">Leaderboards</a>
+        <a v-link="{ path: '/leaderboards' }">Leaderboards</a>
       </li>
     </ul>
   </div>

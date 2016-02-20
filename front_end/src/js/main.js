@@ -20,17 +20,35 @@ function (
 
   var AppView;
   var grids;
-  AppView = new Vue({
-    el: '#App',
-    data: {
-      isSidebarOn: false
+  AppView = Vue.extend({
+    data: function() {
+      return {
+        isSidebarOn: false
+      };
     },
     methods: {
       toggleSidebar: function () {
         this.isSidebarOn = !this.isSidebarOn;
       }
-    },
-    components: Pages
+    }
   });
+
+  var router = new Router();
+  router.map({
+    '/': {
+      component: Pages['my-tasks-page']
+    },
+    '/my-project': {
+      component: Pages['project-details-page']
+    },
+    '/badge-capsule': {
+      component: Pages['badge-capsule-page']
+    },
+    '/leaderboards': {
+      component: Pages['leaderboard']
+    }
+  });
+
+  router.start(AppView, '#App');
 
 });
