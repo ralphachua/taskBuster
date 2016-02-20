@@ -4,7 +4,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 22px;
+  padding-top: 0px;
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-bottom: 22px;
   background-color: $dark-blue;
   height: 100%;
   z-index: 100;
@@ -12,10 +15,14 @@
 }
   .sidebar__trigger {
     @include size(16px);
-    cursor: pointer;
     text-align: right;
     float:right;
-    color: $magenta;
+    width: 100%;
+    overflow: hidden;
+    svg {
+      float:right;
+      cursor: pointer;
+    }
   }
 
   .sidebar__name {
