@@ -11,13 +11,14 @@ Endpoint for retrieving user details
 	data: {
 		name: “Fountain”,
 		gender: “male”,
+		avatar_url: "/avatar/abc",
 		level:  {
 			name: “level 2”,
 			current_points: 30,
 			required_points: 50
-},
+		},
 		active_badge: {
-			image_url: “/img/123”,
+			badge_url: “/img/123”,
 			badge_name: “Bug Crusher”
 		},
 		task: {
