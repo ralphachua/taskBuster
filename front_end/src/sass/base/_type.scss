@@ -1,13 +1,13 @@
 html, body {
   font-size: $base-font-size;
   font-family: 'Roboto', sans-serif;
-  line-spacing: 21;
-  letter-spacing: 0.7;
+  letter-spacing: 0.7px;
   color: $white;
 }
 
 h1 {
   font-size: $base-font-size + 4*$base-font-mult;
+  letter-spacing: 1.56;
 }
 
 h2 {
@@ -29,6 +29,8 @@ a {
 
 .text {
   color: $ash-blue;
+  font-weight: 300;
+
 }
 
 .primary {

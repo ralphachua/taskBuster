@@ -32,12 +32,18 @@
 }
   .task-table__header__title {
     float:left;
+    text-transform: uppercase;
   }
   .task-table__header__add {
     float:right;
   }
   .task-table__item__title {
     color: $black;
+    margin-bottom: 10px;
+  }
+
+  .task-table__item__content {
+    margin-bottom: 10px;
   }
 
 .task-table__columns {
