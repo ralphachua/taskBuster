@@ -1,6 +1,6 @@
 <section class="section myprojects-section">
   <ul class="projects-list">
-    <li class="project-list__item" v-for="project in projects" @click="viewProject(project)">
+    <li class="project-list__item" v-for="project in projects" @click="viewProject(project)" stagger="100">
       <div class="project-list__item__inner">
         <h3 class="project__name primary">{{project.projectName}}</h3>
         <h4 class="project__due-date secondary light">
@@ -21,7 +21,7 @@
                     </g>
                 </g>
             </g>
-        </svg>        
+        </svg>
       </div>
     </li>
   </ul>
