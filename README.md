@@ -259,11 +259,11 @@ Endpoint for retrieving project details
 ## POST /projects
 Endpoint for Creating projects
 **parameters:**
-|Name|Type|
-|---|---|
-|project_name|String(Required)|
-|members|[String](Optional)|
-|due_date|String(Optional)|
+| Name | Type |
+| --- | --- |
+| project_name | String(Required) |
+| members | [String](Optional) |
+| due_date | String(Optional) |
 
 **Sample Request Body**
 ```javascript
@@ -328,13 +328,13 @@ Endpoint for Creating projects
 ## PUT /projects/:project_id
 Endpoint for updating project entry
 **Parameters:**
-|Name|Type|
-|---|---|
-|project_name|String(Optional)|
-|members|[String](Optional)|
-|due_date|String(Optional)|
-|status|String(Optional)|
-|tasks|String(Optional)|
+| Name | Type |
+| --- | --- |
+| project_name | String(Optional) |
+| members | [String](Optional) |
+| due_date | String(Optional) |
+| status | String(Optional) |
+| tasks | String(Optional) |
 		
 **Sample Request Body**
 ```javascript
