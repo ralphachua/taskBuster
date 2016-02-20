@@ -1,0 +1,15 @@
+.progress-bar-component {
+    $progress-bar-height: 5px;
+    margin-bottom: 5px;
+    .progress-bar__inner {
+      width: 100%;
+      height: $progress-bar-height;
+      background-color: #CCC;
+      position: relative;
+    }
+    .progress-indicator {
+      position: absolute;
+      background-color: $magenta;
+      height: $progress-bar-height;
+    }
+}

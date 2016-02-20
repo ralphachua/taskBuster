@@ -1,6 +1,7 @@
-<section class="app__section">
-    Progress Bar min: {{min}} <br>
-    Progress Bar max: {{max}} <br>
-    Progress Bar progress: {{progress}} <br>
-    Progress text: {{text}}
-</section>
+<div class="progress-bar-component">
+    <div class="progress-bar">
+      <div class="progress-bar__inner">
+        <div class="progress-indicator" :style="{width: progress+'%'}"></div>
+      </div>
+    </div>
+</div>

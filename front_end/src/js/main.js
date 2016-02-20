@@ -2,26 +2,35 @@ define([
   'jquery',
   'vue',
   'vue-resource',
-  'text!test.html',
+  'vue-router',
   'common/components/ProgressBar/progressBar',
-  'common/components/BurndownChart/burndownChart'
+  'pages'
 ],
-function ($, Vue, Resource, test, ProgressBar, Burndown) {
+function (
+  $,
+  Vue,
+  Resource,
+  Router,
+  ProgressBar,
+  Pages) {
   Vue.use(Resource);
+  Vue.use(Router);
+  Vue.component('progress-bar', ProgressBar);
 
-  console.log(test);
-
-  var app = new Vue({
+  var AppView;
+  var grids;
+  AppView = new Vue({
     el: '#App',
     data: {
-      global: {}
+      isSidebarOn: false
     },
-    components: {
-      burndown: Burndown
-    }
+    methods: {
+      toggleSidebar: function () {
+        this.isSidebarOn = !this.isSidebarOn;
+      }
+    },
+    components: Pages
   });
 
-  Vue.component('progress-bar', ProgressBar);
-  Vue.component('burndown', Burndown);
 
 });
