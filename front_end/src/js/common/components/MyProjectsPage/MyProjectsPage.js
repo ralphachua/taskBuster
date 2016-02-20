@@ -13,17 +13,17 @@ define(['vue',
     var mockresponse = {
         status: 'success',
         data: [{
-            projectId: 'hja12',
+            projectId: '56c8daf3f846f71e4451eec8',
             projectName: 'Project Name 1',
             due_date: ''
         },
         {
-            projectId: 'hja123',
+            projectId: '56c8daf3f846f71e4451eec8',
             projectName: 'Project Name 2',
             due_date: '2016-02-17T08:33:23.257Z'
         },
         {
-            projectId: 'hja1234',
+            projectId: '56c8daf3f846f71e4451eec8',
             projectName: 'Project Name 3',
             due_date: '2016-02-17T08:33:23.257Z'
         }]
