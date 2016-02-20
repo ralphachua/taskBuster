@@ -398,6 +398,7 @@ Endpoint for retrieving project members
 		{
 			name: “Fountain”,
 			gender: “male”,
+			avatarUrl: "/avatar/abc",
 			activeBadge: {
 				badgeUrl: “/img/123”,
 				badgeName: “Bug Crusher”
@@ -434,6 +435,7 @@ Endpoint for retrieving project members
 		{
 			name: “Pen”,
 			gender: “female”,
+			avatarUrl: "/avatar/abc",
 			activeBadge: {
 				imageUrl: “/img/456”,
 				badgeName: “Space Trainee”
