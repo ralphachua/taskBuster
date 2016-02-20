@@ -2,11 +2,10 @@
 module.exports = {
   
   tableName: "users",
-  autoPK: false,
 
   attributes: {
 
-    userId: {
+    socialId: {
       type: "string",
       required: true
     },

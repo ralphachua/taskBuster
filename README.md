@@ -99,6 +99,41 @@ Endpoint for retrieving user's tasks
 }
 ```
 
+## GET /users/:userId/projects
+Endpoint for retrieving user's tasks
+
+**Response**
+```javascript
+// HTTP status code: 200
+{
+	status: “success”,
+	data: [{
+		project_id: “hja12”,
+		project_name: “Project Name 2”,
+		due_date: “2016-02-17T08:33:23.257Z”
+	}]
+}
+
+```
+```javascript
+//UserNotFound
+{
+	status: “error”,
+	data: {
+		message: “User does not exist”
+	}
+}
+```
+```javascript
+// UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+}
+```
+
 ## POST /tasks
 Endpoint for Creating Tasks
 

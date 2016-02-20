@@ -14,7 +14,8 @@ module.exports = {
       defaultsTo: 0
     },
     tasks: {
-      type: "array"
+      type: "array",
+      defaultsTo: []
     },
     members: {
       type: "array"

@@ -46,5 +46,28 @@ module.exports = {
       object.updatedAt = moment().utc(this.updatedAt).format();
       return object;
     }
-  }
+  },
+
+  /*afterCreate: function(values, done) {
+    var tasks = {
+      find: function(next) {
+        Project.find({ id: values.projectId }, function(err, project){
+          next(err, project);
+        });
+      },
+      update: ["find", function(next, cres) {
+        var params = {
+          projectPointsTotal: values.taskPoints + cres.find.projectPointsTotal
+        };
+        Project.update({ id: values.projectId }, function(err, project){
+          next(err, project);
+        });
+      }]
+    }
+    
+    async.auto(tasks, function(err, result) {
+      return done();
+    });
+  
+  },*/
 }
