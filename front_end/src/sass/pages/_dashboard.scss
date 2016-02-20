@@ -60,3 +60,14 @@
 .project__action-bar__item:first-child {
   text-align: right;
 }
+
+.badge__image {
+  max-width: 140px;
+  margin: 0 auto;
+}
+
+.badge__description {
+  padding: 22px;
+  border: 1px solid #ccc;
+  margin-top: 14px;
+}
