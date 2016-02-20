@@ -1,3 +1,17 @@
 .grid {
   @include outer-container($grid-container-width);
+
+  .col-*:last-child {
+    @include omega;
+  }
+}
+
+.col-4  {
+  @include span-columns(4);
+}
+.col-5  {
+  @include span-columns(5);
+}
+.col-6  {
+  @include span-columns(6);
 }

@@ -5,20 +5,16 @@
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
-    <div id="App" class="main">
-      <!-- build:include common/sidebar-content.html -->
-      <!-- /build -->
-      <!-- build:include common/header.html -->
+    <div id="App" class="main" :class="{'activeSidebar' : isSidebarOn}">
+      <!-- build:include common/sidebar.html -->
       <!-- /build -->
       <div class="app-content grid">
-        <div id="BurndownInner">
-          <burndown></burndown>
-        </div>
-        <div id="AppInner">
-          <projects
-          :projects-data="$data.global.projectsData"
-          ></projects>
-        </div>
+        <!-- build:include common/header.html -->
+        <!-- /build -->
+        <!-- <my-tasks-page></my-tasks-page> -->
+        
+        <!-- <my-projects-page></my-projects-page> -->
+        <project-details-page></project-details-page>
       </div>
       <footer class="main-footer grid">
         <div class="main-footer__legal">

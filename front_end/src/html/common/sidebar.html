@@ -1,0 +1,43 @@
+<aside class="sidebar">
+  <div class="sidebar__inner">
+    <div class="sidebar__trigger" @click="toggleSidebar">
+      X
+    </div>
+    <div class="sidebar__account-info">
+      <div class="sidebar__name centered">
+        Pedro
+      </div>
+      <div class="sidebar__user__title centered">
+        "Space Trainee"
+      </div>
+      <div class="sidebar__avatar">
+
+      </div>
+      <progress-bar
+        :progress="25"
+        :min="0"
+        :max="100"
+        :foo="hello"></progress-bar>
+      <progress-bar
+        :progress="40"
+        :min="0"
+        :max="100"
+        :foo="hello"></progress-bar>
+        Tasks 3/8
+    </div>
+    <ul class="sidebar__menu">
+      <li class="sidebar__menu__item">
+        <a href="">My Tasks</a>
+      </li>
+      <li class="sidebar__menu__item">
+        <a href="">My Project</a>
+      </li>
+      <li class="sidebar__menu__item">
+        <a href="">Badge Capsule</a>
+      </li>
+      <li class="sidebar__menu__item">
+        <a href="">Leaderboards</a>
+      </li>
+    </ul>
+  </div>
+</aside>
