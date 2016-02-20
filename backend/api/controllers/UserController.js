@@ -4,17 +4,17 @@ module.exports = {
   create: function(req, res) {
 
     if (!req.param("name")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Missing name Parameter."));
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Name required"));
       return res.badRequest(payload);
     }
 
     if (!req.param("gender")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Missing gender Parameter."));
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Gender required"));
       return res.badRequest(payload);
     }
 
     if (!req.param("userId")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Missing userId Parameter."));
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("User ID required"));
       return res.badRequest(payload);
     }
 
@@ -57,6 +57,7 @@ module.exports = {
       } else if (result = Errors.RecordNotFound()) {
         payload = ApiService.toErrorJSON(result)
         return res.serverError(payload)
+
       } else {
         payload = ApiService.toSuccessJSON(result)
         return res.json(payload)

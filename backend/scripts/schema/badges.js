@@ -11,7 +11,7 @@ db.badges.insert({
   "badgeId"            : "asd765",
   "badgeName"          : "Space Trainee",
   "badgeUrl"           : "/badge/asd765",
-  "requiredPsoints"     : 20
+  "requiredPoints"     : 20
 });
 
 db.badges.insert({

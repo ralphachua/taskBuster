@@ -1,44 +1,35 @@
 
+
 module.exports = {
   
-  tableName: "tasks",
+  tableName: "projects",
 
   attributes: {
-
-    taskName: {
+    projectName: {
       type: "string",
       required: true
     },
-
-    taskDescription: {
-      type: "string",
-      required: true
-    },
-
-    taskPoints: {
+    projectPointsTotal: {
       type: "integer",
-      required: true
+      defaultsTo: 0
     },
-
-    projectId: {
+    tasks: {
+      type: "array"
+    },
+    members: {
+      type: "array"
+    },
+    dueDate: {
+      type: "date"
+    },
+    createdBy: {
       type: "string",
       required: true
     },
-
-    assignedTo: {
-      type: "string",
-      required: true
-    },
-
     status: {
       type: "string",
       defaultsTo: "TODO"
     },
-
-    doneAt: {
-      type: "date"
-    },
-
     toJSON: function() {
       var moment = require("moment");
       var object = this.toObject();
