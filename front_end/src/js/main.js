@@ -52,6 +52,7 @@ function (
           component: Pages['my-projects-page']
         },
         '/project' : {
+          name: 'project-details',
           component: Pages['project-details-page']
         }
       }
