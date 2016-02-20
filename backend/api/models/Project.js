@@ -7,35 +7,28 @@ module.exports = {
   attributes: {
     projectName: {
       type: "string",
-      required: true,
-      columnName: "project_name"
+      required: true
     },
     projectPointsTotal: {
       type: "integer",
-      defaultsTo: 0,
-      columnName: "project_points_total"
+      defaultsTo: 0
     },
     tasks: {
-      type: "array",
-      columnName: "tasks"
+      type: "array"
     },
     members: {
-      type: "array",
-      columnName: "members"
+      type: "array"
     },
     dueDate: {
-      type: "date",
-      columnName: "due_date"
+      type: "date"
     },
     createdBy: {
       type: "string",
-      required: true,
-      columnName: "created_by"
+      required: true
     },
     status: {
       type: "string",
-      defaultsTo: "TODO",
-      columnName: "status"
+      defaultsTo: "TODO"
     },
     toJSON: function() {
       var moment = require("moment");

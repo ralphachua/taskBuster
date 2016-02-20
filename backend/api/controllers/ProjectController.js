@@ -4,7 +4,7 @@ module.exports = {
   create: function(req, res) {
 
     if (!req.param("projectName")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Missing projectName Parameter."));
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Project name required"));
       return res.badRequest(payload);
     }
 

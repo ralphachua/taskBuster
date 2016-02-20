@@ -29,7 +29,6 @@ module.exports = {
     }
 
     var params = {
-      taskId : "taskId", // Task ID to fix
       taskName:              req.param("taskName"),
       taskDescription:       req.param("taskDescription"),
       assignedTo:            req.param("assignedTo"),
@@ -64,11 +63,20 @@ module.exports = {
     }
 
     var tasks = {
-      updateRecord: function(next) {
-        Task.update({taskId: req.param("taskId")},paramsToUpdate, function(err, task) {
+      find: function(next) {
+        Task.findOne({id: req.param("taskId")}, function(err, task) {
+          if (_.isEmpty(task)) {
+            var payload = ApiService.toErrorJSON(new Errors.RecordNotFound("Task does not exist"));
+            return res.notFound(payload);
+          }
           return next(err, task);
         });
-      }
+      },
+      updateRecord: ["find", function(next) {
+        Task.update({id: req.param("taskId")},paramsToUpdate, function(err, task) {
+          return next(err, task);
+        });
+      }]
     }
 
     async.auto(tasks, function(err, result) {
