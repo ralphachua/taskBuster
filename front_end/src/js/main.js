@@ -3,10 +3,12 @@ define([
   'vue',
   'vue-resource',
   'text!test.html',
+'common/components/ProgressBar/progressBar',
   'common/components/burndownchart/burndown'
 ],
-function ($, Vue, Resource, test, burndown) {
+function ($, Vue, Resource, test, ProgressBar, burndown) {
   Vue.use(Resource);
+
   console.log(test);
 
   var app = new Vue({
@@ -39,4 +41,7 @@ function ($, Vue, Resource, test, burndown) {
 
     console.groupEnd();
   });
+
+  Vue.component('progress-bar', ProgressBar);
+
 });
