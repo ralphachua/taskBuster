@@ -3,7 +3,8 @@ requirejs.config({
   paths: {
     jquery: 'vendor/jquery',
     vue : 'vendor/vue',
-    'vue-resource' : 'vendor/vue-resource'
+    'vue-resource' : 'vendor/vue-resource',
+    highcharts: 'vendor/highcharts'
   },
   deps: ['main']
 });

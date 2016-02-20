@@ -3,10 +3,10 @@ define([
   'vue',
   'vue-resource',
   'text!test.html',
-'common/components/ProgressBar/progressBar',
-  'common/components/burndownchart/burndown'
+  'common/components/ProgressBar/progressBar',
+  'common/components/BurndownChart/burndownChart'
 ],
-function ($, Vue, Resource, test, ProgressBar, burndown) {
+function ($, Vue, Resource, test, ProgressBar, Burndown) {
   Vue.use(Resource);
 
   console.log(test);
@@ -17,31 +17,11 @@ function ($, Vue, Resource, test, ProgressBar, burndown) {
       global: {}
     },
     components: {
-      burndown: burndown.burndownComponent
+      burndown: Burndown
     }
   });
 
-  app.$on('requestBurndown', function(args) {
-    console.group('@main');
-      console.log('requestBurndown');
-      console.log(args);
-
-      var xhr = {
-        url: 'http://localhost:1337/loans/' + args.projectId + '/overview',
-        method: 'GET'
-      };
-
-      this.$http(xhr).then(function onSuccess(response) {
-        console.log("Success");
-        console.log(response);
-      }, function onError(response) {
-        console.log("Error");
-        console.log(response);
-      });
-
-    console.groupEnd();
-  });
-
   Vue.component('progress-bar', ProgressBar);
+  Vue.component('burndown', Burndown);
 
 });
