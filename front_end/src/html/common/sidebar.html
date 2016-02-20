@@ -38,12 +38,12 @@
         :foo="hello"></progress-bar>
         Tasks 3/8
     </div>
-    <ul id="sidebar-menu" class="sidebar__menu">
+    <ul id="sidebar-menu" class="sidebar__menu" @click="toggleSidebar">
       <li class="sidebar__menu__item">
         <a v-link="{ path: '/' }">My Tasks</a>
       </li>
       <li class="sidebar__menu__item">
-        <a v-link="{ path: '/my-project' }">My Project</a>
+        <a v-link="{ path: '/my-projects' }">My Project</a>
       </li>
       <li class="sidebar__menu__item">
         <a v-link="{ path: '/badge-capsule' }">Badge Capsule</a>
