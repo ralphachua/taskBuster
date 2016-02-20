@@ -554,7 +554,7 @@ Endpoint for retrieving project members
 }
 ```
 
-## GET /projects/leaders
+## GET /leaders/projects
 Endpoint for retrieving project leaderboards
 
 **Response**
@@ -614,7 +614,7 @@ Endpoint for retrieving project leaderboards
 }
 ```
 
-## GET /users/leaders
+## GET /leaders/users
 Endpoint for retrieving user leaderboards
 
 **Response**
