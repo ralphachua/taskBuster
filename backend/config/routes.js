@@ -37,10 +37,12 @@ module.exports.routes = {
   "GET /users/:user_id"           : "User.show",
   "GET /users/:user_id/tasks"     : "User.showTasks",
   "GET /users/:user_id/projects"  : "User.showProjects",
-
   //Projects
   "POST /projects"                : "Project.create",
-  "PUT /projects/:projectId"     : "Project.update"
+  "PUT /projects/:projectId"     : "Project.update",
+  //Tasks
+  "POST /tasks"                   : "Task.create",
+  "PUT /tasks/:taskId"            : "Task.update"
 
   /***************************************************************************
   *                                                                          *
