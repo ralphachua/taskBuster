@@ -1,3 +1,6 @@
+/**
+  REGISTER PAGES TO BE USED HERE
+*/
 define([
   'common/components/MyTasksPage/MyTasksPage',
   'common/components/ProjectDetailsPage/ProjectDetailsPage'
