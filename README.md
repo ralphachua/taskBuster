@@ -258,9 +258,12 @@ Endpoint for retrieving project details
 
 ## POST /projects
 Endpoint for Creating projects
-parameters:	project_name(Required)
-		members(Optional)
-		due_date(Optional)
+**parameters:**
+|Name|Type|
+|---|---|
+|project_name|String(Required)|
+|members|[String](Optional)|
+|due_date|String(Optional)|
 
 **Sample Request Body**
 ```javascript
@@ -324,11 +327,14 @@ parameters:	project_name(Required)
 
 ## PUT /projects/:project_id
 Endpoint for updating project entry
-Parameters: 	project_name(Optional)
-		members(Optional)
-		due_date(Optional)
-		status(Optional)
-		tasks(Optional)
+**Parameters:**
+|Name|Type|
+|---|---|
+|project_name|String(Optional)|
+|members|[String](Optional)|
+|due_date|String(Optional)|
+|status|String(Optional)|
+|tasks|String(Optional)|
 		
 **Sample Request Body**
 ```javascript
