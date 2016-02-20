@@ -1,4 +1,6 @@
 
+var moment = require("moment");
+
 module.exports = {
 
   create: function(req, res) {
@@ -35,6 +37,62 @@ module.exports = {
     });
   },
 
+  show: function(req, res) {
+    var tasks = {
+      project: function(next) {
+        Project.findOne({ id: req.param("projectId") }, function(err, project) {
+          if (_.isEmpty(project)) {
+            var payload = ApiService.toErrorJSON(new Errors.RecordNotFound("Project does not exist"));
+            return res.notFound(payload);
+          }
+          return next(err, project);
+        });
+      },
+      tasksTodo: function(next) {
+        Task.count({
+          projectId: req.param("projectId"),
+          status: "TODO"
+        }, function(err, count) {
+          return next(err, count);
+        });
+      },
+      tasksOngoing: function(next) {
+        Task.count({
+          projectId: req.param("projectId"),
+          status: "ONGOING"
+        }, function(err, count) {
+          return next(err, count);
+        });
+      },
+      tasksDone: function(next) {
+        Task.count({
+          projectId: req.param("projectId"),
+          status: "DONE"
+        }, function(err, count) {
+          return next(err, count);
+        });
+      }
+    }
+
+    async.auto(tasks, function(err, result) {
+      var payload = null;
+      if (err) {
+        payload = ApiService.toErrorJSON(new Errors.UnknownError());
+        return res.serverError(payload);
+      } else {
+        var data = {
+          projectName:  result.project.projectName,
+          dueDate:      result.project.dueDate,
+          tasksTodo:    result.tasksTodo,
+          tasksOngoing: result.tasksOngoing,
+          tasksDone:    result.tasksDone
+        }
+        payload = ApiService.toSuccessJSON(data);
+        return res.json(payload);
+      }
+    });
+  },
+
   update: function(req, res) {
     var params = {
       projectName: req.param("projectName"),
@@ -42,6 +100,12 @@ module.exports = {
       dueDate: req.param("dueDate"),
       status: req.param("status")
     };
+
+    if (req.param("status") === "ACTIVE") {
+      params.startedOn = moment().utc(new Date).format();
+    } else if (req.param("status") === "DONE") {
+      params.finishedOn = moment().utc(new Date).format();
+    }
 
     var tasks = {
       find: function(next) {

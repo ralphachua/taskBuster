@@ -44,7 +44,8 @@ module.exports.routes = {
 
   //Projects
   "POST /projects"                : "Project.create",
-  "PUT /projects/:projectId"     : "Project.update",
+  "GET /projects/:projectId"      : "Project.show",
+  "PUT /projects/:projectId"      : "Project.update",
 
   //Tasks
   "POST /tasks"                   : "Task.create",
