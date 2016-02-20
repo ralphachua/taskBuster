@@ -137,7 +137,6 @@ Endpoint for Creating Tasks
 	}
 }
 ```
-
 ```javascript
 //Missing task_description parameter
 {
@@ -157,7 +156,6 @@ Endpoint for Creating Tasks
 }
 ```
 ```javascript
-//Missing task_description parameter
 //Missing assigned_to parameter
 {
 	status: “error”,
@@ -250,6 +248,174 @@ Endpoint for retrieving project details
 ```
 ```javascript
 // UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+}
+```
+
+## POST /projects
+Endpoint for Creating projects
+parameters:	project_name(Required)
+		members(Optional)
+		due_date(Optional)
+
+**Sample Request Body**
+```javascript
+{
+  project_name: "Project Name",
+  members: ["id123", "ad123", "eq678"],
+  due_date: "2016-02-17T 08:33:23.257 Z"
+}
+```
+
+**Response**
+```javascript
+// HTTP Status Code: 200
+{
+	status: “success”,
+	data: {
+		project_name: “Project Name 2”, status: “TODO”
+		members:[
+			{
+				name: “Fountain”,
+				gender: “male”,
+				active_badge: {
+					image_url: “/img/123”,
+					badge_name: “Bug Crusher”
+				},
+				tasks: {} 
+			}
+		]
+		due_date:”2016-02-17T08:33:23.257Z”
+	}
+}
+```
+
+```javascript
+//Missing project name parameter
+{
+	status: “error”,
+	data: {
+		message: “Project name required”
+	}
+}
+```
+```javascript
+//A user does not exist
+{
+	status: “error”,
+	data: {
+		message: “Cannot add member to project”
+	}
+}
+```
+```javascript
+//UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+}
+```
+
+## PUT /projects/:project_id
+Endpoint for updating project entry
+Parameters: 	project_name(Optional)
+		members(Optional)
+		due_date(Optional)
+		status(Optional)
+		tasks(Optional)
+		
+**Sample Request Body**
+```javascript
+{
+  	project_name: "Project Name",
+  	members: ["sda123", "asd123", "eqw687", "agh982"],
+  	due_date: "2016-02-17T 08:33:23.257 Z",
+  	status: "ONGOING",
+  	tasks: [“jjl999”, “hjf564”, "yuy355"]
+}
+```
+
+**Response**
+```javascript
+// HTTP Status Code: 200
+{
+	status: “success”,
+	data: {
+		project_name: “Project Name ”,
+		status: “TODO”
+		members:[{
+				name: “Fountain”,
+				gender: “male”,
+				active_badge: {
+					image_url: “/img/123”,
+					badge_name: “Bug Crusher” 
+				},
+				tasks: {}
+			}
+		]
+		due_date:”2016-02-17T08:33:23.257Z”,
+		tasks: [{
+				task_id: “a1bvc3”,
+				task_name: “Battlefields UI”,
+				task_description: “Create assets for the battlefield screen”,
+				task_point: 3
+			},
+			{
+				task_id: “a1bvjk”,
+				task_name: “Create Tasks API”,
+				task_description: “Expose a task API”,
+				task_point: 3
+			}
+		}]
+	}
+}
+```
+
+```javascript
+//A Task does not exist
+{
+	status: “error”,
+	data: {
+		message: “Cannot add task to project”
+	}
+
+}
+```
+```javascript
+//A User does not exist
+{
+	status: “error”,
+	data: {
+		message: “Cannot add member to project”
+	}
+}
+```
+```javascript
+//Invalid Status
+{
+	status: ”error”,
+	data : {
+	message: “Please give a valid status”
+	}
+}
+```
+```javascript
+//Invalid Date
+{
+	status: “error”,	
+	data: {
+		message: “Please give a valid date”
+	}
+}
+```
+```javascript
+//UnknownError
 {
 	status: “error”,
 	data: {
@@ -374,3 +540,5 @@ Endpoint for retrieving project members
 
 }
 ```
+
+
