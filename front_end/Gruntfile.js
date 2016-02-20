@@ -5,7 +5,15 @@ module.exports = function (grunt) {
   grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
       sass: {
-
+        dev: {
+          options: {
+            sourceMap: true,
+            outputStyle: 'expanded'
+          },
+          files: {
+            'dist/css/styles.css' : 'src/sass/styles.scss'
+          }
+        }
       },
       copy: {},
       clean: {}
