@@ -1,7 +1,8 @@
 requirejs.config({
   baseUrl: '/js/',
   paths: {
-    jquery: 'vendor/jquery'
+    jquery: 'vendor/jquery',
+    vue : 'vendor/vue'
   },
   deps: ['main']
 });
