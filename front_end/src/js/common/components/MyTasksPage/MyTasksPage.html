@@ -20,34 +20,16 @@
         </div>
       </header>
 
-      <div class="task-table__columns gridster">
-         <div class="task-table__item col-4" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-           <div class="task-table__item__title">
-             Battlefield Assets
-           </div>
-           <div class="task-table__item__content text">
-             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-           </div>
-           <div class="task-table__item__points text">Points: 3</div>
-         </div>
-         <div class="task-table__item col-4" data-row="2" data-col="1" data-sizex="1" data-sizey="1">
-           <div class="task-table__item__title">
-             Battlefield Assets
-           </div>
-           <div class="task-table__item__content text">
-             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-           </div>
-           <div class="task-table__item__points text">Points: 3</div>
-         </div>
-         <div class="task-table__item col-4" data-row="1" data-col="2" data-sizex="1" data-sizey="1">
-           <div class="task-table__item__title">
-             Battlefield Assets
-           </div>
-           <div class="task-table__item__content text">
-             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-           </div>
-           <div class="task-table__item__points text">Points: 3</div>
-         </div>
+      <div class="task-table__columns">
+        <ul class="col-4 task-table__column todo-column">
+          <task v-for="todo in tasks.todo" :task-data="todo"></task>
+        </ul>
+        <ul class="col-4 task-table__column ongoing-column">
+          <task v-for="ongoing in tasks.ongoing" :task-data="ongoing"></task>
+        </ul>
+        <ul class="col-4 task-table__column done-column">
+          <task v-for="done in tasks.done" :task-data="done"></task>
+        </ul>
       </div>
   </div>
   </div>
