@@ -1,0 +1,31 @@
+.task-table {
+  background-color: $task-table-bgcolor;
+  color: $ash-blue;
+  min-height: 480px;
+  padding-top: 12px;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+.task-table__header {
+  overflow: hidden;
+
+}
+  .task-table__header__title {
+    float:left;
+  }
+  .task-table__header__add {
+    float:right;
+  }
+  .task-table__item__title {
+    color: $black;
+  }
+
+.task-table__item {
+  border: 1px solid #ccc;
+  padding: 22px;
+  margin-bottom: 14px;
+}
+.task-table__item[data-col="3"] {
+  @include omega;
+}
