@@ -36,4 +36,7 @@
   .sidebar__menu__item a {
     color: $magenta;
     text-decoration: none;
+    &.v-link-active {
+      text-decoration: underline;
+    }
   }
