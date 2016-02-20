@@ -1,12 +1,16 @@
-define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.html'], function ($, Vue, Resource, highcharts, Template) {
-  Vue.use(Resource);
+define(['jquery',
+        'vue',
+        'vue-resource',
+        'highcharts',
+        'text!./burndownChart.html'],
+function ($, Vue, Resource, highcharts, Template) {
 
   var renderBurndownChart = function(options, done) {
     console.group('@burndownChart');
     console.log('renderBurndownChart');
 
     var title = options.title || {
-      text: 'Burndown Chart',
+      text: '',
       x: -20
     };
     var subtitle = options.subtitle || {
@@ -25,7 +29,10 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
         text: 'Days'
       },
       categories: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6',
-        'Day 7', 'Day 8', 'Day 9', 'Day 10']
+        'Day 7', 'Day 8', 'Day 9', 'Day 10'],
+        labels: {
+          style: {"color": "#FFF"}
+        }
     };
 
     var yAxis = options.yAxis || {
@@ -35,7 +42,10 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
       plotLines: [{
         value: 0,
         width: 1
-      }]
+      }],
+      labels: {
+        style: {"color": "#FFF"}
+      }
     };
 
     var tooltip = options.tooltip || {
@@ -53,14 +63,14 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
 
     var idealBurn = options.idealBurn || {
       name: 'Ideal Burn',
-      color: 'rgba(255,0,0,0.25)',
+      color: '#E747A8',
       lineWidth: 2,
       data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
     };
 
     var actualBurn = options.actualBurn || {
       name: 'Actual Burn',
-      color: 'rgba(0, 120, 200, 0.75)',
+      color: '#72DFFF',
       marker: {radius: 6},
       data: [100, 110, 85, 60, 60, 30, 32, 23, 9, 2]
     };
@@ -74,7 +84,10 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
       yAxis: yAxis,
       tooltip: tooltip,
       legend: legend,
-      series: [idealBurn, actualBurn]
+      series: [idealBurn, actualBurn],
+      chart: {
+        backgroundColor: '#212F3E'
+      }
     };
 
     console.log(highchartsOptions);
@@ -86,16 +99,9 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
 
 
   var requestBurndown = function(vueComponent, xhr, done) {
-    console.group('@burndownChart');
-    console.log(vueComponent);
-    console.log(xhr);
     vueComponent.$http(xhr).then(function onSuccess(response) {
-      console.log("onSuccess");
-      console.groupEnd();
       return done(response);
     }, function onError(response) {
-      console.log("onError");
-      console.groupEnd();
       return done(response);
     });
   };
@@ -125,10 +131,6 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
           method: 'GET'
         };
 
-        //requestBurndown(this, xhr, function onRequestBurndown(response) {
-        //  console.log(response);
-        //});
-
         renderBurndownChart({});
 
         console.groupEnd();
@@ -144,11 +146,7 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
         method: 'GET'
       };
 
-      //requestBurndown(this, xhr, function onRequestBurndown(response) {
-      //  console.log(response);
-      //});
-
-      //renderBurndownChart({});
+      this.requestBurndown();
 
       console.groupEnd();
     },
@@ -162,39 +160,4 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
     }
   });
 
-  /*
-  var burndown = Vue.extend({
-    template: Template,
-    props: {
-      title: {
-        type: String,
-        required: false
-      },
-      data: {
-        type: Object,
-        required: false,
-        twoWay: true
-      }
-    },
-    methods: {
-      requestBurndown: function() {
-        console.group('@burndown');
-          console.log('requestBurndown');
-          var args = {
-            projectId: "123-2016-1-000000001"
-          };
-          this.$dispatch('requestBurndown', args);
-          console.log("dispatched: ", args);
-        console.groupEnd();
-      }
-    },
-    compiled: function() {
-
-    }
-  });
-
-  return {
-    burndownComponent: burndown
-  };
-  */
 });
