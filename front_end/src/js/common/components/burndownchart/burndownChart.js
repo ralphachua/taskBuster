@@ -5,8 +5,14 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
     console.group('@burndownChart');
     console.log('renderBurndownChart');
 
-    var title = options.title || 'Burndown Chart';
-    var subtitle = options.subtitle || 'Sprint 1';
+    var title = options.title || {
+      text: 'Burndown Chart',
+      x: -20
+    };
+    var subtitle = options.subtitle || {
+      text: 'Sprint 1',
+      x: -20
+    };
     var colors = options.colors || ['blue', 'red'];
 
     var plotOptions = options.plotOptions || {
