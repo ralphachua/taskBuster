@@ -43,19 +43,12 @@ function (
     '/': {
       component: Pages['my-tasks-page']
     },
-    'my-projects' : {
-      component: Vue.extend({
-        template: '<router-view></router-view>'
-      }),
-      subRoutes: {
-        '/' : {
-          component: Pages['my-projects-page']
-        },
-        '/project' : {
-          name: 'project-details',
-          component: Pages['project-details-page']
-        }
-      }
+    '/my-projects' : {
+      component: Pages['my-projects-page']
+    },
+    '/project-details' : {
+      name: 'project-details',
+      component: Pages['project-details-page']
     },
     '/badge-capsule': {
       component: Pages['badge-capsule-page']
