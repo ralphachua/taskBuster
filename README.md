@@ -399,7 +399,7 @@ Endpoint for retrieving project members
 			name: “Fountain”,
 			gender: “male”,
 			activeBadge: {
-				imageUrl: “/img/123”,
+				badgeUrl: “/img/123”,
 				badgeName: “Bug Crusher”
 			},
 			task: {
