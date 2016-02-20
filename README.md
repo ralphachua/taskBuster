@@ -108,7 +108,8 @@ Endpoint for Creating Tasks
   taskName: "Battlefield Assets",
   taskDescription: "Create assets for the battle field screen...",
   assignedTo: "id123",
-  taskPoints: 3
+  taskPoints: 3,
+  projectId: "asd1231"
 }
 ```
 
@@ -123,7 +124,8 @@ Endpoint for Creating Tasks
 		description:  “Create assets for the battle field screen …”,
 		taskPoints: 3,
 		taskStatus: “TODO”,
-		assignedTo: “id123”
+		assignedTo: “id123”,
+		projectName:"Project Name"
 	}
 }
 ```
