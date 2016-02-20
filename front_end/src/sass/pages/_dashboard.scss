@@ -1,8 +1,10 @@
 .main {
   .sidebar {
+    transition: transform 0.3s ease;
     transform: translateX(-100%);
   }
   .app-content {
+    transition: transform 0.3s ease;
     transform: translateX(0%);
   }
   &.activeSidebar {
@@ -73,11 +75,39 @@
   @include omega;
 }
 
+.project-list__item {
+  border: 1px solid $light-blue;
+  padding: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.project-list__item__inner {
+  float: left;
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+}
+  .project__name {
+    float:left;
+  }
+  .project__due-date {
+    float:right;
+    text-align: right;
+  }
+.project-list__item__remove {
+  @include size(16px);
+  float:right;
+}
 
 .project-details-section {
 
 }
-
+.project__action-bar {
+  padding: 20px 0;
+  margin-top: 20px;
+}
 .project__action-bar__item:first-child {
   text-align: right;
 }
