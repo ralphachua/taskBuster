@@ -14,7 +14,9 @@ module.exports = {
       projectName:  req.param("projectName"),
       createdBy:    req.param("userId"), //req.user
       dueDate:      req.param("dueDate"),
-      members:      req.param("members")
+      members:      req.param("members"),
+      startedOn:  moment("2016-02-10", "YYYY-MM-DD").toString(),
+      finishedOn: moment("2016-02-20", "YYYY-MM-DD").toString()
     };
 
     var tasks = {
@@ -28,6 +30,7 @@ module.exports = {
     async.auto(tasks, function(err, result) {
       var payload = null;
       if (err) {
+        sails.log.error(err);
         payload = ApiService.toErrorJSON(new Errors.UnknownError());
         return res.serverError(payload);
       } else {
@@ -136,20 +139,58 @@ module.exports = {
     });
   },
 
-  listMembers: function(req, res) {
+  getBurndown: function(req, res) {
+    var projectId = req.param("projectId");
+
     var tasks = {
-      project: function(next) {
-        Project.findOne({ id: req.param("projectId") }, function(err, project) {
-          if (_.isEmpty(project)) {
-            var payload = ApiService.toErrorJSON(new Errors.RecordNotFound("Project does not exist"));
-            return res.notFound(payload);
-          }
-          return next(err, project.members);
+      "find": function(next) {
+        Project.findOne({"id": projectId}, function(err, project) {
+          return next(err, project);
         });
       },
-      user: function(next) {
-        User.find({})
+
+      "getTasks": ["find", function(next, result) {
+        Task.find({"projectId": projectId}, function(err, tasks) {
+          return next(err, tasks);
+        });
+      }],
+
+      "getProjectDuration": ["find", function(next, result) {
+        var project = result.find;
+
+        var startDate = project.createdAt;
+        if (project.startedOn) {
+          startDate = project.startedOn;
+        }
+
+        var endDate = project.dueDate;
+        if (project.finishedOn) {
+          endDate = project.finishedOn;
+        }
+
+        var momentStartDate = moment(startDate);
+        var momentEndDate = moment(endDate);
+        var difference = momentEndDate.diff(momentStartDate, "days");
+
+        return next(null, difference);
+      }],
+
+
+    };
+
+    async.auto(tasks, function(err, result) {
+      if (err) {
+        return res.serverError(ApiService.toErrorJSON(
+          new Errors.UnknownError(err)));
       }
-    }
+
+      var response = {
+        "find": result.find,
+        "getTasks": result.getTasks,
+        "getProjectDuration": result.getProjectDuration
+      };
+
+      return res.json(ApiService.toSuccessJSON(response));
+    });
   }
 }
