@@ -34,17 +34,18 @@ module.exports.routes = {
 
   //Users
   "POST /users"                   : "User.create",
-  "GET /users/:user_id"           : "User.show",
-  "GET /users/:user_id/tasks"     : "User.showTasks",
-  "GET /users/:user_id/projects"  : "User.showProjects",
+  "GET /users/:userId"            : "User.show",
+  "GET /users/:userId/tasks"     : "User.showTasks",
+  "GET /users/:userId/projects"  : "User.showProjects",
 
   //Leaders
   "GET /leaders/users"            : "Leader.users",
 
   //Projects
-  "POST /projects"                : "Project.create",
-  "GET /projects/:projectId"      : "Project.show",
-  "PUT /projects/:projectId"      : "Project.update",
+  "POST /projects"                  : "Project.create",
+  "GET /projects/:projectId"        : "Project.show",
+  "PUT /projects/:projectId"        : "Project.update",
+  "GET /projects/:projectId/members": "Project.listMembers",
 
   //Tasks
   "POST /tasks"                   : "Task.create",

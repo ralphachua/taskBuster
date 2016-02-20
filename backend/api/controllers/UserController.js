@@ -13,15 +13,15 @@ module.exports = {
       return res.badRequest(payload);
     }
 
-    if (!req.param("userId")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("User ID required"));
+    if (!req.param("socialId")) {
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Social ID required"));
       return res.badRequest(payload);
     }
 
     var params = {
       name:         req.param("name"),
       gender:       req.param("gender"),
-      userId:       req.param("userId"),
+      socialId:       req.param("socialId"),
       avatarUrl:    "/avatar/123",
       levelId:      "abc123",
       activeBadge:  "qwe098",
@@ -49,19 +49,60 @@ module.exports = {
   },
 
   show: function(req, res) {
-    UserService.generateUserJson(req.param(user_id), function(result){
+    UserService.generateUserJson(req.param("userId"), function(err, result){
       var payload = null
-      if (result = Errors.UnknownError()) {
-        payload = ApiService.toErrorJSON(result)
+      if (err) {
+        payload = ApiService.toErrorJSON(err)
         return res.serverError(payload)
-      } else if (result = Errors.RecordNotFound()) {
-        payload = ApiService.toErrorJSON(result)
-        return res.serverError(payload)
-
       } else {
         payload = ApiService.toSuccessJSON(result)
         return res.json(payload)
       }
     })
+  },
+
+  showTasks: function(req, res) {
+    var tasks = {
+      tasksTodo: function(next) {
+        Task.find({ 
+          assignedTo: req.param("userId"),
+          status: "TODO"
+        }, function(err, todo) {
+          return next(err, todo);
+        });
+      },
+      tasksOngoing: function(next) {
+        Task.find({ 
+          assignedTo: req.param("userId"),
+          status: "ONGOING"
+        }, function(err, ongoing) {
+          return next(err, ongoing);
+        });
+      },
+      tasksDone: function(next) {
+        Task.find({ 
+          assignedTo: req.param("userId"),
+          status: "DONE"
+        }, function(err, done) {
+          return next(err, done);
+        });
+      }
+    }
+
+    async.auto(tasks, function(err, result) {
+      var payload = null;
+      if (err) {
+        payload = ApiService.toErrorJSON(new Errors.UnknownError());
+        return res.serverError(payload);
+      } else {
+        var data = {
+          todo:   result.tasksTodo,
+          ongoing:result.tasksOngoing,
+          done:   result.tasksDone
+        }
+        payload = ApiService.toSuccessJSON(data);
+        return res.json(payload);
+      }
+    });
   }
 }

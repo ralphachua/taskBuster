@@ -134,5 +134,22 @@ module.exports = {
         return res.json(payload);
       }
     });
+  },
+
+  listMembers: function(req, res) {
+    var tasks = {
+      project: function(next) {
+        Project.findOne({ id: req.param("projectId") }, function(err, project) {
+          if (_.isEmpty(project)) {
+            var payload = ApiService.toErrorJSON(new Errors.RecordNotFound("Project does not exist"));
+            return res.notFound(payload);
+          }
+          return next(err, project.members);
+        });
+      },
+      user: function(next) {
+        User.find({})
+      }
+    }
   }
 }

@@ -1,11 +1,11 @@
 
 module.exports = {
 
-  generateUserJson: function(userId,callBack) {
+  generateUserJson: function(userId,callback) {
   	var tasks = {
       user: function(next) {
         var params = {
-          userId: userId
+          id: userId
         }
         User.findOne(params, function(err, user) {
             return next(err, user);
@@ -26,16 +26,33 @@ module.exports = {
         Badge.findOne(params, function(err, badge) {
           return next(err, badge);
         });
-      }]
+      }],
+      tasksTotal: function(next, cres) {
+        var params = {
+          assignedTo: userId
+        }
+        Task.count(params, function(err, count) {
+          return next(err, count);
+        });
+      },
+      tasksDone: function(next, cres) {
+        var params = {
+          assignedTo: userId,
+          status: "DONE"
+        }
+        Task.count(params, function(err, count) {
+          return next(err, count);
+        });
+      },
     }
 
     async.auto(tasks, function(err, result) {
       if (err) {
       	console.log("Error Generating User JSON")
-      	return new Errors.UnknownError()
+      	return callback(new Errors.UnknownError());
       } else if (_.isEmpty(result.user)) {
       	console.log("User does not exist")
-        return new Errors.RecordNotFound();
+        return callback(new Errors.RecordNotFound());
       } else {
         var data = {
           name:       result.user.name,
@@ -50,12 +67,13 @@ module.exports = {
             badgeUrl:  result.badge.badgeUrl,
             badgeName: result.badge.badgeName
           },
+          task: {
+            done: result.tasksDone,
+            total: result.tasksTotal
+          },
           totalPointsDone: result.user.totalPointsDone
         };
-        if (typeof callBack === "function") {
-    		callBack(data)
-		}
-        return data
+        return callback(null, data);
       }
     });
   }

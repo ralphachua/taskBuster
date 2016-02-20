@@ -12,9 +12,9 @@ module.exports = {
         var mergedUsers = []
         var users = cres.users
         users.forEach( function(user){
-          UserService.generateUserJson(user.userId, function(result){
-            if (result == Errors.UnknownError()) {
-              return next(result, mergedUsers)
+          UserService.generateUserJson(user.userId, function(err,result){
+            if (err) {
+              return next(err)
             } else {
               mergedUsers.push(result)
             }
