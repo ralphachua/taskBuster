@@ -1,9 +1,9 @@
 <section class="section myprojects-section">
-  <div v-for="project in projectsData.data">
-    <project-entry
-      :id="project.projectId"
-      :name="project.projectName"
-      :due="project.due_date"
-    ></project-entry>
+{{projects.length}}
+  <div v-for="project in projects">
+    <div>
+      Project Name: {{project.projectName}} <br>
+      {{project.due_date == "" ? 'NO DUE DATE': project.due_date}} <br>
+    </div>
   </div>
 </section>

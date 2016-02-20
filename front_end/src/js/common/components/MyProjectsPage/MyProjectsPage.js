@@ -1,35 +1,35 @@
 define(['vue',
   'jquery',
   'vue-resource',
-  'text!./MyProjectsPage.html',
-  'common/components/ProjectItem/ProjectItem'
-  ],function(Vue, Jquery, Resource, Template, ProjectItem){
+  'text!./MyProjectsPage.html'
+  ],function(Vue, Jquery, Resource, Template ){
 
   Vue.use(Resource);
 
   var getProjects = function(vueComponent, xhr, done) {
     console.group('@getProjects');
-    console.log(vueComponent);
     console.log(xhr);
+
     var mockresponse = {
-    status: 'success',
-    data: [{
-        projectId: 'hja12',
-        projectName: 'Project Name 1',
-        due_date: ''
-    },
-    {
-        projectId: 'hja123',
-        projectName: 'Project Name 2',
-        due_date: '2016-02-17T08:33:23.257Z'
-    },
-    {
-        projectId: 'hja1234',
-        projectName: 'Project Name 3',
-        due_date: '2016-02-17T08:33:23.257Z'
-    }]
-};
-    return done(response);
+        status: 'success',
+        data: [{
+            projectId: 'hja12',
+            projectName: 'Project Name 1',
+            due_date: ''
+        },
+        {
+            projectId: 'hja123',
+            projectName: 'Project Name 2',
+            due_date: '2016-02-17T08:33:23.257Z'
+        },
+        {
+            projectId: 'hja1234',
+            projectName: 'Project Name 3',
+            due_date: '2016-02-17T08:33:23.257Z'
+        }]
+    };
+
+    return done(mockresponse);
     // vueComponent.$http(xhr).then(function onSuccess(response) {
     //   console.log("onSuccess");
     //   console.groupEnd();
@@ -43,23 +43,20 @@ define(['vue',
 
   return Vue.extend({
     template: Template,
-    props: {
-      projectsData: {
-        type: Object,
-        required: false,
-        twoWay: true
-      }
+    // components: {
+    //   'project-item' : ProjectItem
+    // },
+
+    compiled: function(){
+      this.getProjects();
     },
-    components: {
-      'project-item' : ProjectItem
+
+    data: function(){
+      return {projects:[]};
     },
 
     ready: function(){
-      this.getProjects;
-    },
-
-    data:{
-      projects: []
+      console.log(this.projects);
     },
 
     methods: {
@@ -73,9 +70,10 @@ define(['vue',
           // method: 'GET'
         };
 
+        var self = this;
         getProjects(this, xhr, function setProjects(response) {
-         console.log(response);
-         this.projects = response.data;
+          console.log("Response:: ",response);
+          self.projects = response.data;
         });
 
         console.groupEnd();
