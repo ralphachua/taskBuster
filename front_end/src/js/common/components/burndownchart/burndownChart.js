@@ -138,11 +138,19 @@ define(['jquery', 'vue', 'vue-resource', 'highcharts', 'text!./burndownChart.htm
         method: 'GET'
       };
 
-      requestBurndown(this, xhr, function onRequestBurndown(response) {
-        console.log(response);
-      });
+      //requestBurndown(this, xhr, function onRequestBurndown(response) {
+      //  console.log(response);
+      //});
 
       //renderBurndownChart({});
+
+      console.groupEnd();
+    },
+    ready: function() {
+      console.group('@burndownChart');
+      console.log('ready');
+
+      renderBurndownChart({});
 
       console.groupEnd();
     }
