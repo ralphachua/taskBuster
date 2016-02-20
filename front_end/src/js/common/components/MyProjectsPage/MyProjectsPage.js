@@ -112,7 +112,9 @@ define(['vue',
       },
 
       viewProject: function(project){
+        console.log(project);
         this.$dispatch('project-details', project);
+        window.location.hash+='/project';
       }
     }
   });
