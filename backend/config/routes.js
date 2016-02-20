@@ -40,7 +40,10 @@ module.exports.routes = {
 
   //Tasks
   "POST /tasks"                   : "Task.create",
-  "PUT /tasks/:taskId"            : "Task.update"
+  "PUT /tasks/:taskId"            : "Task.update",
+
+  //Projects
+  "GET /projects/:projectId/burndown"     : "Project.getBurndown"
 
   /***************************************************************************
   *                                                                          *
