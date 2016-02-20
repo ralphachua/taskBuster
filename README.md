@@ -334,9 +334,9 @@ Endpoint for updating project entry
 **Parameters:**
 | Name | Type |
 | --- | --- |
-| project_name | String(Optional) |
+| projectName | String(Optional) |
 | members | [String](Optional) |
-| due_date | String(Optional) |
+| dueDate | String(Optional) |
 | status | String(Optional) |
 ```
 
