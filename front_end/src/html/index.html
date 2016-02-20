@@ -11,6 +11,15 @@
       <!-- build:include common/header.html -->
       <!-- /build -->
       <div class="app-content grid">
+
+
+        <progress-bar
+          :progress="66"
+          :min="0"
+          :max="100"
+          :foo="hello"
+        ></progress-bar>
+
         <div class="task-table grid">
           <header class="task-table__headers">
             <div class="task-table__header col-4 primary">
