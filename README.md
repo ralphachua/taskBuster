@@ -541,4 +541,62 @@ Endpoint for retrieving project members
 }
 ```
 
+## Get /projects/leaders
+Endpoint for retrieving project leaderboards
 
+**Response**
+```javascript
+// HTTP status code: 200
+{
+	status: “success”
+	data: {[
+		{
+			project_name: “Project Name 2”, 
+			tasks_done: 11,
+			tasks_total: 20
+			members: [{
+					user_name: “Fountain”,
+					gender: “male”
+					avatar_url: “img/4564” 
+				},
+				{
+					user_name: “Pen”,
+					gender: “female”
+					avatar_url: “img/5675” 
+				}
+			] 
+		},
+		{
+			project_name: “Project Name ”, 
+			tasks_done: 11,
+			tasks_total: 30,
+			members: [{
+					user_name: “Fountain”,
+					gender: “male”
+					avatar_url: “img/4564” 
+				},
+				{
+					user_name: “Pen”,
+					gender: “female”,
+					avatar_url: “img/5675” 
+				},
+				{
+					user_name: “AJ”,
+					gender: “female”,
+					avatar_url: “img/1235645” 
+				}
+			]
+		}
+	]}
+}
+```
+```javascript
+//UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+
+}
+```
