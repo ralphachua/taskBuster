@@ -338,7 +338,6 @@ Endpoint for updating project entry
 | members | [String](Optional) |
 | due_date | String(Optional) |
 | status | String(Optional) |
-| tasks | String(Optional) |
 ```
 
 **Sample Request Body**
@@ -347,8 +346,7 @@ Endpoint for updating project entry
   	projectName: "Project Name",
   	members: ["sda123", "asd123", "eqw687", "agh982"],
   	dueDate: "2016-02-17T 08:33:23.257 Z",
-  	status: "ONGOING",
-  	tasks: [“jjl999”, “hjf564”, "yuy355"]
+  	status: "ONGOING"
 }
 ```
 
