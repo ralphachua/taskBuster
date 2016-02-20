@@ -3,27 +3,28 @@ define([
   'vue',
   'vue-resource',
   'common/components/ProgressBar/progressBar',
-  'gridster'
+  'pages'
 ],
-function ($, Vue, Resource, ProgressBar, gridster) {
+function ($, Vue, Resource, ProgressBar, Pages) {
   Vue.use(Resource);
-
   Vue.component('progress-bar', ProgressBar);
 
-  var app;
-  app = new Vue({
+  var AppView;
+  var grids;
+  AppView = new Vue({
     el: '#App',
     data: {
+      isSidebarOn: false
+    },
+    methods: {
+      toggleSidebar: function () {
+        this.isSidebarOn = !this.isSidebarOn;
+      }
+    },
+    components: Pages,
+    compiled: function () {
+
     }
   });
-
-  $('.task-table__columns.gridster').gridster({
-    widget_selector: '.task-table__item',
-    widget_margins: [10, 10],
-    widget_base_dimensions: [240, 240],
-    min_cols: 3
-  });
-
-
 
 });
