@@ -1,22 +1,22 @@
 db.levels.drop();
 
 db.levels.insert({
-  "level_id"            : "abc123",
-  "level_name"          : "level 1",
-  "accumulated_points"  : 0,
-  "required_points"     : 10
+  "levelId"            : "abc123",
+  "levelName"          : "level 1",
+  "accumulatedPoints"  : 0,
+  "requiredPoints"     : 10
 });
 
 db.levels.insert({
-  "level_id"            : "def456",
-  "level_name"          : "level 2",
-  "accumulated_points"  : 10,
-  "required_points"     : 20
+  "levelId"            : "def456",
+  "levelName"          : "level 2",
+  "accumulatedPoints"  : 10,
+  "requiredPoints"     : 20
 });
 
 db.levels.insert({
-  "level_id"            : "ghi789",
-  "level_name"          : "level 3",
-  "accumulated_points"  : 30,
-  "required_points"     : 40
+  "levelId"            : "ghi789",
+  "levelName"          : "level 3",
+  "accumulatedPoints"  : 30,
+  "requiredPoints"     : 40
 });

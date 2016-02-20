@@ -6,23 +6,19 @@ module.exports = {
   attributes: {
     levelId: {
       type: "string",
-      required: true,
-      columnName: "level_id"
+      required: true
     },
     levelName: {
       type: "string",
-      required: true,
-      columnName: "level_name"
+      required: true
     },
     accumulatedPoints: {
       type: "string",
-      required: true,
-      columnName: "accumulated_points"
+      required: true
     },
     requiredPoints: {
       type: "integer",
-      required: true,
-      columnName: "required_points"
+      required: true
     },
   }
 }

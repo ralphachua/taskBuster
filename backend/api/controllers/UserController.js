@@ -4,17 +4,17 @@ module.exports = {
   create: function(req, res) {
 
     if (!req.param("name")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Missing name Parameter."));
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Name required"));
       return res.badRequest(payload);
     }
 
     if (!req.param("gender")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Missing gender Parameter."));
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Gender required"));
       return res.badRequest(payload);
     }
 
     if (!req.param("userId")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Missing userId Parameter."));
+      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("User ID required"));
       return res.badRequest(payload);
     }
 
@@ -54,18 +54,20 @@ module.exports = {
         var params = {
           userId: req.param("user_id")
         }
-        console.log(params);
         User.findOne(params, function(err, user) {
-          console.log("error: ",err);
-          console.log("user: ",user);
-            return next(err, user);
+          if (_.isEmpty(user)) {
+            var payload = ApiService.toErrorJSON(new Errors.RecordNotFound("User does not exist"));
+            return res.notFound(payload);
+          }
+          return next(err, user);
         });
       },
       level: ["user", function(next, cres) {
         var params = {
-          levelId: cres.user.userId
+          levelId: cres.user.levelId
         }
-        Level.findOne(params, function(err, level) {
+        Level.find(params, function(err, level) {
+          console.log(level)
           return next(err, level);
         });
       }],
@@ -84,9 +86,6 @@ module.exports = {
       if (err) {
         payload = ApiService.toErrorJSON(new Errors.UnknownError());
         return res.serverError(payload);
-      } else if (_.isEmpty(result.find)) {
-        payload = ApiService.toErrorJSON(new Errors.RecordNotFound("User does not exist"));
-        return res.notFound();
       } else {
         var data = {
           name:       result.user.name,
