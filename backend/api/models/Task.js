@@ -6,49 +6,41 @@ module.exports = {
   attributes: {
     taskId: {
       type: "string",
-      required: true,
-      columnName: "taskId"
+      required: true
     },
 
     taskName: {
       type: "string",
-      required: true,
-      columnName: "taskName"
+      required: true
     },
 
     taskDescription: {
       type: "string",
-      required: true,
-      columnName: "taskDescription"
+      required: true
     },
 
     taskPoints: {
       type: "integer",
-      required: true,
-      columnName: "taskPoints"
+      required: true
     },
 
     projectId: {
       type: "string",
-      required: true,
-      columnName: "projectId"
+      required: true
     },
 
     assignedTo: {
       type: "string",
-      required: true,
-      columnName: "assignedTo"
+      required: true
     },
 
     status: {
       type: "string",
-      defaultsTo: "TODO",
-      columnName: "status"
+      defaultsTo: "TODO"
     },
 
     doneAt: {
-      type: "date",
-      columnName: "doneAt"
+      type: "date"
     },
 
     toJSON: function() {
