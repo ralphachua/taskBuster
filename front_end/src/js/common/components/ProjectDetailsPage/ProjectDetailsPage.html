@@ -1,7 +1,7 @@
 <section class="section project-details-section">
   <header class="section__header">
     <h1 class="project__title primary centered">
-      Project Name 2
+      PROJECT NAME: {{projectData.projectName}}
     </h1>
 
     <div class="project__action-bar grid">
@@ -29,10 +29,10 @@
             Summary
           </h2>
           <div class="primary tasks-todo">
-            20 Tasks to do
+            {{projectData.tasksTodo}} Tasks to do
           </div>
           <div class="secondary tasks-done">
-            11 Tasks done
+            {{projectData.tasksDone}} Tasks done
           </div>
         </div>
       </div>
