@@ -5,7 +5,12 @@ define([
   'common/components/ProgressBar/progressBar',
   'pages'
 ],
-function ($, Vue, Resource, ProgressBar, Pages) {
+function (
+  $,
+  Vue,
+  Resource,
+  ProgressBar,
+  Pages) {
   Vue.use(Resource);
   Vue.component('progress-bar', ProgressBar);
 
@@ -21,10 +26,8 @@ function ($, Vue, Resource, ProgressBar, Pages) {
         this.isSidebarOn = !this.isSidebarOn;
       }
     },
-    components: Pages,
-    compiled: function () {
-
-    }
+    components: Pages
   });
+
 
 });

@@ -4,7 +4,8 @@ requirejs.config({
     jquery: 'vendor/jquery',
     vue : 'vendor/vue',
     'vue-resource' : 'vendor/vue-resource',
-    'gridster' : 'vendor/gridster'
+    'gridster' : 'vendor/gridster',
+    highcharts: 'vendor/highcharts'
   },
   deps: ['main']
 });
