@@ -40,6 +40,7 @@ module.exports.routes = {
 
   //Leaders
   "GET /leaders/users"            : "Leader.users",
+  "GET /leaders/projects"         : "Leader.projects",
 
   //Projects
   "POST /projects"                : "Project.create",
