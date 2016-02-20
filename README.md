@@ -11,15 +11,15 @@ Endpoint for retrieving user details
 	data: {
 		name: “Fountain”,
 		gender: “male”,
-		avatar_url: "/avatar/abc",
+		avatarUrl: "/avatar/abc",
 		level:  {
 			name: “level 2”,
-			current_points: 30,
-			required_points: 50
+			currentPoints: 30,
+			requiredPoints: 50
 		},
-		active_badge: {
-			badge_url: “/img/123”,
-			badge_name: “Bug Crusher”
+		activeBadge: {
+			badgeUrl: “/img/123”,
+			badgeName: “Bug Crusher”
 		},
 		task: {
 			done: 8,
@@ -48,7 +48,7 @@ Endpoint for retrieving user details
 }
 ```
 
-## GET /users/:user_id/tasks
+## GET /users/:userId/tasks
 Endpoint for retrieving user's tasks
 
 **Response**
@@ -58,23 +58,23 @@ Endpoint for retrieving user's tasks
 	status: “success”,
 	data: {
 		todo: [{
-			task_id: “a1bvc3”,
-			task_name: “Battlefields UI”,
-			task_description: “Create assets for the battlefield screen”
-			task_points: 3
+			taskId: “a1bvc3”,
+			taskName: “Battlefields UI”,
+			taskDescription: “Create assets for the battlefield screen”
+			taskPoints: 3
 		},
     {
-			task_id: “a1bvjk”,
-			task_name: “Create Tasks API”,
-			task_description: “Expose a task API”
-			task_points: 3
+			taskId: “a1bvjk”,
+			taskName: “Create Tasks API”,
+			taskDescription: “Expose a task API”
+			taskPoints: 3
 		}],
 		ongoing: [],
 		done: [{
-			task_id: “ybhv213s”,
-			task_name: “Create Login API”,
-			task_description: “Expose a login API”
-			task_points: 1
+			taskId: “ybhv213s”,
+			taskName: “Create Login API”,
+			taskDescription: “Expose a login API”
+			taskPoints: 1
     }]
 	}
 }
@@ -105,10 +105,10 @@ Endpoint for Creating Tasks
 **Sample Request Body**
 ```javascript
 {
-  task_name: "Battlefield Assets",
-  task_description: "Create assets for the battle field screen...",
-  assigned_to: "id123",
-  task_points: 3
+  taskName: "Battlefield Assets",
+  taskDescription: "Create assets for the battle field screen...",
+  assignedTo: "id123",
+  taskPoints: 3
 }
 ```
 
@@ -118,12 +118,12 @@ Endpoint for Creating Tasks
 {
 	status: “success”,
 	data: {
-		task_id: “asj332”,
-		task_name: “Battlefield Assets”,
+		taskId: “asj332”,
+		taskName: “Battlefield Assets”,
 		description:  “Create assets for the battle field screen …”,
-		task_points: 3,
-		task_status: “TODO”,
-		assigned_to: “id123”
+		taskPoints: 3,
+		taskStatus: “TODO”,
+		assignedTo: “id123”
 	}
 }
 ```
@@ -174,13 +174,13 @@ Endpoint for Creating Tasks
 }
 ```
 
-## PUT /tasks/:task_id
+## PUT /tasks/:taskId
 Endpoint for updating tasks details (updating status)
 
 **Sample Request Body**
 ```javascript
 {
-  task_status: "ONGOING" 
+  taskStatus: "ONGOING" 
 }
 ```
 
@@ -190,12 +190,12 @@ Endpoint for updating tasks details (updating status)
 {
 	status: “success”,
 	data: {
-		task_id: “asj332”,
-		task_name: “Battlefield Assets”,
+		taskId: “asj332”,
+		taskName: “Battlefield Assets”,
 		description:  “Create assets for the battle field screen …”,
-		task_points: 3,
-		task_status: “ONGOING”,
-		assigned_to: “id123”
+		taskPoints: 3,
+		taskStatus: “ONGOING”,
+		assignedTo: “id123”
 	}
 }
 ```
@@ -220,7 +220,7 @@ Endpoint for updating tasks details (updating status)
 }
 ```
 
-## GET /projects/:project_id
+## GET /projects/:projectId
 Endpoint for retrieving project details
 
 **Response**
@@ -229,11 +229,11 @@ Endpoint for retrieving project details
 {
 	status: “success”,
 	data: {
-		project_name: “Project Name 2”,
-		tasks_todo: 5,
-		tasks_ongoing: 1,
-		tasks_done: 2,
-		due_date: “2016-02-17T08:33:23.257Z”
+		projectName: “Project Name 2”,
+		tasksTodo: 5,
+		tasksOngoing: 1,
+		tasksDone: 2,
+		dueDate: “2016-02-17T08:33:23.257Z”
 	}
 }
 ```
@@ -258,19 +258,21 @@ Endpoint for retrieving project details
 
 ## POST /projects
 Endpoint for Creating projects
+
+```
 **parameters:**
 | Name | Type |
 | --- | --- |
 | project_name | String(Required) |
 | members | [String](Optional) |
 | due_date | String(Optional) |
-
+```
 **Sample Request Body**
 ```javascript
 {
-  project_name: "Project Name",
+  projectName: "Project Name",
   members: ["id123", "ad123", "eq678"],
-  due_date: "2016-02-17T 08:33:23.257 Z"
+  dueDate: "2016-02-17T 08:33:23.257 Z"
 }
 ```
 
@@ -280,14 +282,14 @@ Endpoint for Creating projects
 {
 	status: “success”,
 	data: {
-		project_name: “Project Name 2”, status: “TODO”
+		projectName: “Project Name 2”, status: “TODO”
 		members:[
 			{
 				name: “Fountain”,
 				gender: “male”,
-				active_badge: {
-					image_url: “/img/123”,
-					badge_name: “Bug Crusher”
+				activeBadge: {
+					imageUrl: “/img/123”,
+					badgeName: “Bug Crusher”
 				},
 				tasks: {} 
 			}
@@ -325,8 +327,10 @@ Endpoint for Creating projects
 }
 ```
 
-## PUT /projects/:project_id
+## PUT /projects/:projectId
 Endpoint for updating project entry
+
+```
 **Parameters:**
 | Name | Type |
 | --- | --- |
@@ -335,13 +339,14 @@ Endpoint for updating project entry
 | due_date | String(Optional) |
 | status | String(Optional) |
 | tasks | String(Optional) |
-		
+```
+
 **Sample Request Body**
 ```javascript
 {
-  	project_name: "Project Name",
+  	projectName: "Project Name",
   	members: ["sda123", "asd123", "eqw687", "agh982"],
-  	due_date: "2016-02-17T 08:33:23.257 Z",
+  	dueDate: "2016-02-17T 08:33:23.257 Z",
   	status: "ONGOING",
   	tasks: [“jjl999”, “hjf564”, "yuy355"]
 }
@@ -353,30 +358,30 @@ Endpoint for updating project entry
 {
 	status: “success”,
 	data: {
-		project_name: “Project Name ”,
+		projectName: “Project Name ”,
 		status: “TODO”
 		members:[{
 				name: “Fountain”,
 				gender: “male”,
-				active_badge: {
-					image_url: “/img/123”,
-					badge_name: “Bug Crusher” 
+				activeBadge: {
+					imageUrl: “/img/123”,
+					badgeName: “Bug Crusher” 
 				},
 				tasks: {}
 			}
 		]
-		due_date:”2016-02-17T08:33:23.257Z”,
+		dueDate:”2016-02-17T08:33:23.257Z”,
 		tasks: [{
-				task_id: “a1bvc3”,
-				task_name: “Battlefields UI”,
-				task_description: “Create assets for the battlefield screen”,
-				task_point: 3
+				taskId: “a1bvc3”,
+				taskName: “Battlefields UI”,
+				taskDescription: “Create assets for the battlefield screen”,
+				taskPoint: 3
 			},
 			{
-				task_id: “a1bvjk”,
-				task_name: “Create Tasks API”,
-				task_description: “Expose a task API”,
-				task_point: 3
+				taskId: “a1bvjk”,
+				taskName: “Create Tasks API”,
+				taskDescription: “Expose a task API”,
+				taskPoint: 3
 			}
 		}]
 	}
@@ -407,7 +412,7 @@ Endpoint for updating project entry
 {
 	status: ”error”,
 	data : {
-	message: “Please give a valid status”
+		message: “Please give a valid status”
 	}
 }
 ```
@@ -430,7 +435,7 @@ Endpoint for updating project entry
 }
 ```
 
-## GET /users/:user_id/projects
+## GET /users/:userId/projects
 Endpoint for retrieving user's projects
 
 **Response**
@@ -439,8 +444,8 @@ Endpoint for retrieving user's projects
 {
 	status: “success”,
 	data: [{
-		project_id: “hja12”,
-		project_name: “Project Name 2”,
+		projectId: “hja12”,
+		projectName: “Project Name 2”,
 		due_date: “2016-02-17T08:33:23.257Z”
 	}]
 }
@@ -465,7 +470,7 @@ Endpoint for retrieving user's projects
 }
 ```
 
-## GET /projects/:project_id/members
+## GET /projects/:projectId/members
 Endpoint for retrieving project members
 
 **Response**
@@ -477,34 +482,34 @@ Endpoint for retrieving project members
 		{
 			name: “Fountain”,
 			gender: “male”,
-			active_badge: {
-				image_url: “/img/123”,
-				badge_name: “Bug Crusher”
+			activeBadge: {
+				imageUrl: “/img/123”,
+				badgeName: “Bug Crusher”
 			},
 			task: {
 				todo: [
 					{
-						task_id: “a1bvc3”,
-						task_name: “Battlefields UI”,
-						task_description: “Create assets for the battlefield screen”
-						task_point: 3
+						taskId: “a1bvc3”,
+						taskName: “Battlefields UI”,
+						taskDescription: “Create assets for the battlefield screen”
+						taskPoint: 3
 		
 					},
 					{
-						task_id: “a1bvjk”,
-						task_name: “Create Tasks API”,
-						task_description: “Expose a task API”
-						task_point: 3
+						taskid: “a1bvjk”,
+						taskName: “Create Tasks API”,
+						taskDescription: “Expose a task API”
+						taskPoint: 3
 		
 					}
 				],
 				ongoing: [],
 				done: [
 					{
-						task_id: “ybhv213s”,
-						task_name: “Create Login API”,
-						task_description: “Expose a login API”
-						task_point: 1
+						taskId: “ybhv213s”,
+						taskName: “Create Login API”,
+						taskDescription: “Expose a login API”
+						taskPoint: 1
 					}
 				]
 
@@ -513,9 +518,9 @@ Endpoint for retrieving project members
 		{
 			name: “Pen”,
 			gender: “female”,
-			active_badge: {
-				image_url: “/img/456”,
-				badge_name: “Space Trainee”
+			activeBadge: {
+				imageUrl: “/img/456”,
+				badgeName: “Space Trainee”
 			},
 			task: {
 				todo: [],
@@ -557,39 +562,39 @@ Endpoint for retrieving project leaderboards
 	status: “success”
 	data: {[
 		{
-			project_name: “Project Name 2”, 
-			tasks_done: 11,
-			tasks_total: 20
+			projectName: “Project Name 2”, 
+			tasksDone: 11,
+			tasksTotal: 20
 			members: [{
-					user_name: “Fountain”,
+					userName: “Fountain”,
 					gender: “male”
-					avatar_url: “img/4564” 
+					avatarUrl: “img/4564” 
 				},
 				{
-					user_name: “Pen”,
+					userName: “Pen”,
 					gender: “female”
-					avatar_url: “img/5675” 
+					avatarUrl: “img/5675” 
 				}
 			] 
 		},
 		{
-			project_name: “Project Name ”, 
-			tasks_done: 11,
-			tasks_total: 30,
+			projectName: “Project Name ”, 
+			tasksDone: 11,
+			tasksTotal: 30,
 			members: [{
-					user_name: “Fountain”,
+					userName: “Fountain”,
 					gender: “male”
-					avatar_url: “img/4564” 
+					avatarUrl: “img/4564” 
 				},
 				{
-					user_name: “Pen”,
+					userName: “Pen”,
 					gender: “female”,
-					avatar_url: “img/5675” 
+					avatarUrl: “img/5675” 
 				},
 				{
-					user_name: “AJ”,
+					userName: “AJ”,
 					gender: “female”,
-					avatar_url: “img/1235645” 
+					avatarUrl: “img/1235645” 
 				}
 			]
 		}
@@ -618,48 +623,48 @@ Endpoint for retrieving user leaderboards
 	data: [{
 			user_name: “Big Beear”,
 			gender: “male”,
-			avatar_url: “/avatar/13123”,
-			active_badge: {
-				badge_url: “img/353”,
-				badge_name: “Sojourner”
+			avatarUrl: “/avatar/13123”,
+			activeBadge: {
+				badgeUrl: “img/353”,
+				badgeName: “Sojourner”
 			},
 			level: {
-				level_name: “level 2”,
-				total_points: 55
+				levelName: “level 2”,
+				totalPoints: 55
 			},
 			badges: [{
-					badge_url: “img/353”,
-					badge_name: “Sojourner”
+					badgeUrl: “img/353”,
+					badgeName: “Sojourner”
 				},
 				{
-					badge_url: “img/56789”,
-					badge_name: “Space Trainee”
+					badgeUrl: “img/56789”,
+					badgeName: “Space Trainee”
 				},
 				{
-					badge_url: “img/1234”,
-					badge_name: “Destroyer”
+					badgeUrl: “img/1234”,
+					badgeName: “Destroyer”
 				}
 			]
 		},
 		{
-			user_name: “AJ”,
+			userName: “AJ”,
 			gender: “female”,
-			avatar_url: “/avatar/567567”,
-			active_badge: {
-				badge_url: “img/56789”,
-				badge_name: “Space Trainee”
+			avatarUrl: “/avatar/567567”,
+			activeBadge: {
+				badgeUrl: “img/56789”,
+				badgeName: “Space Trainee”
 			},
 			level: {
-				level_name: “level 1”,
-				total_points: 5
+				levelName: “level 1”,
+				totalPoints: 5
 			},
 			badges: [{
-					badge_url: “img/353”,
-					badge_name: “Sojourner”
+					badgeUrl: “img/353”,
+					badgeName: “Sojourner”
 				},
 				{
-					badge_url: “img/56789”,
-					badge_name: “Space Trainee”
+					badgeUrl: “img/56789”,
+					badgeName: “Space Trainee”
 				}
 			]
 		}
