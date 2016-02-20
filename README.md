@@ -263,9 +263,9 @@ Endpoint for Creating projects
 **parameters:**
 | Name | Type |
 | --- | --- |
-| project_name | String(Required) |
+| projectName | String(Required) |
 | members | [String](Optional) |
-| due_date | String(Optional) |
+| dueDate | String(Optional) |
 ```
 **Sample Request Body**
 ```javascript
