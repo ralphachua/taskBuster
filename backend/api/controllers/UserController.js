@@ -49,17 +49,18 @@ module.exports = {
   },
 
   show: function(req, res) {
-    var generate = UserService.generateUserJson(req.param(user_id))
-    var payload = null
-    if (generate = Errors.UnknownError()) {
-      payload = ApiService.toErrorJSON(generate)
-      return res.serverError(payload)
-    } else if (generate = Errors.RecordNotFound()) {
-      payload = ApiService.toErrorJSON(generate)
-      return res.serverError(payload)
-    } else {
-      payload = ApiService.toSuccessJSON(generate)
-      return res.json(payload)
-    }
+    UserService.generateUserJson(req.param(user_id), function(result){
+      var payload = null
+      if (result = Errors.UnknownError()) {
+        payload = ApiService.toErrorJSON(result)
+        return res.serverError(payload)
+      } else if (result = Errors.RecordNotFound()) {
+        payload = ApiService.toErrorJSON(result)
+        return res.serverError(payload)
+      } else {
+        payload = ApiService.toSuccessJSON(result)
+        return res.json(payload)
+      }
+    })
   }
 }
