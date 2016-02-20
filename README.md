@@ -541,7 +541,7 @@ Endpoint for retrieving project members
 }
 ```
 
-## Get /projects/leaders
+## GET /projects/leaders
 Endpoint for retrieving project leaderboards
 
 **Response**
@@ -588,6 +588,76 @@ Endpoint for retrieving project leaderboards
 			]
 		}
 	]}
+}
+```
+```javascript
+//UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+
+}
+```
+
+## GET /users/leaders
+Endpoint for retrieving user leaderboards
+
+**Response**
+```javascript
+// HTTP status code: 200
+{
+	status: “success”
+	data: [{
+			user_name: “Big Beear”,
+			gender: “male”,
+			avatar_url: “/avatar/13123”,
+			active_badge: {
+				badge_url: “img/353”,
+				badge_name: “Sojourner”
+			},
+			level: {
+				level_name: “level 2”,
+				total_points: 55
+			},
+			badges: [{
+					badge_url: “img/353”,
+					badge_name: “Sojourner”
+				},
+				{
+					badge_url: “img/56789”,
+					badge_name: “Space Trainee”
+				},
+				{
+					badge_url: “img/1234”,
+					badge_name: “Destroyer”
+				}
+			]
+		},
+		{
+			user_name: “AJ”,
+			gender: “female”,
+			avatar_url: “/avatar/567567”,
+			active_badge: {
+				badge_url: “img/56789”,
+				badge_name: “Space Trainee”
+			},
+			level: {
+				level_name: “level 1”,
+				total_points: 5
+			},
+			badges: [{
+					badge_url: “img/353”,
+					badge_name: “Sojourner”
+				},
+				{
+					badge_url: “img/56789”,
+					badge_name: “Space Trainee”
+				}
+			]
+		}
+	]
 }
 ```
 ```javascript
