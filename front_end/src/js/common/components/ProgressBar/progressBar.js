@@ -2,7 +2,7 @@ define(['vue', 'text!./progressBar.html'], function (Vue, Template){
   return Vue.extend({
     template: Template,
     props: {
-      foo: {
+      text: {
         type: String,
       },
       progress:{
