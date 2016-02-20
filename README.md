@@ -61,20 +61,20 @@ Endpoint for retrieving user's tasks
 			task_id: “a1bvc3”,
 			task_name: “Battlefields UI”,
 			task_description: “Create assets for the battlefield screen”
-			task_point: 3
+			task_points: 3
 		},
     {
 			task_id: “a1bvjk”,
 			task_name: “Create Tasks API”,
 			task_description: “Expose a task API”
-			task_point: 3
+			task_points: 3
 		}],
 		ongoing: [],
 		done: [{
 			task_id: “ybhv213s”,
 			task_name: “Create Login API”,
 			task_description: “Expose a login API”
-			task_point: 1
+			task_points: 1
     }]
 	}
 }
