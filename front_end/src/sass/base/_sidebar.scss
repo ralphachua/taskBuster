@@ -1,0 +1,35 @@
+.sidebar {
+  max-width: 320px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 22px;
+  background-color: $dark-blue;
+  height: 100%;
+  z-index: 100;
+  overflow:hidden;
+}
+  .sidebar__trigger {
+    @include size(16px);
+    cursor: pointer;
+    text-align: right;
+    float:right;
+    color: $magenta;
+  }
+
+  .sidebar__avatar {
+    @include size(150px);
+    margin: 0 auto;
+  }
+
+  .sidebar__menu {
+    padding-top: 80px;
+  }
+  .sidebar__menu__item {
+    margin-bottom: 20px;
+  }
+  .sidebar__menu__item a {
+    color: $magenta;
+    text-decoration: none;
+  }

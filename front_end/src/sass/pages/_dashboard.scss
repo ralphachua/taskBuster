@@ -1,3 +1,20 @@
+.main {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .app-content {
+    transform: translateX(0%);
+  }
+  &.activeSidebar {
+    .sidebar {
+      transform: translateX(0%);
+    }
+    .app-content {
+      transform: translateX(320px);
+    }
+  }
+}
+
 .task-table {
   background-color: $task-table-bgcolor;
   color: $ash-blue;
@@ -9,6 +26,7 @@
 
 .task-table__header {
   overflow: hidden;
+  padding-bottom: 20px;
 
 }
   .task-table__header__title {
@@ -21,6 +39,10 @@
     color: $black;
   }
 
+.task-table__columns {
+  margin-top: 20px;
+}
+
 .task-table__item {
   border: 1px solid #ccc;
   padding: 22px;
@@ -28,4 +50,13 @@
 }
 .task-table__item[data-col="3"] {
   @include omega;
+}
+
+
+.project-details-section {
+
+}
+
+.project__action-bar__item:first-child {
+  text-align: right;
 }

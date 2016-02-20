@@ -1,5 +1,6 @@
 .progress-bar-component {
     $progress-bar-height: 5px;
+    margin-bottom: 5px;
     .progress-bar__inner {
       width: 100%;
       height: $progress-bar-height;
