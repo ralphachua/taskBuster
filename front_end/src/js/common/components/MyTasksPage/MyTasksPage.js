@@ -1,16 +1,15 @@
 define([
     'vue',
     'text!./MyTasksPage.html',
-    'gridster'
+    './Task',
+    'dragula'
   ],
-  function(Vue, Template, Gridster) {
+  function(Vue, Template, Task, dragula) {
     return Vue.extend({
       template: Template,
       data: function() {
         return {
           tasks: {
-            status: 'success',
-            data: {
               todo: [{
                 taskId: 'a1bvc3',
                 taskName: 'Battlefields UI',
@@ -30,8 +29,22 @@ define([
                 taskPoints: 1
               }]
             }
-          }
         };
+      },
+      components: {
+        task: Task
+      },
+      ready: function () {
+        var todoColumn = $('.mytasks-section .todo-column')[0];
+        var ongoingColumn = $('.mytasks-section .ongoing-column')[0];
+        var doneColumn = $('.mytasks-section .done-column')[0];
+        console.log(todoColumn);
+
+        dragula([todoColumn, ongoingColumn, doneColumn]).on('drag', function (el) {
+          console.log(el);
+        });
+
+
       }
     });
   });
