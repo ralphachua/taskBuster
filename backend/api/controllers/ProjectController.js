@@ -1,4 +1,6 @@
 
+var moment = require("moment");
+
 module.exports = {
 
   create: function(req, res) {
@@ -42,6 +44,12 @@ module.exports = {
       dueDate: req.param("dueDate"),
       status: req.param("status")
     };
+
+    if (req.param("status") === "ACTIVE") {
+      params.startedOn = moment().utc(new Date).format();
+    } else if (req.param("status") === "DONE") {
+      params.finishedOn = moment().utc(new Date).format();
+    }
 
     var tasks = {
       find: function(next) {

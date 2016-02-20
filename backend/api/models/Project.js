@@ -30,6 +30,12 @@ module.exports = {
       type: "string",
       defaultsTo: "TODO"
     },
+    startedOn: {
+      type: "date"
+    },
+    finishedOn: {
+      type: "date"
+    },
     toJSON: function() {
       var moment = require("moment");
       var object = this.toObject();
