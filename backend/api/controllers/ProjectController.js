@@ -13,7 +13,7 @@ module.exports = {
     var params = {
       projectName:  req.param("projectName"),
       createdBy:    req.param("userId"), //req.user
-      dueDate:      req.param("dueDate"),
+      dueDate:      Date(req.param("dueDate")),
       members:      req.param("members")
     };
 
@@ -28,6 +28,7 @@ module.exports = {
     async.auto(tasks, function(err, result) {
       var payload = null;
       if (err) {
+        console.log(err)
         payload = ApiService.toErrorJSON(new Errors.UnknownError());
         return res.serverError(payload);
       } else {

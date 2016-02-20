@@ -57,7 +57,7 @@ module.exports = {
         var projects = cres.projects
         if (projects.length > 0) {
           projects.forEach( function(project) {
-            ProjectService.generateProjectJson(project, function(results) {
+            ProjectService.generateProjectJson(project.id, function(results) {
               if (result == Errors.UnknownError()) {
                 return next(result, mergedProjects)
               } else {

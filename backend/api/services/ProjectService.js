@@ -2,53 +2,57 @@
 module.exports = {
 
   generateProjectJson: function(projectId,callBack) {
-    console.log("start generating...")
   	var tasks = {
       project: function(next) {
         var params = {
           id: projectId
         }
         Project.findOne(params, function(err, project) {
-            return next(err, project);
+          return next(err, project);
         });
       },
       member: ["project", function(next, cres) {
         var members = cres.project.members
+        console.log(members)
         var mergedMembers = []
         members.forEach(function(member){
           var params = {
             userId : member.userId
           }
-          User.findOne(param, function(err, user){
+          User.findOne(params, function(err, user){
             mergedMembers.push({
               userName: user.userName,
               gender: user.gender,
               avatarUrl: user.avatarUrl
             })
+
+            if (member == members[members.length - 1]) {
+              console.log(mergedMembers)
+              return next(null, mergedMembers)
+            }
           })
-          if (member == members[members.length - 1]) {
-            console.log(mergedMembers)
-            return next(null, mergedMembers)
-          }
         })
       }],
       tasksDone: ["project", function(next, cres) {
         var tasksDone = 0
         var tasks = cres.project.tasks
-        tasks.forEach(function(task){
-          var params = {
-            id : task.id
-          }
-          Task.findOne(params, function(err, task){
-            if (task.status == "DONE") {
-              tasksDone++
+        if (tasks) {
+          tasks.forEach(function(task){
+            var params = {
+              id : task.id
             }
+            Task.findOne(params, function(err, task){
+              if (task.status == "DONE") {
+                tasksDone++
+              }
+            })
+            if (task == tasks[tasks.length - 1]) {
+              return next(null, tasksDone)
+            };
           })
-          if (task == tasks[tasks.length - 1]) {
-            console.log(tasksDone)
-            return next(null, tasksDone)
-          };
-        })
+        } else {
+          return next(null, tasksDone)
+        }
       }]
     }
 
