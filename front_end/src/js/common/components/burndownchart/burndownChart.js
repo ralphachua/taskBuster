@@ -58,7 +58,8 @@ function ($, Vue, Resource, highcharts, Template) {
       layout: 'vertical',
       align: 'right',
       verticalAlign: 'middle',
-      borderWidth: 0
+      borderWidth: 0,
+      itemStyle: {"color": "#FFF"}
     };
 
     var idealBurn = options.idealBurn || {
