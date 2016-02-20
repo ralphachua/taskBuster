@@ -22,6 +22,7 @@
   padding-top: 12px;
   padding-left: 17px;
   padding-right: 17px;
+  margin-top: 5%;
 }
 
 .task-table__header {
@@ -44,6 +45,8 @@
 }
 
 .task-table__item {
+  @include bordershadow;
+  background-color: $white;
   border: 1px solid #ccc;
   padding: 22px;
   margin-bottom: 14px;
