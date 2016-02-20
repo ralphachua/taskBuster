@@ -4,6 +4,7 @@ requirejs.config({
     jquery: 'vendor/jquery',
     vue : 'vendor/vue',
     'vue-resource' : 'vendor/vue-resource',
+    'vue-router' : 'vendor/vue-router',
     'gridster' : 'vendor/gridster',
     highcharts: 'vendor/highcharts'
   },
