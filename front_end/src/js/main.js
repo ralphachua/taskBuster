@@ -3,21 +3,31 @@ define([
   'vue',
   'vue-resource',
   'text!test.html',
-'common/components/ProgressBar/progressBar',
-  'common/components/burndownchart/burndown'
+  'common/components/ProgressBar/progressBar',
+  'common/components/burndownchart/burndown',
+  'projects/projects',
+  'projects/projectsData',
+  'projects/projectentry'
 ],
-function ($, Vue, Resource, test, ProgressBar, burndown) {
+function ($, Vue, Resource, test, ProgressBar, burndown, projectscomponent, ProjectData, projectEntry) {
   Vue.use(Resource);
-
   console.log(test);
+
+  Vue.component('progress-bar', ProgressBar);
+  Vue.component('project-entry', projectEntry);
+
+  var projectData = ProjectData;
 
   var app = new Vue({
     el: '#App',
     data: {
-      global: {}
+      global: {
+        projectsData: projectData
+      }
     },
     components: {
-      burndown: burndown.burndownComponent
+      burndown: burndown.burndownComponent,
+      projects: projectscomponent
     }
   });
 
@@ -42,6 +52,26 @@ function ($, Vue, Resource, test, ProgressBar, burndown) {
     console.groupEnd();
   });
 
-  Vue.component('progress-bar', ProgressBar);
+  app.$on('getProjects', function(args) {
+    console.group('@Get Projects');
+      console.log('getProjects');
+      console.log(args);
+
+      var req = {
+        url: 'http://localhost:1337/users/' + args.userId + '/projects',
+        method: 'GET'
+      };
+
+      this.$http(req).then(function onSuccess(response) {
+        console.log("Success");
+        console.log(response.data);
+      }, function onError(response) {
+        console.log("Error");
+        console.log(response);
+      });
+
+    console.groupEnd();
+  });
+
 
 });

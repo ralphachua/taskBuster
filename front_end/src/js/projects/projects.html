@@ -1,0 +1,13 @@
+<section id="projects" class="app__section">
+  Status: {{projectsData.status}} <br>
+  Length: {{projectsData.data.length}} <br><br>
+
+  <div v-for="project in projectsData.data">
+    <project-entry
+      :id="project.projectId"
+      :name="project.projectName"
+      :due="project.due_date"
+    ></project-entry>
+  </div>
+  
+</section>
