@@ -12,7 +12,8 @@ function (
   Resource,
   Router,
   ProgressBar,
-  Pages) {
+  Pages
+  ) {
   Vue.use(Resource);
   Vue.use(Router);
   Vue.component('progress-bar', ProgressBar);
@@ -29,7 +30,12 @@ function (
       toggleSidebar: function () {
         this.isSidebarOn = !this.isSidebarOn;
       }
+    },
+    events: {
+      'project-details': function (project) {
+      console.log("dispatch project-details: ",project);
     }
+  }
   });
 
   var router = new Router();
@@ -47,7 +53,6 @@ function (
       component: Pages['leaderboard']
     }
   });
-
 
   router.start(AppView, '#App');
 
