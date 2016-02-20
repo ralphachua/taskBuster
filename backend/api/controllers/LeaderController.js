@@ -12,14 +12,13 @@ module.exports = {
         var mergedUsers = []
         var users = cres.users
         users.forEach( function(user){
-          UserService.generateUserJson(user.userId, function(result){
-            if (result == Errors.UnknownError()) {
-              return next(result, mergedUsers)
+          UserService.generateUserJson(user.userId, function(err, result){
+            if (err) {
+              return next(err, mergedUsers)
             } else {
               mergedUsers.push(result)
             }
             if (user == users[users.length - 1]) {
-              console.log("here finally")
               return next(null,mergedUsers);    
             };
           }) 
@@ -57,14 +56,13 @@ module.exports = {
         var projects = cres.projects
         if (projects.length > 0) {
           projects.forEach( function(project) {
-            ProjectService.generateProjectJson(project.id, function(results) {
-              if (result == Errors.UnknownError()) {
-                return next(result, mergedProjects)
+            ProjectService.generateProjectJson(project.id, function(err, result) {
+              if (err) {
+                return next(err, mergedProjects)
               } else {
                 mergedProjects.push(result)
               }
               if (project == projects[projects.length - 1]) {
-                console.log("here finally")
                 return next(null,mergedProjects);    
               };
             })
