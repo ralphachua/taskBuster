@@ -18,6 +18,10 @@
     color: $magenta;
   }
 
+  .sidebar__name {
+    margin: 14px auto;
+  }
+
   .sidebar__avatar {
     @include size(150px);
     margin: 0 auto;

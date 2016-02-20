@@ -22,6 +22,7 @@
   padding-top: 12px;
   padding-left: 17px;
   padding-right: 17px;
+  margin-top: 5%;
 }
 
 .task-table__header {
@@ -31,12 +32,18 @@
 }
   .task-table__header__title {
     float:left;
+    text-transform: uppercase;
   }
   .task-table__header__add {
     float:right;
   }
   .task-table__item__title {
     color: $black;
+    margin-bottom: 10px;
+  }
+
+  .task-table__item__content {
+    margin-bottom: 10px;
   }
 
 .task-table__columns {
@@ -44,6 +51,8 @@
 }
 
 .task-table__item {
+  @include bordershadow;
+  background-color: $white;
   border: 1px solid #ccc;
   padding: 22px;
   margin-bottom: 14px;
@@ -59,4 +68,15 @@
 
 .project__action-bar__item:first-child {
   text-align: right;
+}
+
+.badge__image {
+  max-width: 140px;
+  margin: 0 auto;
+}
+
+.badge__description {
+  padding: 22px;
+  border: 1px solid #ccc;
+  margin-top: 14px;
 }
