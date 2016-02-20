@@ -1,4 +1,10 @@
-define(['jquery', 'vue'], function ($, vue) {
-  console.log($);
-  console.log(vue);
+define([
+  'jquery',
+  'vue',
+  'vue-resource',
+  'text!test.html'
+],
+function ($, Vue, Resource, test) {
+  Vue.use(Resource);
+  console.log(test);
 });

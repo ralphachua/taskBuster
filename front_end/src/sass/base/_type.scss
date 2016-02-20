@@ -1,4 +1,30 @@
 body, html {
   font-size: $base-font-size;
-  font-family: 'Robot', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  color: $white;
+}
+
+h1 {
+  font-size: $base-font-size + 4*$base-font-mult;
+}
+
+h2 {
+font-size: $base-font-size + 3*$base-font-mult;
+}
+
+h3 {
+  font-size: $base-font-size + 2*$base-font-mult;
+}
+
+h4 {
+  font-size: $base-font-size + 1*$base-font-mult;
+}
+
+
+.primary {
+  color: $primary-text-color;
+}
+
+.secondary {
+  color: $secondary-text-color;
 }
