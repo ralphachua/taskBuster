@@ -33,9 +33,8 @@ module.exports = {
       taskDescription:       req.param("taskDescription"),
       assignedTo:            req.param("assignedTo"),
       taskPoints:            req.param("taskPoints"),
-      projectId:             req.param("projectId"),
-      status:                "TODO"
-    }
+      projectId:             req.param("projectId")
+    };
 
     var tasks = {
       save: function(next) {
@@ -43,7 +42,7 @@ module.exports = {
           return next(err, user);
         });
       }
-    }
+    };
 
     async.auto(tasks, function(err, result) {
       var payload = null;
@@ -58,8 +57,19 @@ module.exports = {
   },
 
   update: function(req, res) {
+    var taskStatus = req.param("taskStatus") || "";
+    if (!taskStatus) {
+      return res.badRequest(ApiService.toErrorJSON(
+        new Errors.InvalidArgumentError("Missing taskStatus parameter.")));
+    }
+
     var paramsToUpdate = {
-      status: req.param("taskStatus")
+      status: taskStatus
+    }
+
+    if (taskStatus == "DONE") {
+      var doneAt = req.param("doneAt") || moment().toString();
+      paramsToUpdate.doneAt = doneAt;
     }
 
     var tasks = {
