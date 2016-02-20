@@ -30,7 +30,12 @@ function (
       toggleSidebar: function () {
         this.isSidebarOn = !this.isSidebarOn;
       }
+    },
+    events: {
+      'project-details': function (project) {
+      console.log("dispatch project-details: ",project);
     }
+  }
   });
 
   var router = new Router();

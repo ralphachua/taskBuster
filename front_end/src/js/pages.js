@@ -16,7 +16,7 @@ define([
     'my-tasks-page' : MyTasks,
     'project-details-page' : ProjectDetails,
     'badge-capsule-page' : BadgeCapsule,
-    'my-projects-page' : MyProjects
+    'my-projects-page' : MyProjects,
     'leaderboard': '<p>This is Leaderboard, yeah!</p>'
   };
 });

@@ -41,6 +41,38 @@ define(['vue',
     // });
   };
 
+  var getProjectDetails = function(vueComponent, projectid, done){
+    console.group('@getProjectDetails');
+    var xhr = {
+          url: 'http://localhost:1337/projects/' + projectid ,
+          method: 'GET'
+    };
+
+    console.log(xhr);
+
+    var mockresponse = {
+      status: 'success',
+      data: {
+        projectName: 'Project Name 2',
+        tasksTodo: 5,
+        tasksOngoing: 1,
+        tasksDone: 2,
+        dueDate: '2016-02-17T08:33:23.257Z'
+      }
+    };
+
+    return done(mockresponse);
+    // vueComponent.$http(xhr).then(function onSuccess(response) {
+    //   console.log("onSuccess");
+    //   console.groupEnd();
+    //   return done(response);
+    // }, function onError(response) {
+    //   console.log("onError");
+    //   console.groupEnd();
+    //   return done(response);
+    // });
+  };
+
   return Vue.extend({
     template: Template,
     // components: {
@@ -77,6 +109,10 @@ define(['vue',
         });
 
         console.groupEnd();
+      },
+
+      viewProject: function(project){
+        this.$dispatch('project-details', project);
       }
     }
   });

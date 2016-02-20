@@ -1,7 +1,7 @@
 <section class="section myprojects-section">
 {{projects.length}}
   <div v-for="project in projects">
-    <div>
+    <div @click="viewProject(project)">
       Project Name: {{project.projectName}} <br>
       {{project.due_date == "" ? 'NO DUE DATE': project.due_date}} <br>
     </div>
