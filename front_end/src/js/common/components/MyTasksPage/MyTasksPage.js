@@ -76,7 +76,33 @@ define([
         var doneColumn = $('.mytasks-section .done-column')[0];
         console.log(todoColumn);
 
-        dragula([todoColumn, ongoingColumn, doneColumn]).on('drag', function (el) {
+        dragula([todoColumn, ongoingColumn, doneColumn], {
+          accepts: function(el, target, source, sibling) {
+            var currentStatus = el.__vue__.taskData.status;
+            var targetStatus = '';
+            if (target.className.indexOf('todo-column') > -1) {
+              targetStatus = 'TODO';
+            }
+            else if (target.className.indexOf('ongoing-column') > -1) {
+              targetStatus = 'ONGOING';
+            }
+            else if (target.className.indexOf('done-column') > -1) {
+              targetStatus = 'DONE';
+            }
+
+            // Rules
+            if (currentStatus == 'TODO' && targetStatus == 'ONGOING') {
+              el.__vue__.taskData.status = 'ONGOING';
+              return true;
+            }
+            else if (currentStatus == 'ONGOING' && targetStatus == 'DONE') {
+              el.__vue__.taskData.status = 'DONE';
+              return true;
+            }
+
+            return false;
+          }
+        }).on('drop', function (el) {
           console.dir(el);
           if (el.hasOwnProperty(('__vue__'))) {
             el.__vue__.$dispatch('taskDragged', el.__vue__);
