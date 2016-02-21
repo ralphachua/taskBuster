@@ -22,7 +22,7 @@ module.exports = {
   // }
 
   /**  A P P  **/
-  port: process.env.PORT || 1337,
+  port: process.env.PORT || 8082,
 
   /**  C O R S  **/
   cors: {
