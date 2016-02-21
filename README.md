@@ -362,10 +362,10 @@ Endpoint for updating project entry
 **Parameters:**
 | Name | Type |
 | --- | --- |
-| projectName | String(Optional) |
-| members | [String](Optional) |
-| dueDate | String(Optional) |
-| status | String(Optional) |
+| projectName | String(Required) |
+| members | [String](Required) |
+| dueDate | String(Required) |
+| status | String(Required) |
 ```
 
 **Sample Request Body**
