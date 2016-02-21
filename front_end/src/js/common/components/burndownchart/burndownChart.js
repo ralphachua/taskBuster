@@ -159,7 +159,7 @@ function ($, Vue, Resource, highcharts, Template) {
     },
     ready: function() {
       var self = this;
-      var projectId = '56c8ce5fb793502423e8610b';
+      var projectId = this.$route.query.projectId;
 
       requestBurndown(self, projectId, function(err, response) {
         if (err) {
