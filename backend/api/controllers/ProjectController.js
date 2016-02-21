@@ -52,7 +52,7 @@ module.exports = {
         });
       },
       tasksTodo: function(next) {
-        Task.find({
+        Task.count({
           projectId: req.param("projectId"),
           status: "TODO"
         }, function(err, count) {
@@ -60,7 +60,7 @@ module.exports = {
         });
       },
       tasksOngoing: function(next) {
-        Task.find({
+        Task.count({
           projectId: req.param("projectId"),
           status: "ONGOING"
         }, function(err, count) {
@@ -68,7 +68,7 @@ module.exports = {
         });
       },
       tasksDone: function(next) {
-        Task.find({
+        Task.count({
           projectId: req.param("projectId"),
           status: "DONE"
         }, function(err, count) {
@@ -86,7 +86,6 @@ module.exports = {
         var data = {
           projectName:  result.project.projectName,
           dueDate:      result.project.dueDate,
-          status:       result.project.status,
           tasksTodo:    result.tasksTodo,
           tasksOngoing: result.tasksOngoing,
           tasksDone:    result.tasksDone
