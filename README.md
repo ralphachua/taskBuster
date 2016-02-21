@@ -444,14 +444,14 @@ Endpoint for retrieving project members
 						taskId: “a1bvc3”,
 						taskName: “Battlefields UI”,
 						taskDescription: “Create assets for the battlefield screen”
-						taskPoint: 3
+						taskPoints: 3
 		
 					},
 					{
 						taskid: “a1bvjk”,
 						taskName: “Create Tasks API”,
 						taskDescription: “Expose a task API”
-						taskPoint: 3
+						taskPoints: 3
 		
 					}
 				],
@@ -461,7 +461,7 @@ Endpoint for retrieving project members
 						taskId: “ybhv213s”,
 						taskName: “Create Login API”,
 						taskDescription: “Expose a login API”
-						taskPoint: 1
+						taskPoints: 1
 					}
 				]
 
