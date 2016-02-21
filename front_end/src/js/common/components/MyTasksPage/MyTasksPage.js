@@ -1,13 +1,17 @@
 define([
     'vue',
-    'vue-resource',
     'text!./MyTasksPage.html',
     './Task',
-    'dragula'
+    'dragula',
+    './Battlefield'
   ],
-  function(Vue, Resource, Template, Task, dragula) {
-    Vue.use(Resource);
-
+  function(
+    Vue,
+    Template,
+    Task,
+    dragula,
+    Battlefield
+  ) {
     var getTasks = function(vueComponent, userId, done){
       var xhr = {
         url:'http://localhost:1337/users/' + userId+"/tasks" ,
@@ -32,32 +36,13 @@ define([
       data: function() {
         return {
           tasks:{}
-          // tasks: {
-          //     todo: [{
-          //       taskId: 'a1bvc3',
-          //       taskName: 'Battlefields UI',
-          //       taskDescription: 'Create assets for the battlefield screen',
-          //       taskPoints: 3
-          //     }, {
-          //       taskId: 'a1bvjk',
-          //       taskName: 'Create Tasks API',
-          //       taskDescription: 'Expose a task API',
-          //       taskPoints: 3
-          //     }],
-          //     ongoing: [],
-          //     done: [{
-          //       taskId: 'ybhv213s',
-          //       taskName: 'Create Login API',
-          //       taskDescription: 'Expose a login API',
-          //       taskPoints: 1
-          //     }]
-          //   }
         };
       },
       components: {
-        task: Task
+        task: Task,
+        battlefield: Battlefield
       },
-      compiled: function(){ 
+      compiled: function(){
         var self = this;
         console.log("compile");
         // comment if you're going to use mock data
