@@ -35,6 +35,9 @@
   background-color: $ash-blue;
   position: relative;
 }
+  .battlefield-section__bg {
+    position: absolute;
+  }
   .battlefield-section__fg { //foreground
     position: absolute;
   }
@@ -146,8 +149,11 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.project__action-bar__item:first-child {
-  text-align: right;
+.project__action-bar__item {
+  cursor: pointer;
+  &:first-child {
+    text-align: right;
+  }
 }
 
 .badge__image {

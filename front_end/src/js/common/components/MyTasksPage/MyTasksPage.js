@@ -3,18 +3,20 @@ define([
     'text!./MyTasksPage.html',
     './Task',
     'dragula',
-    './Battlefield'
+    './Battlefield',
+    'common/global_config'
   ],
   function(
     Vue,
     Template,
     Task,
     dragula,
-    Battlefield
+    Battlefield,
+    config
   ) {
     var getTasks = function(vueComponent, userId, done){
       var xhr = {
-        url:'http://localhost:1337/users/' + userId+"/tasks" ,
+        url: config.API_HOST + userId+"/tasks" ,
         method:'GET'
       };
 
@@ -42,7 +44,7 @@ define([
       console.log("payload");
       console.log(payload);
       var xhr = {
-        url:'http://localhost:1337/tasks/' + payload.taskId,
+        url: config.API_HOST + payload.taskId,
         method:'PUT',
         data: payload
       };
@@ -63,7 +65,7 @@ define([
       );
 
       console.groupEnd();
-    }
+    };
 
     return Vue.extend({
       template: Template,
@@ -88,6 +90,7 @@ define([
           //TODO: check if has err
 
           var newresponse = JSON.parse(JSON.stringify(response.data));
+
           console.log("status: ",newresponse.status);
           self.tasks = newresponse.data;
           console.log("data: ",self.tasks);
