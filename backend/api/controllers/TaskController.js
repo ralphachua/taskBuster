@@ -63,15 +63,6 @@ module.exports = {
         new Errors.InvalidArgumentError("Missing taskStatus parameter.")));
     }
 
-    var paramsToUpdate = {
-      status: taskStatus
-    }
-
-    if (taskStatus == "DONE") {
-      var doneAt = req.param("doneAt") || moment().toString();
-      paramsToUpdate.doneAt = doneAt;
-    }
-
     var tasks = {
       find: function(next) {
         Task.findOne({id: req.param("taskId")}, function(err, task) {
@@ -82,7 +73,19 @@ module.exports = {
           return next(err, task);
         });
       },
-      updateRecord: ["find", function(next) {
+      updateRecord: ["find", function(next, cres) {
+        var paramsToUpdate = {
+          status: taskStatus
+        }
+
+        if (taskStatus == "DONE") {
+          var doneAt = req.param("doneAt") || moment().toString();
+          paramsToUpdate.doneAt = doneAt;
+          UserService.taskDone(cres.task, function(err, result){
+            console.log("success updating badges")
+            console.log(result)
+          })
+        }
         Task.update({id: req.param("taskId")},paramsToUpdate, function(err, task) {
           return next(err, task);
         });
