@@ -90,7 +90,7 @@ module.exports = {
       },
       updateUser: ["user" ,function(next, cres) {
         var paramsToUpdate = {
-            totalPointsDone = user.totalPointsDone + task.taskPoints
+            totalPointsDone: cres.user.totalPointsDone + task.taskPoints
           }
           User.update(paramsToUpdate, function(err, user) {
             return next(err, user);
@@ -100,7 +100,7 @@ module.exports = {
         Badge.find({}, function(err, badges){
           var user = cres.updateUser
           badges.forEach(function(badge){
-            if !(_.contains(user.badges, badge.badgeId)) {
+            if (!_.contains(user.badges, badge.badgeId)) {
               if (badge.requiredPoints <= user.totalPointsDone) {
                 var paramsToUpdate = {
                   badges: user.badges.push(badge.badgeId)

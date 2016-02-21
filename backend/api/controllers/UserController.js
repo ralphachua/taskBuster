@@ -63,30 +63,13 @@ module.exports = {
 
   showTasks: function(req, res) {
     var tasks = {
-      tasksTodo: function(next) {
+      task: function(next) {
         Task.find({ 
-          assignedTo: req.param("userId"),
-          status: "TODO"
-        }, function(err, todo) {
-          return next(err, todo);
+          assignedTo: req.param("userId")
+        }, function(err, tasks) {
+          return next(err, tasks);
         });
       },
-      tasksOngoing: function(next) {
-        Task.find({ 
-          assignedTo: req.param("userId"),
-          status: "ONGOING"
-        }, function(err, ongoing) {
-          return next(err, ongoing);
-        });
-      },
-      tasksDone: function(next) {
-        Task.find({ 
-          assignedTo: req.param("userId"),
-          status: "DONE"
-        }, function(err, done) {
-          return next(err, done);
-        });
-      }
     }
 
     async.auto(tasks, function(err, result) {
@@ -95,12 +78,7 @@ module.exports = {
         payload = ApiService.toErrorJSON(new Errors.UnknownError());
         return res.serverError(payload);
       } else {
-        var data = {
-          todo:   result.tasksTodo,
-          ongoing:result.tasksOngoing,
-          done:   result.tasksDone
-        }
-        payload = ApiService.toSuccessJSON(data);
+        payload = ApiService.toSuccessJSON(result.task);
         return res.json(payload);
       }
     });
