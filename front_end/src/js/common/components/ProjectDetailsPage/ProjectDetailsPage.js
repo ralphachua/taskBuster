@@ -1,10 +1,29 @@
 define(['vue',
-        'vue-resource',
         'text!./ProjectDetailsPage.html',
         'common/components/BurndownChart/burndownChart'
-      ], function (Vue, Resource, Template, Burndown) {
-  
-  Vue.use(Resource);
+      ], function (Vue, Template, Burndown) {
+
+
+  var getTeamMembers = function(vueComponent, projectid, done){
+    console.group('@getTeamMembers');
+    var xhr = {
+          url: 'http://localhost:1337/projects/' + projectid + '/members' ,
+          method: 'GET'
+    };
+
+    console.log(xhr);
+
+    vueComponent.$http(xhr).then(function onSuccess(response) {
+      console.log("onSuccess");
+      console.groupEnd();
+      return done(response);
+    }, function onError(response) {
+      console.log("onError");
+      console.groupEnd();
+      return done(response);
+    });
+
+  };
 
   var getProjectDetails = function(vueComponent, projectid, done){
     console.group('@getProjectDetails');
@@ -44,7 +63,10 @@ define(['vue',
       burndown: Burndown
     },
     data: function(){
-      return {projectData:{}};
+      return {
+        projectData:{},
+        team:[]
+      };
     },
     beforeCompile: function () {
       console.log('before compile');
@@ -62,10 +84,19 @@ define(['vue',
         console.group("@renderProjectDetails");
         var newresponse = JSON.parse(JSON.stringify(response.data));
         console.log("status: ",newresponse.status);
-        self.projectData = newresponse.data;//JSON.parse(JSON.stringify(newresponse.data));
+        self.projectData = newresponse.data;
         console.log("data: ",self.projectData);
         console.groupEnd();
-      })
+      });
+
+      // getTeamMembers(this, this.$route.query.projectId, function renderTeam(response){
+      //   console.group("@renderProjectDetails");
+      //   var newresponse = JSON.parse(JSON.stringify(response.data));
+      //   console.log("status: ",newresponse.status);
+      //   self.projectData = newresponse.data;
+      //   console.log("data: ",self.projectData);
+      //   console.groupEnd();
+      // });
     }
   });
 });
