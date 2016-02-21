@@ -99,6 +99,41 @@ Endpoint for retrieving user's tasks
 }
 ```
 
+## GET /users/:userId/projects
+Endpoint for retrieving user's tasks
+
+**Response**
+```javascript
+// HTTP status code: 200
+{
+	status: “success”,
+	data: [{
+		projectId: “hja12”,
+		projectName: “Project Name 2”,
+		dueDate: “2016-02-17T08:33:23.257Z”
+	}]
+}
+
+```
+```javascript
+//UserNotFound
+{
+	status: “error”,
+	data: {
+		message: “User does not exist”
+	}
+}
+```
+```javascript
+// UnknownError
+{
+	status: “error”,
+	data: {
+		message: “An unknown error occurred”
+	}
+}
+```
+
 ## POST /tasks
 Endpoint for Creating Tasks
 
@@ -265,9 +300,9 @@ Endpoint for Creating projects
 **parameters:**
 | Name | Type |
 | --- | --- |
-| project_name | String(Required) |
+| projectName | String(Required) |
 | members | [String](Optional) |
-| due_date | String(Optional) |
+| dueDate | String(Optional) |
 ```
 **Sample Request Body**
 ```javascript
@@ -285,17 +320,7 @@ Endpoint for Creating projects
 	status: “success”,
 	data: {
 		projectName: “Project Name 2”, status: “TODO”
-		members:[
-			{
-				name: “Fountain”,
-				gender: “male”,
-				activeBadge: {
-					imageUrl: “/img/123”,
-					badgeName: “Bug Crusher”
-				},
-				tasks: {} 
-			}
-		]
+		members: ["id123", "ad123", "eq678"],
 		due_date:”2016-02-17T08:33:23.257Z”
 	}
 }
@@ -336,11 +361,10 @@ Endpoint for updating project entry
 **Parameters:**
 | Name | Type |
 | --- | --- |
-| project_name | String(Optional) |
+| projectName | String(Optional) |
 | members | [String](Optional) |
-| due_date | String(Optional) |
+| dueDate | String(Optional) |
 | status | String(Optional) |
-| tasks | String(Optional) |
 ```
 
 **Sample Request Body**
@@ -349,8 +373,7 @@ Endpoint for updating project entry
   	projectName: "Project Name",
   	members: ["sda123", "asd123", "eqw687", "agh982"],
   	dueDate: "2016-02-17T 08:33:23.257 Z",
-  	status: "ONGOING",
-  	tasks: [“jjl999”, “hjf564”, "yuy355"]
+  	status: "ONGOING"
 }
 ```
 
@@ -362,40 +385,18 @@ Endpoint for updating project entry
 	data: {
 		projectName: “Project Name ”,
 		status: “TODO”
-		members:[{
-				name: “Fountain”,
-				gender: “male”,
-				activeBadge: {
-					imageUrl: “/img/123”,
-					badgeName: “Bug Crusher” 
-				},
-				tasks: {}
-			}
-		]
-		dueDate:”2016-02-17T08:33:23.257Z”,
-		tasks: [{
-				taskId: “a1bvc3”,
-				taskName: “Battlefields UI”,
-				taskDescription: “Create assets for the battlefield screen”,
-				taskPoint: 3
-			},
-			{
-				taskId: “a1bvjk”,
-				taskName: “Create Tasks API”,
-				taskDescription: “Expose a task API”,
-				taskPoint: 3
-			}
-		}]
+		members: ["sda123", "asd123", "eqw687", "agh982"]
+		dueDate:”2016-02-17T08:33:23.257Z”
 	}
 }
 ```
 
 ```javascript
-//A Task does not exist
+//ProjectNotFound
 {
 	status: “error”,
 	data: {
-		message: “Cannot add task to project”
+		message: “Project does not exist”
 	}
 
 }
@@ -406,58 +407,6 @@ Endpoint for updating project entry
 	status: “error”,
 	data: {
 		message: “Cannot add member to project”
-	}
-}
-```
-```javascript
-//Invalid Status
-{
-	status: ”error”,
-	data : {
-		message: “Please give a valid status”
-	}
-}
-```
-```javascript
-//Invalid Date
-{
-	status: “error”,	
-	data: {
-		message: “Please give a valid date”
-	}
-}
-```
-```javascript
-//UnknownError
-{
-	status: “error”,
-	data: {
-		message: “An unknown error occurred”
-	}
-}
-```
-
-## GET /users/:userId/projects
-Endpoint for retrieving user's projects
-
-**Response**
-```javascript
-// HTTP status code: 200
-{
-	status: “success”,
-	data: [{
-		projectId: “hja12”,
-		projectName: “Project Name 2”,
-		due_date: “2016-02-17T08:33:23.257Z”
-	}]
-}
-```
-```javascript
-//UserNotFound
-{
-	status: “error”,
-	data: {
-		message: “User does not exist”
 	}
 }
 ```
@@ -484,8 +433,9 @@ Endpoint for retrieving project members
 		{
 			name: “Fountain”,
 			gender: “male”,
+			avatarUrl: "/avatar/abc",
 			activeBadge: {
-				imageUrl: “/img/123”,
+				badgeUrl: “/img/123”,
 				badgeName: “Bug Crusher”
 			},
 			task: {
@@ -494,14 +444,14 @@ Endpoint for retrieving project members
 						taskId: “a1bvc3”,
 						taskName: “Battlefields UI”,
 						taskDescription: “Create assets for the battlefield screen”
-						taskPoint: 3
+						taskPoints: 3
 		
 					},
 					{
 						taskid: “a1bvjk”,
 						taskName: “Create Tasks API”,
 						taskDescription: “Expose a task API”
-						taskPoint: 3
+						taskPoints: 3
 		
 					}
 				],
@@ -511,7 +461,7 @@ Endpoint for retrieving project members
 						taskId: “ybhv213s”,
 						taskName: “Create Login API”,
 						taskDescription: “Expose a login API”
-						taskPoint: 1
+						taskPoints: 1
 					}
 				]
 
@@ -520,6 +470,7 @@ Endpoint for retrieving project members
 		{
 			name: “Pen”,
 			gender: “female”,
+			avatarUrl: "/avatar/abc",
 			activeBadge: {
 				imageUrl: “/img/456”,
 				badgeName: “Space Trainee”
