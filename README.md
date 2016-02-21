@@ -267,9 +267,10 @@ Endpoint for retrieving project details
 	status: “success”,
 	data: {
 		projectName: “Project Name 2”,
-		tasksTodo: 5,
-		tasksOngoing: 1,
-		tasksDone: 2,
+		tasksTodo: 0,
+		tasksOngoing: 0,
+		tasksDone: 0,
+		status: "TODO",
 		dueDate: “2016-02-17T08:33:23.257Z”
 	}
 }
