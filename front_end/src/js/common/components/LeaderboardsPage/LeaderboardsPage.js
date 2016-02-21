@@ -5,7 +5,7 @@ define(['vue',
 
     var getLeaderBoardProjects = function(done){
       var xhr = {
-        url: config.API_HOST + "/leaders/projects" ,
+        url: config.API_HOST + "leaders/projects" ,
         method:'GET'
       };
 
@@ -70,7 +70,7 @@ define(['vue',
 
     var getLeaderBoardUsers = function(done){
       var xhr = {
-        url: config.API_HOST + "/leaders/users" ,
+        url: config.API_HOST + "leaders/users" ,
         method:'GET'
       };
 

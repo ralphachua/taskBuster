@@ -1,13 +1,14 @@
 define(['jquery','vue', 'datedropper',
         'text!./ProjectDetailsPage.html',
-        'common/components/BurndownChart/burndownChart'
-      ], function ($, Vue, dateDropper, Template, Burndown) {
+        'common/components/BurndownChart/burndownChart',
+        'common/global_config'
+      ], function ($, Vue, dateDropper, Template, Burndown, config) {
 
 
   var getTeamMembers = function(vueComponent, projectid, done){
     console.group('@getTeamMembers');
     var xhr = {
-          url: 'http://localhost:1337/projects/' + projectid + '/members' ,
+          url: config.API_HOST +'projects/' + projectid + '/members' ,
           method: 'GET'
     };
 
@@ -28,7 +29,7 @@ define(['jquery','vue', 'datedropper',
   var getProjectDetails = function(vueComponent, projectid, done){
     console.group('@getProjectDetails');
     var xhr = {
-          url: 'http://localhost:1337/projects/' + projectid ,
+          url: config.API_HOST+'projects/' + projectid ,
           method: 'GET'
     };
 

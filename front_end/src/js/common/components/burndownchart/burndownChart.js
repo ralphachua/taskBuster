@@ -3,7 +3,8 @@ define(['jquery',
         'vue-resource',
         'highcharts',
         'text!./burndownChart.html'],
-function ($, Vue, Resource, highcharts, Template) {
+        'common/global_config'
+function ($, Vue, Resource, highcharts, Template, config) {
 
   var renderBurndownChart = function(options) {
     var title = options.title || {
@@ -125,7 +126,7 @@ function ($, Vue, Resource, highcharts, Template) {
 
   var requestBurndown = function(vueComponent, projectId, done) {
     var xhr = {
-      url: 'http://localhost:1337/projects/' + projectId + '/burndown',
+      url: config.API_HOST +'projects/' + projectId + '/burndown',
       method: 'GET'
     };
 
