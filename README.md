@@ -108,9 +108,9 @@ Endpoint for retrieving user's tasks
 {
 	status: “success”,
 	data: [{
-		project_id: “hja12”,
-		project_name: “Project Name 2”,
-		due_date: “2016-02-17T08:33:23.257Z”
+		projectId: “hja12”,
+		projectName: “Project Name 2”,
+		dueDate: “2016-02-17T08:33:23.257Z”
 	}]
 }
 
