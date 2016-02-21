@@ -10,13 +10,17 @@ module.exports = {
       return res.badRequest(payload);
     }
 
+    /*
+    Sample startedOn and finishedOn format:
+     startedOn:  moment("2016-02-10", "YYYY-MM-DD").toString(),
+     finishedOn: moment("2016-02-20", "YYYY-MM-DD").toString()
+     */
+
     var params = {
       projectName:  req.param("projectName"),
       createdBy:    req.param("userId"), //req.user
       dueDate:      req.param("dueDate"),
-      members:      req.param("members"),
-      startedOn:  moment("2016-02-10", "YYYY-MM-DD").toString(),
-      finishedOn: moment("2016-02-20", "YYYY-MM-DD").toString()
+      members:      req.param("members")
     };
 
     var tasks = {
