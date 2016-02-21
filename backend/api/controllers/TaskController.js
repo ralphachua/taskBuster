@@ -33,9 +33,8 @@ module.exports = {
       taskDescription:       req.param("taskDescription"),
       assignedTo:            req.param("assignedTo"),
       taskPoints:            req.param("taskPoints"),
-      projectId:             req.param("projectId"),
-      status:                "TODO"
-    }
+      projectId:             req.param("projectId")
+    };
 
     var tasks = {
       save: function(next) {
@@ -43,7 +42,7 @@ module.exports = {
           return next(err, user);
         });
       }
-    }
+    };
 
     async.auto(tasks, function(err, result) {
       var payload = null;
@@ -58,8 +57,10 @@ module.exports = {
   },
 
   update: function(req, res) {
-    var paramsToUpdate = {
-      status: req.param("taskStatus")
+    var taskStatus = req.param("taskStatus") || "";
+    if (!taskStatus) {
+      return res.badRequest(ApiService.toErrorJSON(
+        new Errors.InvalidArgumentError("Missing taskStatus parameter.")));
     }
 
     var tasks = {
@@ -72,7 +73,19 @@ module.exports = {
           return next(err, task);
         });
       },
-      updateRecord: ["find", function(next) {
+      updateRecord: ["find", function(next, cres) {
+        var paramsToUpdate = {
+          status: taskStatus
+        }
+
+        if (taskStatus == "DONE") {
+          var doneAt = req.param("doneAt") || moment().toString();
+          paramsToUpdate.doneAt = doneAt;
+          UserService.taskDone(cres.task, function(err, result){
+            console.log("success updating badges")
+            console.log(result)
+          })
+        }
         Task.update({id: req.param("taskId")},paramsToUpdate, function(err, task) {
           return next(err, task);
         });

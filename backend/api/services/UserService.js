@@ -76,5 +76,64 @@ module.exports = {
         return callback(null, data);
       }
     });
+  },
+
+  taskDone: function(task, callback) {
+    var tasks = {
+      user: function(next) {
+        var params = {
+          id: task.assignedTo
+        }
+        User.findOne(params, function(err, user) { 
+          return next(err, user);
+        });
+      },
+      updateUser: ["user" ,function(next, cres) {
+        var paramsToUpdate = {
+            totalPointsDone = user.totalPointsDone + task.taskPoints
+          }
+          User.update(paramsToUpdate, function(err, user) {
+            return next(err, user);
+          })
+      }],
+      checkForBadges: ["updateUser", function(next, cres) {
+        Badge.find({}, function(err, badges){
+          var user = cres.updateUser
+          badges.forEach(function(badge){
+            if !(_.contains(user.badges, badge.badgeId)) {
+              if (badge.requiredPoints <= user.totalPointsDone) {
+                var paramsToUpdate = {
+                  badges: user.badges.push(badge.badgeId)
+                }
+                User.update(paramsToUpdate, function(err, user) {
+                  user = user
+                  if (err) {
+                    callback(err)
+                  };
+                })
+              };
+            };
+            if (badge == badges[badges.length -1]) {
+              return (null, user.badges)
+            };
+          })
+        })
+      }]
+    }
+
+    async.auto(tasks, function(err, result){
+      if (err) {
+        sails.log("error occurred")
+        sails.log(err)
+        callback(err)
+      } else {
+        var data = {
+          updatedUser: result.updateUser,
+          updatedBadges: result.checkForBadges
+        }
+        sails.log(data)
+        callback(null, data)
+      }
+    })
   }
 }
