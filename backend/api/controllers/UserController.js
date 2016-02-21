@@ -138,5 +138,38 @@ module.exports = {
         return res.json(payload);
       }
     });
-  }  
+  }, 
+
+  showBadges: function(req, res){
+    var tasks = {
+      task: function(next){
+        Task.find({assignedTo: req.param("userId")}, function(err, task){
+          return next(err, task);
+        });
+      },
+      badge: ["task", function(next, cres){
+        var badgeIds = _.union(_.map(cres.task, "badgeId"));
+        Badge.find({id: badgeIds}, function(err, badge){
+          return next(err, badge);
+        });
+      }]
+    }
+
+    async.auto(tasks, function(err, result){
+      var payload = null;
+      if(err){
+        payload = ApiService.toErrorJSON(new Errors.UnknownError());
+        return res.serverError(payload);
+      } else{
+        var data = _.map(result.badge, function(badge){
+          return {
+            badgeId: badge.id,
+            badgeName: badge.badgeName,
+          };
+        });
+        payload = ApiService.toSuccessJSON(data);
+        return res.json(payload);
+      }
+    });
+  }
 }
