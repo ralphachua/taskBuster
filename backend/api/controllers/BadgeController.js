@@ -1,3 +1,4 @@
+
 module.exports = {
 
   create: function(req, res) {
@@ -8,10 +9,10 @@ module.exports = {
     }
 
     var params = {
-      badgeName:  req.param("badgeName"),
-      badgeUrl:    req.param("badgeUrl"), 
-      requiredPoints:      req.param("requiredPoints"),
-    };
+      badgeName:      req.param("badgeName"),
+      badgeUrl:       req.param("badgeUrl"), 
+      requiredPoints:      req.param("requiredPoints")
+    }
 
     var tasks = {
       save: function(next) {
@@ -31,13 +32,13 @@ module.exports = {
         payload = ApiService.toSuccessJSON(result.save);
         return res.json(payload);
       }
-    });
+    })
   },
 
   show: function(req, res) {
     var tasks = {
       badge: function(next) {
-        Badge.findOne({ id: req.param("badgeId") }, function(err, badge) {
+        Badge.findOne({ badgeId: req.param("badgeId") }, function(err, badge) {
           if (_.isEmpty(badge)) {
             var payload = ApiService.toErrorJSON(new Errors.RecordNotFound("Badge does not exist"));
             return res.notFound(payload);
@@ -45,6 +46,7 @@ module.exports = {
           return next(err, badge);
         });
       }
+    }
 
     async.auto(tasks, function(err, result) {
       var payload = null;
@@ -61,7 +63,7 @@ module.exports = {
         payload = ApiService.toSuccessJSON(data);
         return res.json(payload);
       }
-    });
+    })
   },
 
   showAll: function(req, res){

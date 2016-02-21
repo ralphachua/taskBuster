@@ -138,7 +138,7 @@ module.exports = {
         return res.json(payload);
       }
     });
-  } 
+  }, 
 
   showBadges: function(req, res){
     var tasks = {
