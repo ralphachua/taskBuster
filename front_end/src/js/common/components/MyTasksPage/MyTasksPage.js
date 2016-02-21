@@ -2,9 +2,14 @@ define([
     'vue',
     'text!./MyTasksPage.html',
     './Task',
-    'dragula'
+    'dragula',
   ],
-  function(Vue, Template, Task, dragula) {
+  function(
+    Vue,
+    Template,
+    Task,
+    dragula
+  ) {
     var getTasks = function(vueComponent, userId, done){
       var xhr = {
         url:'http://localhost:1337/users/' + userId+"/tasks" ,
