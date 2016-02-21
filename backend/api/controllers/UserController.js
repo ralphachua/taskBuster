@@ -104,5 +104,39 @@ module.exports = {
         return res.json(payload);
       }
     });
-  }
+  },
+
+  showProjects: function(req, res) {
+    var tasks = {
+      task: function(next) {
+        Task.find({ assignedTo: req.param("userId") }, function(err, task) {
+          return next(err, task);
+        });
+      },
+      project: ["task", function(next, cres) {
+        var projectIds = _.union(_.map(cres.task, "projectId"));
+        Project.find({ id: projectIds}, function(err, project) {
+          return next(err, project);
+        });
+      }]
+    }
+
+    async.auto(tasks, function(err, result) {
+      var payload = null;
+      if (err) {
+        payload = ApiService.toErrorJSON(new Errors.UnknownError());
+        return res.serverError(payload);
+      } else {
+        var data = _.map(result.project, function(project) {
+          return {
+            projectId:  project.id,
+            projectName:project.projectName,
+            dueDate:    project.dueDate
+          };
+        });
+        payload = ApiService.toSuccessJSON(data);
+        return res.json(payload);
+      }
+    });
+  }  
 }

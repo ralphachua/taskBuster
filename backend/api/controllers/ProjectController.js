@@ -143,6 +143,100 @@ module.exports = {
     });
   },
 
+  listMembers: function(req, res) {
+    var tasks = {
+      project: function(next) {
+        Project.findOne({ id: req.param("projectId") }, function(err, project) {
+          return next(err, project);
+        });
+      },
+      task: function(next) {
+        Task.find({ projectId: req.param("projectId") }, function(err, task) {
+          return next(err, task);
+        });
+      },
+      badge: function(next) {
+        Badge.find({}, function(err, badges) {
+          return next(err, badges);
+        });
+      },
+      user: ["project", function(next, cres) {
+        var userIds = cres.project.members;
+        User.find({ id: userIds }, function(err, users) {
+          return next(err, users);
+        });
+      }]
+    }
+
+    async.auto(tasks, function(err, result) {
+      var payload = null;
+      if (err) {
+        payload = ApiService.toErrorJSON(new Errors.UnknownError());
+        return res.serverError(payload);
+      } else {
+        var users = result.user;
+        var badges = result.badge;
+        var tasks = result.task;
+
+        var data = _.map(users, function(user) {
+          var activeBadge = _.find(badges, function(o) {
+            return o.badgeId == user.activeBadge;
+          });
+          var todo = _.map(_.filter(tasks, function(o) {
+            return o.assignedTo == user.id && o.status === "TODO";
+          }), function(task) {
+            return {
+              taskId:           task.id,
+              taskName:         task.taskName,
+              taskDescription:  task.taskDescription,
+              taskPoints:       task.taskPoints
+            }
+          });
+
+          var ongoing = _.map(_.filter(tasks, function(o) {
+            return o.assignedTo == user.id && o.status === "ONGOING";
+          }), function(task) {
+            return {
+              taskId:           task.id,
+              taskName:         task.taskName,
+              taskDescription:  task.taskDescription,
+              taskPoints:       task.taskPoints
+            }
+          });
+
+          var done = _.map(_.filter(tasks, function(o) {
+            return o.assignedTo == user.id && o.status === "DONE";
+          }), function(task) {
+            return {
+              taskId:           task.id,
+              taskName:         task.taskName,
+              taskDescription:  task.taskDescription,
+              taskPoints:       task.taskPoints
+            }
+          });
+
+          return {
+            name:   user.name,
+            gender: user.gender,
+            avatarUrl: user.avatarUrl,
+            activeBadge: {
+              badgeUrl: activeBadge.badgeUrl,
+              badgeName: activeBadge.badgeName
+            },
+            task: {
+              todo: todo,
+              ongoing: ongoing,
+              done: done
+            }
+          }
+        });
+
+        payload = ApiService.toSuccessJSON(data);
+        return res.json(payload);
+      }
+    });
+  },
+
   getBurndown: function(req, res) {
     var projectId = req.param("projectId");
 
