@@ -48,19 +48,19 @@ module.exports = {
     }
   },
 
-  /*afterCreate: function(values, done) {
+  afterCreate: function(values, done) {
     var tasks = {
       find: function(next) {
-        Project.find({ id: values.projectId }, function(err, project){
-          next(err, project);
+        Project.findOne({ id: values.projectId }, function(err, project){
+          return next(err, project);
         });
       },
       update: ["find", function(next, cres) {
         var params = {
-          projectPointsTotal: values.taskPoints + cres.find.projectPointsTotal
+          projectPointsTotal: values.taskPoints + parseInt(cres.find.projectPointsTotal)
         };
-        Project.update({ id: values.projectId }, function(err, project){
-          next(err, project);
+        Project.update({ id: values.projectId }, params, function(err, project){
+          return next(err, project);
         });
       }]
     }
@@ -69,5 +69,5 @@ module.exports = {
       return done();
     });
   
-  },*/
+  },
 }

@@ -32,11 +32,14 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  "GET /ycbb/ruok" : { response: "ok" },
+  
   //Users
   "POST /users"                   : "User.create",
   "GET /users/:userId"            : "User.show",
   "GET /users/:userId/tasks"     : "User.showTasks",
   "GET /users/:userId/projects"  : "User.showProjects",
+  "GET /users/:userId/badges"  : "User.showBadges",
 
   //Leaders
   "GET /leaders/users"            : "Leader.users",
@@ -47,6 +50,11 @@ module.exports.routes = {
   "GET /projects/:projectId"        : "Project.show",
   "PUT /projects/:projectId"        : "Project.update",
   "GET /projects/:projectId/members": "Project.listMembers",
+
+  //Badges
+  "POST /badges"                  : "Badge.create",
+  "GET /badges/:badgeId"          : "Badge.show",
+  "GET /badges"                   : "Badge.showAll",
 
   //Tasks
   "POST /tasks"                   : "Task.create",
