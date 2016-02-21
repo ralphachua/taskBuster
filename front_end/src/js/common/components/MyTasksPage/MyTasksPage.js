@@ -3,12 +3,14 @@ define([
     'text!./MyTasksPage.html',
     './Task',
     'dragula',
+    './Battlefield'
   ],
   function(
     Vue,
     Template,
     Task,
-    dragula
+    dragula,
+    Battlefield
   ) {
     var getTasks = function(vueComponent, userId, done){
       var xhr = {
@@ -37,7 +39,8 @@ define([
         };
       },
       components: {
-        task: Task
+        task: Task,
+        battlefield: Battlefield
       },
       compiled: function(){
         var self = this;
