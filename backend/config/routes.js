@@ -32,6 +32,8 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  "GET /ycbb/ruok" : { response: "ok" },
+  
   //Users
   "POST /users"                   : "User.create",
   "GET /users/:userId"            : "User.show",
