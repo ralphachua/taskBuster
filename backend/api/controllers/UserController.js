@@ -78,7 +78,16 @@ module.exports = {
         payload = ApiService.toErrorJSON(new Errors.UnknownError());
         return res.serverError(payload);
       } else {
-        payload = ApiService.toSuccessJSON(result.task);
+        var data = _.map(result.task, function(task) {
+          return {
+            taskId:           task.taskId,
+            taskName:         task.taskName,
+            taskDescription:  task.taskDescription,
+            taskPoints:       task.taskPoints,
+            status:           task.status  
+          }
+        });
+        payload = ApiService.toSuccessJSON(data);
         return res.json(payload);
       }
     });
