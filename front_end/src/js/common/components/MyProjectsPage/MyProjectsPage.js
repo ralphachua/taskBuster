@@ -81,10 +81,6 @@ define(['vue',
       return {projects:[]};
     },
 
-    ready: function(){
-      console.log(this.projects);
-    },
-
     methods: {
       getProjects: function() {
         console.group('@getProjects');
@@ -92,7 +88,7 @@ define(['vue',
 
         var userId = "user001";
         var xhr = {
-          url: 'http://localhost:1337/users/' + userId + '/projects',
+          url: 'http://1localhost:1337/users/' + userId + '/projects',
           method: 'GET'
         };
 

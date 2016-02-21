@@ -34,18 +34,6 @@ define(['vue',
 
     console.log(xhr);
 
-    // var mockresponse = {
-    //   status: 'success',
-    //   data: {
-    //     projectName: 'Project Name 2',
-    //     tasksTodo: 5,
-    //     tasksOngoing: 1,
-    //     tasksDone: 2,
-    //     dueDate: '2016-02-17T08:33:23.257Z'
-    //   }
-    // };
-
-    // return done(mockresponse);
     vueComponent.$http(xhr).then(function onSuccess(response) {
       console.log("onSuccess");
       console.groupEnd();
@@ -71,7 +59,6 @@ define(['vue',
     beforeCompile: function () {
       console.log('before compile');
       this.$log();
-      //this.query = this.route.query;
     },
     compiled: function () {
       console.log('Should get data from query obj');
@@ -89,14 +76,14 @@ define(['vue',
         console.groupEnd();
       });
 
-      // getTeamMembers(this, this.$route.query.projectId, function renderTeam(response){
-      //   console.group("@renderProjectDetails");
-      //   var newresponse = JSON.parse(JSON.stringify(response.data));
-      //   console.log("status: ",newresponse.status);
-      //   self.projectData = newresponse.data;
-      //   console.log("data: ",self.projectData);
-      //   console.groupEnd();
-      // });
+      getTeamMembers(this, this.$route.query.projectId, function renderTeam(response){
+        console.group("@renderTeamDetails");
+        var newresponse = JSON.parse(JSON.stringify(response.data));
+        console.log("status: ",newresponse.status);
+        self.team = newresponse.data;
+        console.log("data: ",self.team);
+        console.groupEnd();
+      });
     }
   });
 });
