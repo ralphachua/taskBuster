@@ -1,7 +1,7 @@
-define(['vue',
+define(['jquery','vue', 'datedropper',
         'text!./ProjectDetailsPage.html',
         'common/components/BurndownChart/burndownChart'
-      ], function (Vue, Template, Burndown) {
+      ], function ($, Vue, dateDropper, Template, Burndown) {
 
 
   var getTeamMembers = function(vueComponent, projectid, done){
@@ -56,12 +56,21 @@ define(['vue',
         team:[]
       };
     },
+    ready: function(){
+      console.group("@due");
+      console.log($("#due").length);
+      $("#due").dateDropper();
+
+      console.groupEnd();
+
+    },
     beforeCompile: function () {
       console.log('before compile');
       this.$log();
     },
     compiled: function () {
       console.log('Should get data from query obj');
+
       //use the contents of this.$route.query as parameters for the API call
       var self = this;
       console.log(this.$route.query);

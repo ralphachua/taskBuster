@@ -8,7 +8,8 @@ requirejs.config({
     dragula        : 'vendor/dragula',
     highcharts     : 'vendor/highcharts',
     phaser         : 'vendor/phaser',
-    animatesprite  : 'vendor/jquery.animateSprite.min'
+    animatesprite  : 'vendor/jquery.animateSprite.min',
+    datedropper    : 'vendor/datedropper.min'
   },
   deps: ['main']
 });

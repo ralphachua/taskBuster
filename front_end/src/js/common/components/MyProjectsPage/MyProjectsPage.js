@@ -88,7 +88,7 @@ define(['vue',
 
         var userId = "user001";
         var xhr = {
-          url: 'http://1localhost:1337/users/' + userId + '/projects',
+          url: 'http://localhost:1337/users/' + userId + '/projects',
           method: 'GET'
         };
 
