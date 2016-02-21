@@ -59,7 +59,12 @@ define(['jquery','vue', 'datedropper',
     ready: function(){
       console.group("@due");
       console.log($("#due").length);
-      $("#due").dateDropper();
+      $("#due").dateDropper(
+        { placeholder:"Add Due Date",
+         color:"#E12299",
+         textColor:"#212B37",
+         bgColor:"#ffffff",
+         borderColor:"#5ED7FF"  });
 
       console.groupEnd();
 
