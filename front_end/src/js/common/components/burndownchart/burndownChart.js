@@ -2,8 +2,8 @@ define(['jquery',
         'vue',
         'vue-resource',
         'highcharts',
-        'text!./burndownChart.html'],
-        'common/global_config'
+        'text!./burndownChart.html',
+        'common/global_config']
 function ($, Vue, Resource, highcharts, Template, config) {
 
   var renderBurndownChart = function(options) {

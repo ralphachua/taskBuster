@@ -89,7 +89,7 @@ define(['vue',
 
         var userId = "user001";
         var xhr = {
-          url: config.API_HOST +'/users/' + userId + '/projects',
+          url: config.API_HOST +'users/' + userId + '/projects',
           method: 'GET'
         };
 
