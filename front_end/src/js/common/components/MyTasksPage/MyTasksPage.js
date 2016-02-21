@@ -20,17 +20,51 @@ define([
 
       console.log(xhr);
 
-      vueComponent.$http(xhr).then(function onSuccess(response) {
-      console.log("onSuccess");
-      console.groupEnd();
-      return done(response);
-      }, function onError(response) {
-      console.log("onError");
-      console.groupEnd();
-      return done(response);
-    });
+      vueComponent.$http(xhr).then(
+        function onSuccess(response) {
+          console.log("getTasks.onSuccess");
+          console.groupEnd();
+          return done(null, response);
+        },
+
+        function onError(response) {
+          console.log("getTasks.onError");
+          console.groupEnd();
+          return done(response);
+        }
+      );
 
     };
+
+    var updateTask = function(vueComponent, payload, done) {
+      console.group("@MyTasksPage");
+      console.log("updateTask");
+      console.log("payload");
+      console.log(payload);
+      var xhr = {
+        url:'http://localhost:1337/tasks/' + payload.taskId,
+        method:'PUT',
+        data: payload
+      };
+
+      console.log("xhr");
+      console.log(xhr);
+
+      vueComponent.$http(xhr).then(
+        function onSuccess(response) {
+          console.log('updateTask.onSuccess');
+          return done(null, response);
+        },
+
+        function onError(response) {
+          console.log('updateTask.onError');
+          return done(response);
+        }
+      );
+
+      console.groupEnd();
+    }
+
     return Vue.extend({
       template: Template,
       data: function() {
@@ -46,8 +80,13 @@ define([
         var self = this;
         console.log("compile");
         // comment if you're going to use mock data
-        getTasks(this,'user001', function updateTasks(response){
-          console.group("@updateTasks");
+        getTasks(this,'user001', function updateTasks(err, response){
+          console.group('@getTasks');
+          console.log('err: ', err);
+          console.log('response: ', response);
+
+          //TODO: check if has err
+
           var newresponse = JSON.parse(JSON.stringify(response.data));
           console.log("status: ",newresponse.status);
           self.tasks = newresponse.data;
@@ -56,6 +95,7 @@ define([
         });
       },
       ready: function () {
+        var self = this;
         var todoColumn = $('.mytasks-section .todo-column')[0];
         var ongoingColumn = $('.mytasks-section .ongoing-column')[0];
         var doneColumn = $('.mytasks-section .done-column')[0];
@@ -90,7 +130,24 @@ define([
         }).on('drop', function (el) {
           console.dir(el);
           if (el.hasOwnProperty(('__vue__'))) {
-            el.__vue__.$dispatch('taskDragged', el.__vue__);
+            var taskData = el.__vue__.taskData;
+            var payload = {
+              taskId: taskData.id,
+              taskStatus: taskData.status
+            };
+
+            updateTask(self, payload, function(err, response) {
+              console.group('MyTasksPage');
+              console.log('updateTask');
+
+              if (err) {
+                console.log(err);
+                return;
+              }
+
+              console.log(response);
+              el.__vue__.$dispatch('taskDragged', el.__vue__);
+            });
           }
         });
 
