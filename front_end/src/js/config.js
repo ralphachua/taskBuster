@@ -6,7 +6,8 @@ requirejs.config({
     'vue-resource' : 'vendor/vue-resource',
     'vue-router'   : 'vendor/vue-router',
     dragula        : 'vendor/dragula',
-    highcharts     : 'vendor/highcharts'
+    highcharts     : 'vendor/highcharts',
+    phaser         : 'vendor/phaser'
   },
   deps: ['main']
 });
