@@ -56,27 +56,29 @@ Endpoint for retrieving user's tasks
 // HTTP status code: 200
 {
 	status: “success”,
-	data: {
-		todo: [{
+	data: [
+		{
 			taskId: “a1bvc3”,
 			taskName: “Battlefields UI”,
-			taskDescription: “Create assets for the battlefield screen”
-			taskPoints: 3
+			taskDescription: “Create assets for the battlefield screen”,
+			taskPoints: 3,
+			status: "TODO"
 		},
-    {
+    		{
 			taskId: “a1bvjk”,
 			taskName: “Create Tasks API”,
 			taskDescription: “Expose a task API”
-			taskPoints: 3
-		}],
-		ongoing: [],
-		done: [{
+			taskPoints: 3,
+			status: "TODO"
+		},
+		{
 			taskId: “ybhv213s”,
 			taskName: “Create Login API”,
 			taskDescription: “Expose a login API”
-			taskPoints: 1
-    }]
-	}
+			taskPoints: 1,
+			status: "ONGOING"
+		 }
+	]
 }
 
 ```
