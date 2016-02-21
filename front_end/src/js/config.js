@@ -7,7 +7,8 @@ requirejs.config({
     'vue-router'   : 'vendor/vue-router',
     dragula        : 'vendor/dragula',
     highcharts     : 'vendor/highcharts',
-    phaser         : 'vendor/phaser'
+    phaser         : 'vendor/phaser',
+    animatesprite  : 'vendor/jquery.animateSprite.min'
   },
   deps: ['main']
 });

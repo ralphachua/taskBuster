@@ -5,10 +5,7 @@ define(['jquery',
         'text!./burndownChart.html'],
 function ($, Vue, Resource, highcharts, Template) {
 
-  var renderBurndownChart = function(options, done) {
-    console.group('@burndownChart');
-    console.log('renderBurndownChart');
-
+  var renderBurndownChart = function(options) {
     var title = options.title || {
       text: '',
       x: -20
@@ -24,6 +21,11 @@ function ($, Vue, Resource, highcharts, Template) {
       tooltip: {hideDelay: 200}
     };
 
+    if (options.xAxis) {
+      options.xAxis.labels = {
+        style: {"color": "#FFF"}
+      };
+    }
     var xAxis = options.xAxis || {
       title: {
         text: 'Days'
@@ -35,6 +37,16 @@ function ($, Vue, Resource, highcharts, Template) {
         }
     };
 
+    if (options.yAxis) {
+      options.yAxis.plotLines = [{
+        value: 0,
+        width: 1
+      }];
+
+      options.yAxis.labels = {
+        style: {"color": "#FFF"}
+      };
+    }
     var yAxis = options.yAxis || {
       title: {
         text: 'Points'
@@ -62,6 +74,14 @@ function ($, Vue, Resource, highcharts, Template) {
       itemStyle: {"color": "#FFF"}
     };
 
+    if (options.idealBurn) {
+      options.idealBurn = {
+        name: 'Ideal Burn',
+        color: '#E747A8',
+        lineWidth: 2,
+        data: options.idealBurn
+      };
+    }
     var idealBurn = options.idealBurn || {
       name: 'Ideal Burn',
       color: '#E747A8',
@@ -69,6 +89,14 @@ function ($, Vue, Resource, highcharts, Template) {
       data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
     };
 
+    if (options.actualBurn) {
+      options.actualBurn = {
+        name: 'Actual Burn',
+        color: '#72DFFF',
+        marker: {radius: 6},
+        data: options.actualBurn
+      };
+    }
     var actualBurn = options.actualBurn || {
       name: 'Actual Burn',
       color: '#72DFFF',
@@ -91,20 +119,25 @@ function ($, Vue, Resource, highcharts, Template) {
       }
     };
 
-    console.log(highchartsOptions);
-
     $('#burndown-chart').highcharts(highchartsOptions);
-
-    console.groupEnd();
   };
 
 
-  var requestBurndown = function(vueComponent, xhr, done) {
-    vueComponent.$http(xhr).then(function onSuccess(response) {
-      return done(response);
-    }, function onError(response) {
-      return done(response);
-    });
+  var requestBurndown = function(vueComponent, projectId, done) {
+    var xhr = {
+      url: 'http://localhost:1337/projects/' + projectId + '/burndown',
+      method: 'GET'
+    };
+
+    vueComponent.$http(xhr).then(
+      function onSuccess(response) {
+        return done(null, response);
+      },
+
+      function onError(response) {
+        return done(response);
+      }
+    );
   };
 
 
@@ -114,50 +147,28 @@ function ($, Vue, Resource, highcharts, Template) {
       title: {
         type: String,
         required: false
-      },
-      data: {
-        type: Object,
-        required: false,
-        twoWay: true
       }
     },
-    methods: {
-      requestBurndown: function() {
-        console.group('@burndownChart');
-        console.log('requestBurndown');
-
-        var projectId = "123-2016-1-000000001";
-        var xhr = {
-          url: 'http://localhost:1337/loans/' + projectId + '/overview',
-          method: 'GET'
-        };
-
-        renderBurndownChart({});
-
-        console.groupEnd();
-      }
+    data: function() {
+      return {
+        burndownData: {}
+      };
     },
     compiled: function() {
-      console.group('@burndownChart');
-      console.log('compiled');
 
-      var projectId = "123-2016-1-000000001";
-      var xhr = {
-        url: 'http://localhost:1337/loans/' + projectId + '/overview',
-        method: 'GET'
-      };
-
-      this.requestBurndown();
-
-      console.groupEnd();
     },
     ready: function() {
-      console.group('@burndownChart');
-      console.log('ready');
+      var self = this;
+      var projectId = this.$route.query.projectId;
 
-      renderBurndownChart({});
+      requestBurndown(self, projectId, function(err, response) {
+        if (err) {
+          console.log('err: ', err);
+          return;
+        }
 
-      console.groupEnd();
+        renderBurndownChart(response.data.data);
+      });
     }
   });
 

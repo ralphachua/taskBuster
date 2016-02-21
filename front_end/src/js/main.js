@@ -35,6 +35,10 @@ function (
     events: {
       'project-details': function (project) {
       console.log("dispatch project-details: ",project);
+    }, 
+      'taskDragged': function (el) {
+      console.log("taskDragged");
+      this.$broadcast('taskDragged',el);
     }
   }
   });
