@@ -10,17 +10,13 @@ module.exports = {
       return res.badRequest(payload);
     }
 
-    /*
-    Sample startedOn and finishedOn format:
-     startedOn:  moment("2016-02-10", "YYYY-MM-DD").toString(),
-     finishedOn: moment("2016-02-20", "YYYY-MM-DD").toString()
-     */
-
     var params = {
       projectName:  req.param("projectName"),
       createdBy:    req.param("userId"), //req.user
       dueDate:      req.param("dueDate"),
-      members:      req.param("members")
+      members:      req.param("members"),
+      startedOn:  moment("2016-02-10", "YYYY-MM-DD").toString(),
+      finishedOn: moment("2016-02-20", "YYYY-MM-DD").toString()
     };
 
     var tasks = {
@@ -90,6 +86,7 @@ module.exports = {
         var data = {
           projectName:  result.project.projectName,
           dueDate:      result.project.dueDate,
+          status:       result.project.status,
           tasksTodo:    result.tasksTodo,
           tasksOngoing: result.tasksOngoing,
           tasksDone:    result.tasksDone
@@ -268,78 +265,12 @@ module.exports = {
 
         var momentStartDate = moment(startDate);
         var momentEndDate = moment(endDate);
-        var differenceInDays = momentEndDate.diff(momentStartDate, "days");
+        var difference = momentEndDate.diff(momentStartDate, "days");
 
-        var xAxisLabels = new Array(differenceInDays);
-        for (var i = 0; i < differenceInDays; ++i) {
-          xAxisLabels[i] = "Day " + (i + 1);
-        }
-
-        return next(null, {
-          startDate: startDate,
-          endDate: endDate,
-          differenceInDays: differenceInDays,
-          xAxisLabels: xAxisLabels
-        });
+        return next(null, difference);
       }],
 
-      "getIdealBurnChartPoints": ["getProjectDuration", function(next, result) {
-        var project = result.find;
-        var projectTotalPoints = parseFloat(project.projectPointsTotal);
 
-        var projectDuration = result.getProjectDuration;
-        var projectDurationInDays = projectDuration.differenceInDays;
-
-        var idealBurnRate = parseFloat(projectTotalPoints / projectDurationInDays);
-        var idealBurnChartPoints = new Array(projectDurationInDays);
-
-        for (var i = 0; i < projectDurationInDays; ++i) {
-          sails.log.info("i: ", i);
-          idealBurnChartPoints[i] = projectTotalPoints;
-          projectTotalPoints = parseFloat(projectTotalPoints - idealBurnRate);
-        }
-
-        return next(null, idealBurnChartPoints);
-      }],
-
-      "getActualBurnChartPoints": ["getTasks", "getProjectDuration", function(next, result) {
-        var project = result.find;
-        var projectTotalPoints = project.projectPointsTotal;
-
-        var tasks = result.getTasks;
-        _.forEach(tasks, function(task) {
-          if (task.status == "DONE") {
-            task.doneAt = moment(task.doneAt).format("YYYY-MM-DD").toString();
-          }
-        });
-
-        var projectDuration = result.getProjectDuration;
-        var startDate = moment(projectDuration.startDate).format("YYYY-MM-DD").toString();
-        var projectDurationInDays = projectDuration.differenceInDays;
-
-        var actualBurnChartPoints = new Array(projectDurationInDays);
-
-        for (var i = 0; i < projectDurationInDays; ++i) {
-          var date = moment(startDate).add(i, "days").format("YYYY-MM-DD").toString();
-
-          var tasksDoneAtDate = _.filter(tasks, function(task) {
-            return (task.status == "DONE" && task.doneAt == date);
-          });
-
-          if (tasksDoneAtDate.length > 0) {
-            var pointsDoneAtDate = _.pluck(tasksDoneAtDate, "taskPoints");
-            var totalPointsDoneAtDate = _.reduce(pointsDoneAtDate, function(sum, points) {
-              return sum + points;
-            });
-
-            projectTotalPoints = projectTotalPoints - totalPointsDoneAtDate;
-          }
-
-          actualBurnChartPoints[i] = projectTotalPoints;
-        }
-
-        return next(null, actualBurnChartPoints);
-      }]
     };
 
     async.auto(tasks, function(err, result) {
@@ -348,29 +279,10 @@ module.exports = {
           new Errors.UnknownError(err)));
       }
 
-      var project = result.find;
-      var projectDuration = result.getProjectDuration;
-      var getIdealBurnChartPoints = result.getIdealBurnChartPoints;
-      var getActualBurnChartPoints = result.getActualBurnChartPoints;
-
       var response = {
-        title: {
-          text: 'Burndown Chart',
-          x: -20
-        },
-        subtitle: {
-          text: project.projectName,
-          x: -20
-        },
-        xAxis: {
-          title: {"text": "Days"},
-          categories: projectDuration.xAxisLabels,
-        },
-        yAxis: {
-          title: {"text": "Points"}
-        },
-        idealBurn: getIdealBurnChartPoints,
-        actualBurn: getActualBurnChartPoints
+        "find": result.find,
+        "getTasks": result.getTasks,
+        "getProjectDuration": result.getProjectDuration
       };
 
       return res.json(ApiService.toSuccessJSON(response));
