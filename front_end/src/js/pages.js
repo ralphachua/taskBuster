@@ -5,18 +5,20 @@ define([
   'common/components/MyTasksPage/MyTasksPage',
   'common/components/ProjectDetailsPage/ProjectDetailsPage',
   'common/components/BadgeCapsulePage/BadgeCapsule',
-  'common/components/MyProjectsPage/MyProjectsPage'
+  'common/components/MyProjectsPage/MyProjectsPage',
+  'common/components/LeaderboardsPage/LeaderboardsPage'
 ], function (
     MyTasks,
     ProjectDetails,
     BadgeCapsule,
-    MyProjects
+    MyProjects,
+    Leaderboards
   ) {
   return {
     'my-tasks-page' : MyTasks,
     'project-details-page' : ProjectDetails,
     'badge-capsule-page' : BadgeCapsule,
     'my-projects-page' : MyProjects,
-    'leaderboard': '<p>This is Leaderboard, yeah!</p>'
+    'leaderboards': Leaderboards
   };
 });

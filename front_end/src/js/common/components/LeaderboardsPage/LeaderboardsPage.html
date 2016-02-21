@@ -1,0 +1,19 @@
+<section class="section leaderboards-section grid">
+  LeaderBoards Users
+  <ul class="leaderboards-list">
+    <li class="leaderboards__item" v-for="user in users">
+      <div class="project-list__item__inner">
+        <h3 class="project__name primary">{{user.user_name}}</h3>
+      </div>
+    </li>
+  </ul>
+
+  LeaderBoards Projects
+  <ul class="leaderboards-list">
+    <li class="leaderboards__item" v-for="project in projects">
+      <div class="project-list__item__inner">
+        <h3 class="project__name primary">{{project.projectName}}</h3>
+      </div>
+    </li>
+  </ul>
+</section>
