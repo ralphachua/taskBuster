@@ -18,7 +18,8 @@ module.exports = {
       defaultsTo: []
     },
     members: {
-      type: "array"
+      type: "array",
+      defaultsTo: []
     },
     dueDate: {
       type: "date"
