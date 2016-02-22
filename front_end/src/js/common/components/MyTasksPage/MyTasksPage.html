@@ -1,13 +1,13 @@
 <battlefield v-bind:tasks.sync="tasks"></battlefield>
-<section class="section mytasks-section grid">
+<section class="section mytasks-section">
   <div class="section__content">
-    <div class="task-table grid">
+    <div class="task-table">
       <header class="task-table__headers">
         <div class="task-table__header col-4 primary">
           <div class="task-table__header__title">
             To-Do
           </div>
-          <div class="task-table__header__add">+</div>
+          <div class="task-table__header__add" @click="addTasks">+</div>
         </div>
         <div class="task-table__header col-4 primary">
           <div class="task-table__header__title">
@@ -35,7 +35,31 @@
   </div>
   </div>
 </section>
-<div class="modal">
+<div class="modal" :class="{'visible': modalVisible}">
   <div class="modal__overlay"></div>
-  <div class="modal__inner"></div>
+  <div class="modal__inner">
+
+    <div id="AddModal" class="modal__content">
+      <div class="modal__close" @click="modalClose">
+        X
+      </div>
+      <h3 class="modal__title title">ADD TASK</h3>
+      <div class="modal__form">
+        <div class="label">Task Title</div>
+        <input type="text" v-model="addTasksModel.name">
+        <div class="label">Task Description</div>
+        <input type="text" v-model="addTasksModel.desc">
+        <div class="label">Task Points</div>
+        <input type="number" v-model="addTasksModel.point">
+        <div class="label">Project</div>
+        <select v-model="addTasksModel.project"></select>
+      </div>
+
+      <div class="add-task-trigger centered primary">
+        ADD TASK
+      </div>
+    </div>
+
+
+  </div>
 </div>

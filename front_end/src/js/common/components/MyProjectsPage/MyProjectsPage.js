@@ -87,9 +87,8 @@ define(['vue',
         console.group('@getProjects');
         console.log('getProjects');
 
-        var userId = "user001";//"56c961053becd0753b5462c2";
         var xhr = {
-          url: config.API_HOST +'users/' + userId + '/projects',
+          url: config.API_HOST +'users/' + config.USER_INFO.ID + '/projects',
           method: 'GET'
         };
 
