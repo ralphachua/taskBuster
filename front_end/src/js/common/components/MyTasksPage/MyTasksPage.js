@@ -40,7 +40,28 @@ define([
       );
     };
 
-    var addTask = function (vueComponent, userId, done) {
+    var addTask = function (vueComponent, model, done) {
+      var xhr = {
+        url: config.API_HOST +'/tasks' ,
+        data: model,
+        method:'POST'
+      };
+
+      console.log(xhr);
+
+      vueComponent.$http(xhr).then(
+        function onSuccess(response) {
+          console.log("getTasks.onSuccess");
+          console.groupEnd();
+          return done(null, response);
+        },
+
+        function onError(response) {
+          console.log("getTasks.onError");
+          console.groupEnd();
+          return done(response);
+        }
+      );
     };
 
     var getTasks = function(vueComponent, userId, done){
@@ -103,10 +124,10 @@ define([
           tasks: {},
           modalVisible: false,
           addTasksModel: {
-            name: '',
-            desc: '',
-            point: 0,
-            project: ''
+            taskName: '',
+            taskDescription: '',
+            taskPoints: 0,
+            projectId: ''
           }
         };
       },
@@ -115,9 +136,35 @@ define([
         battlefield: Battlefield
       },
       methods: {
-        addTask: function () {
+        showAddTaskModal : function () {
           console.log('Add task trigger clicked');
           this.modalVisible = true;
+        },
+        addTask: function () {
+          var valid =true;
+          var self = this;
+          console.log('Adding task w/ %o', this.addTasksModel);
+
+          Object.keys(self.addTasksModel).forEach(function (t) {
+            if (self.addTasksModel[t].length < 1) {
+              valid = false;
+              return;
+            }
+          });
+
+          if (valid) {
+            //API call
+            addTask(self, this.addTasksModel, function (err, response) {
+              var data;
+
+              if (response) {
+                data = response.data.data;
+                self.tasks.todo.push(data);
+
+              }
+            });
+          }
+
         },
         modalClose: function () {
           this.modalVisible = false;
