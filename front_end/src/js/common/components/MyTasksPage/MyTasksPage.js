@@ -41,7 +41,6 @@ define([
     };
 
     var addTask = function (vueComponent, userId, done) {
-
     };
 
     var getTasks = function(vueComponent, userId, done){
@@ -118,10 +117,11 @@ define([
       },
       methods: {
         addTask: function () {
-
+          console.log('Add task trigger clicked');
+          this.modalVisible = true;
         },
         modalClose: function () {
-
+          this.modalVisible = false;
         },
         getUserInfo: function (callback) {
           var self = this;
@@ -147,11 +147,21 @@ define([
         this.getUserInfo(function (err, response) {
           console.log('USER INFO');
           console.log(response);
+          var data;
+          if (response) {
+            data = response.data.data;
+            config.USER_INFO.name = data.name;
+            Object.assign(config.USER_INFO.activeBadge, data.activeBadge);
+            Object.assign(config.USER_INFO.level, data.level);
+            Object.assign(config.USER_INFO.task,  data.task);
+            config.USER_INFO.totalPointsDone = data.totalPointsDone;
+          }
         });
 
         getProjects(self, config.USER_INFO.ID, function (err, response) {
           if (response) {
             console.log(response.data);
+
           }
         });
 

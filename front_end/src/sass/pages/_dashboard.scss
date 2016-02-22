@@ -21,7 +21,49 @@
     .main-header__menu-trigger {
       opacity: 0;
     }
+
+    .sidebar__avatar__inner {
+      -webkit-animation: avatar-blink 2.5s steps(2) infinite;;
+               -moz-animation: avatar-blink 2.5s steps(2) infinite;;
+                -ms-animation: avatar-blink 2.5s steps(2) infinite;;
+                 -o-animation: avatar-blink 2.5s steps(2) infinite;;
+                    animation: avatar-blink 2.5s steps(2) infinite;;
+    }
   }
+}
+
+.sidebar__avatar__inner {
+  background-image: url(../img/avatar.png);
+  width: 100px;
+  margin: 0 auto;
+  padding: 22px;
+  background-repeat: no-repeat;
+  height: 140px;
+}
+
+@keyframes avatar-blink {
+  from { background-position:    0px; }
+    to { background-position: -204px; }
+}
+
+@-webkit-keyframes avatar-blink {
+   from { background-position:    0px; }
+     to { background-position: -204px; }
+}
+
+@-moz-keyframes avatar-blink {
+   from { background-position:    0px; }
+     to { background-position: -204px; }
+}
+
+@-ms-keyframes avatar-blink {
+   from { background-position:    0px; }
+     to { background-position: -204px; }
+}
+
+@-o-keyframes avatar-blink {
+   from { background-position:    0px; }
+     to { background-position: -204px; }
 }
 
 /**
@@ -60,6 +102,10 @@
   .task-table__item__content {
     margin-bottom: 10px;
   }
+
+.task-table__header__add {
+  cursor: pointer;
+}
 
 .task-table__columns {
   @include outer-container;

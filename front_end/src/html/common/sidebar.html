@@ -21,14 +21,17 @@
         {{userData.name}}
       </div>
       <div class="sidebar__user__title centered">
-        {{userData.badge.badgeName}}
+        "{{userData.activeBadge.badgeName}}""
       </div>
       <div class="sidebar__avatar">
-
+        <div class="sidebar__avatar__inner">
+        </div>
+        <div class="sidebar__avatar__badge" :style="{backgroundImage: userData.activeBadge.badgeUrl}">
+        </div>
       </div>
       <div class="exp-progress-bar">
         <div class="user-level">
-          {{userData.level.name}}
+          {{userData.level.name | capitalize}}
         </div>
         <progress-bar
           :progress="userData.level.currentPoints"
