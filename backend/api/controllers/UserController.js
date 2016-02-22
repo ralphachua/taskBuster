@@ -23,7 +23,7 @@ module.exports = {
       gender:       req.param("gender"),
       socialId:       req.param("socialId"),
       avatarUrl:    "/avatar/123",
-      levelId:      "abc123",
+      levelId:      1,
       activeBadge:  "qwe098",
       badges:       ["qwe098"]
     }

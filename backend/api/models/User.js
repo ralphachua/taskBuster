@@ -26,7 +26,7 @@ module.exports = {
     },
 
     levelId: {
-      type: "string",
+      type: "integer",
       required: true
     },
 

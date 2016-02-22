@@ -2,6 +2,7 @@
 module.exports = {
 
   generateUserJson: function(userId,callback) {
+
   	var tasks = {
       user: function(next) {
         var params = {
@@ -88,13 +89,30 @@ module.exports = {
           return next(err, user);
         });
       },
-      updateUser: ["user" ,function(next, cres) {
-        var paramsToUpdate = {
-            totalPointsDone: cres.user.totalPointsDone + task.taskPoints
-          }
-          User.update(paramsToUpdate, function(err, user) {
-            return next(err, user);
-          })
+      level: ["user", function(next, cres) {
+        var params = {
+          levelId: cres.user.levelId
+        }
+        Level.findOne(params, function(err, level) {
+          return next(err, level);
+        });
+      }],
+      updateUser: ["user", "level", function(next, cres) {
+        var totalPointsDone = cres.user.totalPointsDone + task.taskPoints
+        var requiredPoints = cres.level.requiredPoints;
+        var currentPoints =  totalPointsDone - cres.level.accumulatedPoints;
+        
+        var params = {
+          totalPointsDone: totalPointsDone
+        }
+        
+        if (currentPoints >= requiredPoints) {
+          params.levelId = cres.user.levelId + 1;
+        }
+        
+        User.update({ id: task.assignedTo }, params, function(err, user) {
+          return next(err, user);
+        })
       }],
       checkForBadges: ["updateUser", function(next, cres) {
         Badge.find({}, function(err, badges){

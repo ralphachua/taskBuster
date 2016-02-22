@@ -83,7 +83,7 @@ module.exports = {
         if (taskStatus == "DONE") {
           var doneAt = req.param("doneAt") || moment().toString();
           paramsToUpdate.doneAt = doneAt;
-          UserService.taskDone(cres.task, function(err, result){
+          UserService.taskDone(cres.find, function(err, result){
             console.log("success updating badges")
             console.log(result)
           })
