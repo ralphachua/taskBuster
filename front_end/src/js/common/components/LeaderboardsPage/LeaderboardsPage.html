@@ -1,17 +1,17 @@
 <section class="section leaderboards-section grid">
   <div>
   <h4 class="leaderboards__title primary" @click="showTaskBusters">TOP TASK BUSTERS</h4>
+  <div id="leaderboards_task">
   <ul class="leaderboards-list">
-    {{var count = 0;}}
     <li class="leaderboards__item" v-for="user in users">
-      {{count++;}}
       <div class="project-list__item__inner">
+        <h2 class="leaderboards__item__rank primary">{{ $index+1 }}</h2>
         <h4 class="project__name light">{{user.user_name}}</h4>
         <h3 class="project__name primary">{{user.activeBadge.badgeName}}</h3>
       </div>
       <div class="project-list__item__inner">
         <p class="project__name secondary">{{user.level.levelName}}</p>
-        <p class="project__name secondary">TOTAL TASK POINTS: {{user.level.totalPoints}}</p>
+        <p class="project__name secondary">TOTAL TASK POINTS: {{user.level.totalPointsDone}}</p>
       </div>
       <ul class="badges-list">
           <li class="badges__item" v-for="badge in user.badges">
@@ -21,12 +21,15 @@
     </li>
   </ul>
 </div>
+</div>
 
   <div>
   <h4 class="leaderboards__title primary" @click="showProjects">TOP ACTIVE PROJECTS</h4>
+  <div id="leaderboards_projects">
   <ul class="leaderboards-list">
-    <li class="leaderboards__item" v-for="project in projects">
+    <li class="leaderboards__item" v-for="project in projects" >
       <div class="project-list__item__inner">
+        <h2 class="leaderboards__item__rank primary">{{ $index+1 }}</h2>
         <h4 class="project__name light">{{project.projectName}} </h4>
         <progress-bar
           :progress="project.tasksDone"
@@ -36,5 +39,5 @@
       </div>
     </li>
   </ul>
-</div>
+</div></div>
 </section>

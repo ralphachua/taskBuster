@@ -3,7 +3,7 @@ define(['vue',
   'common/global_config'
   ],function(Vue, Template, config){
 
-    var getLeaderBoardProjects = function(done){
+    var getLeaderBoardProjects = function(vueComponent,done){
       var xhr = {
         url: config.API_HOST + "leaders/projects" ,
         method:'GET'
@@ -15,7 +15,7 @@ define(['vue',
         status: 'success',
         data: [
         {
-            projectName: 'Project Name 2',
+            projectName: 'Project Name 2', 
             tasksDone: 11,
             tasksTotal: 20,
             members: [{
@@ -30,7 +30,7 @@ define(['vue',
                   }
             ]},
         {
-            projectName: 'Project Name ',
+            projectName: 'Project Name ', 
             tasksDone: 11,
             tasksTotal: 30,
             members: [{
@@ -41,7 +41,7 @@ define(['vue',
                 {
                     userName: 'Pen',
                     gender: 'female',
-                    avatarUrl: 'img/5675'
+                    avatarUrl: 'img/5675' 
                 },
                 {
                     userName: 'AJ',
@@ -52,23 +52,23 @@ define(['vue',
         }
     ]
 };
-      return done(null, mockdata);
-      // vueComponent.$http(xhr).then(
-      //   function onSuccess(response) {
-      //     console.log("getLeaderBoardProjects.onSuccess");
-      //     console.groupEnd();
-      //     return done(null, response);
-      //   },
+      // return done(null, mockdata);
+      vueComponent.$http(xhr).then(
+        function onSuccess(response) {
+          console.log("getLeaderBoardProjects.onSuccess");
+          console.groupEnd();
+          return done(null, response);
+        },
 
-      //   function onError(response) {
-      //     console.log("getLeaderBoardProjects.onError");
-      //     console.groupEnd();
-      //     return done(response);
-      //   }
-      // );
+        function onError(response) {
+          console.log("getLeaderBoardProjects.onError");
+          console.groupEnd();
+          return done(response);
+        }
+      );
     };
 
-    var getLeaderBoardUsers = function(done){
+    var getLeaderBoardUsers = function(vueComponent, done){
       var xhr = {
         url: config.API_HOST + "leaders/users" ,
         method:'GET'
@@ -131,25 +131,28 @@ define(['vue',
             ]
         }]
       };
-    return done(null, mockdata);
-    //   vueComponent.$http(xhr).then(
-    //     function onSuccess(response) {
-    //       console.log("getLeaderBoardUsers.onSuccess");
-    //       console.groupEnd();
-    //       return done(null, response);
-    //     },
+    // return done(null, mockdata);
+      vueComponent.$http(xhr).then(
+        function onSuccess(response) {
+          console.log("getLeaderBoardUsers.onSuccess");
+          console.groupEnd();
+          return done(null, response);
+        },
 
-    //     function onError(response) {
-    //       console.log("getLeaderBoardUsers.onError");
-    //       console.groupEnd();
-    //       return done(response);
-    //     }
-    //   );
-    // };
-  };
+        function onError(response) {
+          console.log("getLeaderBoardUsers.onError");
+          console.groupEnd();
+          return done(response);
+        }
+      );
+    };
+  
 
   return Vue.extend({
     template: Template,
+
+    compiled: function(){
+    },
 
     data: function(){
       return {projects:[],
@@ -163,21 +166,31 @@ define(['vue',
     methods:{
       retrieveData: function(){
         var self = this;
-        getLeaderBoardProjects(function renderProjectLeaderBoard(err, response){
+        getLeaderBoardProjects(this, function renderProjectLeaderBoard(err, response){
           console.group("@renderProLeaderBoard");
           console.log("resp.data: ",response.data);
-          self.projects = response.data;
-          console.log("self.proj: ",self.projects.length);
+          var newresponse = JSON.parse(JSON.stringify(response.data));
+          self.projects = newresponse.data;
+          console.log("self.projects: ",self.projects);
           console.groupEnd();
         });
 
-        getLeaderBoardUsers(function renderUserLeaderBoard(err, response){
+        getLeaderBoardUsers(this, function renderUserLeaderBoard(err, response){
           console.group("@renderUserLeaderBoard");
           console.log("resp.data: ",response.data);
-          self.users = response.data;
-          console.log("self.users: ",self.users.length);
+          var newresponse = JSON.parse(JSON.stringify(response.data));
+          self.users = newresponse.data;
+          console.log("self.users: ",self.users);
           console.groupEnd();
         });
+      },
+      showTaskBusters: function(){
+        $('#leaderboards_projects').css("visibility", "hidden");
+        $('#leaderboards_task').css("visibility", "visible");
+      },
+      showProjects: function(){
+        $('#leaderboards_projects').css("visibility", "visible");
+        $('#leaderboards_task').css("visibility", "hidden");
       }
     }
   });

@@ -1,10 +1,10 @@
 define(['vue', 'text!./BadgeCapsule.html', 
         'common/global_config'], function (Vue, Template, config) {
 
-    var getBadges = function(done){
+    var getBadges = function(vueComponent,done){
       var xhr = {
-        url:'',
-        method:''
+        url:config.API_HOST + "leaders/users",
+        method: "GET"
       };
 
         var mockdata={"status": "success",
@@ -55,7 +55,7 @@ define(['vue', 'text!./BadgeCapsule.html',
       methods:{
         retrieveBadges: function(){
             var self = this;
-            getBadges(function renderBadges(err, response){
+            getBadges(this, function renderBadges(err, response){
               console.group("@retrieveBadges");
               console.log("response: ",response.data);
               self.badges = response.data;
