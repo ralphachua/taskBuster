@@ -64,9 +64,12 @@ define(['vue',
           case 'DONE':
           console.log('%cSOMEONE SHOULD DIE', 'color:red');
           self.$children.forEach(function (val, key) {
-            if (val.taskData.projectId === data.res.projectId) {
+            console.log('%s: %s', val.taskData.id,data.res.id);
+            console.log(val.taskData.id === data.res.id);
+            if (val.taskData.id === data.res.id) {
               console.log(val);
               val.die();
+              return;
             }
           });
           break;

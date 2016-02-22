@@ -3,7 +3,7 @@ define( ['jquery','vue',
 ], function ($, Vue, guid) {
   console.log(guid);
   return Vue.extend({
-    template: '<div id="m_{{guid}}" class="monster"></div>',
+    template: '<div id="m_{{guid}}" class="monster" data-state={{isAlive.toString()}}></div>',
     props: {
       taskData: Object
     },
@@ -17,6 +17,7 @@ define( ['jquery','vue',
     },
     compiled: function () {
       var self = this;
+      console.log(self);
       this.element  = this.$el;
       console.dir(this.element);
       $(this.element.id).animateSprite({
@@ -30,7 +31,7 @@ define( ['jquery','vue',
         var self = this;
         var id = '#'.concat(self.element.id);
         console.log('%cBRB Dying', 'color:red');
-
+        console.log(self);
         console.log($(id));
 
         $(id).bind('webkitAnimationEnd', function () {
@@ -38,8 +39,9 @@ define( ['jquery','vue',
           $(id).css('display', 'none');
           self.$dispatch('monsterDied', self);
         });
-
-        $(id).addClass('dead');
+        console.log('Adding class to %s', self.element.id);
+        self.isAlive = false;
+        //document.getElementById(self.element.id).className+=' dead';
       }
     }
   });
