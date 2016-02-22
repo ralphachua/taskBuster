@@ -16,3 +16,48 @@ body {
 .section {
   min-height: 100vh;
 }
+
+.modal {
+  position: relative;
+  display: none;
+  &.visible {
+    display: block;
+    .modal__overlay {
+      position: fixed;
+      top:0;
+      left: 0;
+      background-color: rgba(0,0,0,0.8);
+      width: 100%;
+      height: 100%;
+      z-index: 200;
+    }
+
+    .modal__inner {
+      background-color: transparent;
+      padding: 22px;
+      width: 100%;
+      display: block;
+      min-height: 200px;
+      position: fixed;
+      top: 15%;
+      z-index: 250;
+    }
+
+    .modal__title {
+      text-align:center;
+    }
+
+    .modal__content {
+      background-color: $white;
+      padding:22px;
+      color: #000;
+      width: 480px;
+      margin: 0 auto;
+    }
+  }
+
+  .modal__close {
+    text-align: right;
+    color: $magenta;
+  }
+}

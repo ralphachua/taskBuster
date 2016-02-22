@@ -1,3 +1,24 @@
+@mixin textbox ($width: 310px) {
+  letter-spacing: 0.58px;
+  line-height: 20px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0);
+  width: $width;
+  font-weight: 500;
+  font-size: 20px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid $ash-blue;
+  margin-bottom: 20px;
+
+  &:focus {
+    border-bottom-color: $magenta;
+    outline: 0;
+  }  
+}
+
+
 .progress-bar-component {
     $progress-bar-height: 5px;
     margin-bottom: 10px;
@@ -14,4 +35,19 @@
       background-color: $magenta;
       height: $progress-bar-height;
     }
+}
+
+.label {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+input {
+  @include textbox(100%);
+
+}
+
+select {
+  @include textbox(100%);
 }
