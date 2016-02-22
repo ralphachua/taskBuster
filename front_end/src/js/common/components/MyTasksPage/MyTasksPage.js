@@ -105,10 +105,9 @@ define([
           addTasksModel: {
             name: '',
             desc: '',
-            point: '',
+            point: 0,
             project: ''
-          },
-          projects: []
+          }
         };
       },
       components: {
@@ -158,22 +157,28 @@ define([
           }
         });
 
+        getTasks(self, config.USER_INFO.ID, function updateTasks(err, response){
+          var newresponse;
+          //TODO: check if has err
+          if (response && response.hasOwnProperty('data')) {
+            newresponse = response.data;
+            console.log(newresponse.data.todo);
+            console.log("status: ",newresponse.status);
+
+            self.tasks = newresponse.data;
+
+            console.log("data: ",self.tasks);
+            self.$dispatch('tasksLoaded', self.tasks.ongoing);
+          }}
+        );
+
+
         getProjects(self, config.USER_INFO.ID, function (err, response) {
           if (response) {
             console.log(response.data);
 
           }
-        });
-
-        getTasks(self, config.USER_INFO.ID, function (err, response){
-          //TODO: check if has err
-          if (response && response.hasOwnProperty('data')) {
-            self.tasks = response.data.data;
-
-            console.log("data: ",self.tasks);
-            self.$dispatch('tasksLoaded', self.tasks.ongoing);
-          }
-        });
+          });
 
       },
       ready: function () {
@@ -182,7 +187,6 @@ define([
         var ongoingColumn = $('.mytasks-section .ongoing-column')[0];
         var doneColumn = $('.mytasks-section .done-column')[0];
         var targetStatus = '';
-
         dragula([todoColumn, ongoingColumn, doneColumn], {
           accepts: function(el, target, source, sibling) {
             var currentStatus = el.__vue__.taskData.status;
@@ -210,7 +214,9 @@ define([
             return false;
           }
         }).on('drop', function (el) {
+          console.dir(el);
           if (el.hasOwnProperty(('__vue__'))) {
+            console.log(el);
             var currentStatus = el.__vue__.taskData.status;
             var taskData = el.__vue__.taskData;
             var payload = {
@@ -219,9 +225,17 @@ define([
             };
 
             updateTask(self, payload, function(err, response) {
+              console.group('MyTasksPage');
+              console.log('updateTask');
+
               if (err) {
+                console.log(err);
                 return;
               }
+              console.log(payload);
+              console.log(response);
+              console.dir(el);
+
               //event consumed by Battlefield.js
               el.__vue__.$dispatch('taskDragged', {
                 el: el.__vue__,

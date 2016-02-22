@@ -15,7 +15,7 @@ define(['vue',
         status: 'success',
         data: [
         {
-            projectName: 'Project Name 2', 
+            projectName: 'Project Name 2',
             tasksDone: 11,
             tasksTotal: 20,
             members: [{
@@ -30,7 +30,7 @@ define(['vue',
                   }
             ]},
         {
-            projectName: 'Project Name ', 
+            projectName: 'Project Name ',
             tasksDone: 11,
             tasksTotal: 30,
             members: [{
@@ -41,7 +41,7 @@ define(['vue',
                 {
                     userName: 'Pen',
                     gender: 'female',
-                    avatarUrl: 'img/5675' 
+                    avatarUrl: 'img/5675'
                 },
                 {
                     userName: 'AJ',
@@ -150,9 +150,6 @@ define(['vue',
 
   return Vue.extend({
     template: Template,
-
-    compiled: function(){
-    },
 
     data: function(){
       return {projects:[],
