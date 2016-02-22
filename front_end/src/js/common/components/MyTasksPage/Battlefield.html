@@ -1,5 +1,5 @@
 <section class="battlefield-section">
-  <div class="avatar" :class="{'ready' : isReady}"></div>
+  <div id="BattlefieldAvatar" class="avatar" :class="{'ready' : isReady}"></div>
   <div class="monster-group">
     <monster v-for="monster in monsters" v-bind:task-data="monster" track-by="id"></monster>
   </div>

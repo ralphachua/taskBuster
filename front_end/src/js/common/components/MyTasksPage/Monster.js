@@ -30,6 +30,7 @@ define( ['jquery','vue',
       die: function () {
         var self = this;
         var id = '#'.concat(self.element.id);
+        var avatar = $('#BattlefieldAvatar');
         console.log('%cBRB Dying', 'color:red');
         console.log(self);
         console.log($(id));
@@ -38,9 +39,14 @@ define( ['jquery','vue',
           console.log('%cDead','color:red');
           $(id).css('display', 'none');
           self.$dispatch('monsterDied', self);
+          avatar.removeClass('firing');
         });
+
+
+
         console.log('Adding class to %s', self.element.id);
         self.isAlive = false;
+        avatar.addClass('firing');
         //document.getElementById(self.element.id).className+=' dead';
       }
     }
