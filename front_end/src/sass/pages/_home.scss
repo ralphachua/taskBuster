@@ -10,10 +10,20 @@
   margin-bottom: 60px !important;
 }
 
-.homepage__login{ 
+.homepage__login{
   float: right;
+  POSITION: ABSOLUTE;
   text-align: right;
   padding-right: 50px !important;
+  right: 0;
+  top: 12px;
 }
 
+.homepage-section .homepage__header {
+  position: absolute;
+right: 0;
+top: 0;
+width: 100%;
+z-index: 200;
 
+}

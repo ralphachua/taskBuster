@@ -1,7 +1,7 @@
-<section class="section project-details-section ">
-  <header class="section__header">
-    <h4 class="homepage__login secondary light" @click="signIn">
-      Sign in
+<section class="section homepage-section ">
+  <header class="section__header homepage__header">
+    <h4 class="homepage__login secondary  signin-trigger" @click="showModal">
+      SIGN IN
     </h4>
   </header>
   <div class="section__content" >
@@ -15,3 +15,30 @@
 
   </div>
 </section>
+<div class="modal" :class="{'visible': modalVisible}">
+  <div class="modal__overlay"></div>
+  <div class="modal__inner">
+
+    <div id="AddModal" class="modal__content">
+      <div class="modal__close" @click="modalClose">
+        X
+      </div>
+      <h3 class="modal__title title">Sign In</h3>
+      <div class="modal__form">
+        <div class="label">What should we call you?</div>
+        <input type="text" v-model="model.given_name">
+        <div class="label">Gender</div>
+        <select v-model="addTasksModel.gender">
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+      </div>
+
+      <div class="add-task-trigger centered primary" @click="signUp">
+        Sign In
+      </div>
+    </div>
+
+
+  </div>
+</div>

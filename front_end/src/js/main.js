@@ -53,6 +53,11 @@ function (
   var router = new Router();
   router.map({
     '/': {
+      component: Pages.homepage
+
+    },
+    '/tasks' : {
+      name:'mytasks',
       component: Pages['my-tasks-page']
     },
     '/my-projects' : {
@@ -66,7 +71,7 @@ function (
       component: Pages['badge-capsule-page']
     },
     '/leaderboards': {
-      component: Pages['leaderboards']
+      component: Pages.leaderboards
     }
   });
 
