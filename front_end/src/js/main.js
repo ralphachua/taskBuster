@@ -57,6 +57,7 @@ function (
 
     },
     '/tasks' : {
+      name: 'mytasks',
       component: Pages['my-tasks-page']
     },
     '/my-projects' : {
