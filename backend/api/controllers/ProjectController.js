@@ -86,6 +86,7 @@ module.exports = {
         var data = {
           projectName:  result.project.projectName,
           dueDate:      result.project.dueDate,
+          status:       result.project.status,
           tasksTodo:    result.tasksTodo,
           tasksOngoing: result.tasksOngoing,
           tasksDone:    result.tasksDone

@@ -1,4 +1,6 @@
 
+var moment = require("moment");
+
 module.exports = {
 
   create: function(req, res) {
@@ -33,17 +35,16 @@ module.exports = {
       taskDescription:       req.param("taskDescription"),
       assignedTo:            req.param("assignedTo"),
       taskPoints:            req.param("taskPoints"),
-      projectId:             req.param("projectId"),
-      status:                "TODO"
-    }
+      projectId:             req.param("projectId")
+    };
 
     var tasks = {
       save: function(next) {
-        Task.create(params, function(err, user) {
-          return next(err, user);
+        Task.create(params, function(err, task) {
+          return next(err, task);
         });
       }
-    }
+    };
 
     async.auto(tasks, function(err, result) {
       var payload = null;
@@ -58,8 +59,10 @@ module.exports = {
   },
 
   update: function(req, res) {
-    var paramsToUpdate = {
-      status: req.param("taskStatus")
+    var taskStatus = req.param("taskStatus") || "";
+    if (!taskStatus) {
+      return res.badRequest(ApiService.toErrorJSON(
+        new Errors.InvalidArgumentError("Missing taskStatus parameter.")));
     }
 
     var tasks = {
@@ -72,7 +75,18 @@ module.exports = {
           return next(err, task);
         });
       },
-      updateRecord: ["find", function(next) {
+      updateRecord: ["find", function(next, cres) {
+        var paramsToUpdate = {
+          status: taskStatus
+        }
+
+        if (taskStatus == "DONE") {
+          var doneAt = req.param("doneAt") || moment().toString();
+          paramsToUpdate.doneAt = doneAt;
+          UserService.taskDone(cres.find, function(err, result){
+            
+          });
+        }
         Task.update({id: req.param("taskId")},paramsToUpdate, function(err, task) {
           return next(err, task);
         });

@@ -5,7 +5,7 @@ module.exports = {
 
   attributes: {
     levelId: {
-      type: "string",
+      type: "integer",
       required: true
     },
     levelName: {
