@@ -9,7 +9,10 @@ module.exports = {
           id: userId
         }
         User.findOne(params, function(err, user) {
-            return next(err, user);
+          if (_.isEmpty(user)) {
+            return callback(new Errors.RecordNotFound("User " + userId + " does not exist"));
+          }
+          return next(err, user);
         });
       },
       level: ["user", function(next, cres) {
