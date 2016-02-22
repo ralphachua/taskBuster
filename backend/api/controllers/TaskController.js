@@ -40,8 +40,8 @@ module.exports = {
 
     var tasks = {
       save: function(next) {
-        Task.create(params, function(err, user) {
-          return next(err, user);
+        Task.create(params, function(err, task) {
+          return next(err, task);
         });
       }
     };
