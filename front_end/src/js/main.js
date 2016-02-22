@@ -42,11 +42,11 @@ function (
     events: {
       'project-details': function (project) {
       console.log("dispatch project-details: ",project);
-    },
+      },
       'taskDragged': function (el) {
       console.log("taskDragged");
       this.$broadcast('taskDragged',el);
-    }
+      }
   }
   });
 
@@ -66,7 +66,7 @@ function (
       component: Pages['badge-capsule-page']
     },
     '/leaderboards': {
-      component: Pages['leaderboards']
+      //component: Pages['leaderboards']
     }
   });
 
