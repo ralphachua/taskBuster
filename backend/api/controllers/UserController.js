@@ -7,7 +7,7 @@ module.exports = {
 
       exist: function(next) {
         var params = {
-          socialId: req.param("user_id")
+          socialId: req.param("user_id") || "asgfdhjk"
         }
         User.findOne(params, function(err, user) {
           return next(err, user);
@@ -17,9 +17,9 @@ module.exports = {
       save: ["exist", function(next, cres) {
         if (_.isEmpty(cres.exist)) {
           var params = {
-            name:         req.param("given_name"),
-            gender:       req.param("gender"),
-            socialId:     req.param("user_id"),
+            name:         req.param("given_name") ||  "John",
+            gender:       req.param("gender") || "male",
+            socialId:     req.param("user_id") || "asgfdhjk",
             avatarUrl:    "/avatar/123",
             levelId:      1,
             activeBadge:  "qwe098",
