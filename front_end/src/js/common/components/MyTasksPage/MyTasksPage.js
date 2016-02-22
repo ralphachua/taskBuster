@@ -15,6 +15,34 @@ define([
     config
   ) {
 
+
+    console.log(config);
+    var getProjects = function (vueComponent, userId, done) {
+      var xhr = {
+        url: config.API_HOST +'users/'+ userId+"/projects" ,
+        method:'GET'
+      };
+
+      console.log(xhr);
+
+      vueComponent.$http(xhr).then(
+        function onSuccess(response) {
+          console.log("getProjects.onSuccess");
+          console.groupEnd();
+          return done(null, response);
+        },
+
+        function onError(response) {
+          console.log("getProjects.onError");
+          console.groupEnd();
+          return done(response);
+        }
+      );
+    };
+
+    var addTask = function (vueComponent, userId, done) {
+    };
+
     var getTasks = function(vueComponent, userId, done){
       var xhr = {
         url: config.API_HOST +'users/'+ userId+"/tasks" ,
@@ -72,24 +100,65 @@ define([
       template: Template,
       data: function() {
         return {
-          tasks: {}
+          tasks: {},
+          modalVisible: false,
+          addTasksModel: {
+            name: '',
+            desc: '',
+            point: 0,
+            project: ''
+          }
         };
       },
       components: {
         task: Task,
         battlefield: Battlefield
       },
+      methods: {
+        addTask: function () {
+          console.log('Add task trigger clicked');
+          this.modalVisible = true;
+        },
+        modalClose: function () {
+          this.modalVisible = false;
+        },
+        getUserInfo: function (callback) {
+          var self = this;
+          var xhr = {
+            url: config.API_HOST +'users/'+ config.USER_INFO.ID ,
+            method:'GET'
+          };
+
+          self.$http(xhr).then(
+            function onSuccess(response) {
+              console.log(response);
+              return callback(null, response);
+            },
+            function onError (response) {
+              console.log(response);
+              return callback(response, null);
+            }
+          );
+        }
+      },
       compiled: function(){
         var self = this;
-        console.log("compile");
+        this.getUserInfo(function (err, response) {
+          console.log('USER INFO');
+          console.log(response);
+          var data;
+          if (response) {
+            data = response.data.data;
+            config.USER_INFO.name = data.name;
+            Object.assign(config.USER_INFO.activeBadge, data.activeBadge);
+            Object.assign(config.USER_INFO.level, data.level);
+            Object.assign(config.USER_INFO.task,  data.task);
+            config.USER_INFO.totalPointsDone = data.totalPointsDone;
+          }
+        });
 
-        // comment if you're going to use mock data
         getTasks(self, config.USER_INFO.ID, function updateTasks(err, response){
           var newresponse;
-          console.group('@getTasks');
-          console.log('err: ', err);
-          console.log('response: ', response);
-
           //TODO: check if has err
           if (response && response.hasOwnProperty('data')) {
             newresponse = response.data;
@@ -100,10 +169,17 @@ define([
 
             console.log("data: ",self.tasks);
             self.$dispatch('tasksLoaded', self.tasks.ongoing);
-          }
+          }}
+        );
 
-          console.groupEnd();
-        });
+
+        getProjects(self, config.USER_INFO.ID, function (err, response) {
+          if (response) {
+            console.log(response.data);
+
+          }
+          });
+
       },
       ready: function () {
         var self = this;

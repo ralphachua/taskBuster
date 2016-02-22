@@ -8,7 +8,7 @@ define({
     }
   })(),
   USER_INFO: {
-    ID: '56c961053becd0753b5462c2',
+    ID: '56ca99394aa1adfc70b3f108',
     name: '',
     avatarUrl: '',
     level: {
@@ -18,11 +18,12 @@ define({
     },
     activeBadge: {
       badgeUrl: '',
-      badgeName: 'Bug Crusher'
+      badgeName: ''
     },
     task: {
       done: 0,
       total: 0
-    }
+    },
+    totalPointsDone: 0
   }
 });

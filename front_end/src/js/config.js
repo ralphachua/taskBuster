@@ -10,7 +10,7 @@ requirejs.config({
     phaser         : 'vendor/phaser',
     animatesprite  : 'vendor/jquery.animateSprite.min',
     datedropper    : 'vendor/datedropper.min',
-    auth0          : '//cdn.auth0.com/js/lock-8.2.min',
+    auth0          : '//cdn.auth0.com/js/lock-8.2',
     starscroll   : 'vendor/starscroll.min'
   },
   shim: {

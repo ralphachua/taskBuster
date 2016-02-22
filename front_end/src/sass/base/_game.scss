@@ -26,17 +26,17 @@
 
   &.ready {
     -webkit-animation: avatar-ready .5s steps(5) forwards;
-    	       -moz-animation: avatar-ready .5s steps(6) infinite;
-    	        -ms-animation: avatar-ready .5s steps(6) infinite;
-    	         -o-animation: avatar-ready .5s steps(6) infinite;
+    	       -moz-animation: avatar-ready .5s steps(6) forwards;
+    	        -ms-animation: avatar-ready .5s steps(6) forwards;
+    	         -o-animation: avatar-ready .5s steps(6) forwards;
     	            animation: avatar-ready .5s steps(5) forwards;
   }
 
   &.firing {
     -webkit-animation: avatar-fire 1s steps(9) forwards;
-       -moz-animation: avatar-fire 1s steps(10) infinite;
-        -ms-animation: avatar-fire 1s steps(10) infinite;
-         -o-animation: avatar-fire 1s steps(10) infinite;
+       -moz-animation: avatar-fire 1s steps(10) forwards;
+        -ms-animation: avatar-fire 1s steps(10) forwards;
+         -o-animation: avatar-fire 1s steps(10) forwards;
             animation: avatar-fire 1s steps(9) forwards;
   }
 }
@@ -63,7 +63,6 @@
   from { background-position:    0px; }
     to { background-position: -1425px; }
 }
-
 
 @-webkit-keyframes avatar-idle {
    from { background-position:    0px; }
