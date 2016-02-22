@@ -47,7 +47,6 @@ define( ['jquery','vue',
         console.log('Adding class to %s', self.element.id);
         self.isAlive = false;
         avatar.addClass('firing');
-        //document.getElementById(self.element.id).className+=' dead';
       }
     }
   });

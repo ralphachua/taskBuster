@@ -43,6 +43,10 @@ define(['vue',
       monster: Monster
     },
     events:{
+      monsterDied: function (monster) {
+        console.log('%cSOMEONE WAS KILLED', 'color:red');
+        this.monsters.$remove(monster.taskData);
+      },
       tasksLoaded: function (list) {
         console.log('Tasks loaded!');
         console.log(list);
