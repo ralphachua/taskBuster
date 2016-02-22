@@ -23,13 +23,13 @@
 
       <div class="task-table__columns">
         <ul class="col-4 task-table__column todo-column">
-          <task v-for="todo in tasks | filterBy 'TODO' in 'status'"  track-by="$index" :task-data="todo"></task>
+          <task v-for="todo in tasks.todo"  track-by="$index" :task-data="todo"></task>
         </ul>
         <ul class="col-4 task-table__column ongoing-column">
-          <task v-for="ongoing in tasks | filterBy 'ONGOING' in 'status'" track-by="$index" :task-data="ongoing"></task>
+          <task v-for="ongoing in tasks.ongoing" track-by="$index" :task-data="ongoing"></task>
         </ul>
         <ul class="col-4 task-table__column done-column">
-          <task v-for="done in tasks | filterBy 'DONE' in 'status'" track-by="$index" :task-data="done"></task>
+          <task v-for="done in tasks.done" track-by="$index" :task-data="done"></task>
         </ul>
       </div>
   </div>

@@ -14,6 +14,7 @@ define([
     Battlefield,
     config
   ) {
+
     var getTasks = function(vueComponent, userId, done){
       var xhr = {
         url: config.API_HOST +'users/'+ userId+"/tasks" ,
@@ -71,7 +72,7 @@ define([
       template: Template,
       data: function() {
         return {
-          tasks: []
+          tasks: {}
         };
       },
       components: {
@@ -95,13 +96,10 @@ define([
             console.log(newresponse.data.todo);
             console.log("status: ",newresponse.status);
 
-            Object.keys(newresponse.data).forEach(function (type) {
-              newresponse.data[type].forEach(function (val) {
-                self.tasks.push(val);
-              });
-            });
+            self.tasks = newresponse.data;
 
             console.log("data: ",self.tasks);
+            self.$dispatch('tasksLoaded', self.tasks.ongoing);
           }
 
           console.groupEnd();
@@ -116,9 +114,7 @@ define([
         dragula([todoColumn, ongoingColumn, doneColumn], {
           accepts: function(el, target, source, sibling) {
             var currentStatus = el.__vue__.taskData.status;
-            console.log('DRAGGING');
-            console.dir(el);
-
+            var targetStatus = '';
             if (target.className.indexOf('todo-column') > -1) {
               targetStatus = 'TODO';
             }
@@ -131,9 +127,11 @@ define([
 
             // Rules
             if (currentStatus == 'TODO' && targetStatus == 'ONGOING') {
+              el.__vue__.taskData.status = 'ONGOING';
               return true;
             }
             else if (currentStatus == 'ONGOING' && targetStatus == 'DONE') {
+              el.__vue__.taskData.status = 'DONE';
               return true;
             }
 
@@ -145,19 +143,10 @@ define([
             console.log(el);
             var currentStatus = el.__vue__.taskData.status;
             var taskData = el.__vue__.taskData;
-            var payload  = {};
-            payload.taskId = taskData.id;
-
-            if (taskData.status === 'ONGOING') {
-              payload.taskStatus = 'DONE';
-            } else {
-              if (taskData.status === 'TODO') {
-                payload.taskStatus = 'ONGOING';
-              }
-            }
-
-            console.log(el.__vue__);
-
+            var payload = {
+              taskId: taskData.id,
+              taskStatus: taskData.status
+            };
 
             updateTask(self, payload, function(err, response) {
               console.group('MyTasksPage');
@@ -170,18 +159,13 @@ define([
               console.log(payload);
               console.log(response);
               console.dir(el);
+
               //event consumed by Battlefield.js
               el.__vue__.$dispatch('taskDragged', {
                 el: el.__vue__,
                 res: response.data.data[0]
               });
 
-              if (currentStatus == 'TODO' && targetStatus == 'ONGOING') {
-                el.__vue__.taskData.status = 'ONGOING';
-              }
-              else if (currentStatus == 'ONGOING' && targetStatus == 'DONE') {
-                el.__vue__.taskData.status = 'DONE';
-              }
 
             });
           }

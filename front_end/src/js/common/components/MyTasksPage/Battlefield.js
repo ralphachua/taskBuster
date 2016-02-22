@@ -5,40 +5,35 @@ define(['vue',
   './Monster'
 ], function (Vue, $, Template, AnimateSprite, Monster) {
 
-  // var animate = function(action){
-  //   $(".monster").animateSprite({
-  //     fps: 12,
-  //     animations: {
-  //         die: [0, 1, 2, 3, 4, 5]
-  //     },
-  //     loop: false,
-  //     complete: function(){
-  //     }
-  //   });
-  // };
-
   return Vue.extend({
     template: Template,
     data: function () {
       return {
+        init: false,
         monsters: []
       };
     },
     props: {
-      tasks: Array
+      tasks: Object
+    },
+    watch: {
+      tasks: function (val, oldVal) {
+        var self = this;
+        console.log('%cTASKS UPDATED', 'color:blue; font-size: 20px');
+        console.log(val.ongoing);
+        if (!self.init) {
+          val.ongoing.forEach(function (t) {
+            self.monsters.push(t);
+          });
+          self.init = true;
+        }
+      }
     },
     computed:  {
       isReady: function () {
         var flag = false;
 
-        console.log(this.tasks);
-
-        this.tasks.forEach(function (task) {
-          if (task.status === 'ONGOING') {
-            flag = true;
-            return;
-          }
-        });
+        flag = !!this.monsters.length;
 
         return flag;
       }
@@ -48,6 +43,10 @@ define(['vue',
       monster: Monster
     },
     events:{
+      tasksLoaded: function (list) {
+        console.log('Tasks loaded!');
+        console.log(list);
+      },
       taskDragged: function(data){
         console.log('Battlefield');
         var self = this;
@@ -57,7 +56,13 @@ define(['vue',
         console.log(data.res.status);
 
         switch(data.res.status) {
+          case 'ONGOING' :
+            //spawn monster
+            self.monsters.push(data.res);
+
+          break;
           case 'DONE':
+          console.log('%cSOMEONE SHOULD DIE', 'color:red');
           self.$children.forEach(function (val, key) {
             if (val.taskData.projectId === data.res.projectId) {
               console.log(val);
@@ -70,6 +75,10 @@ define(['vue',
         // console.log("die called!");
         // animate('die');
       }
+    },
+    beforeCompile: function () {
+      var self = this;
+      self.$log();
     },
     ready: function () {
       var self = this;

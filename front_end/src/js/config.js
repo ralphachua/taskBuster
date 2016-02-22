@@ -9,10 +9,13 @@ requirejs.config({
     highcharts     : 'vendor/highcharts',
     phaser         : 'vendor/phaser',
     animatesprite  : 'vendor/jquery.animateSprite.min',
-    datedropper    : 'vendor/datedropper.min'
+    datedropper    : 'vendor/datedropper.min',
+    auth0          : '//cdn.auth0.com/js/lock-8.2.min'
   },
   shim: {
     animatesprite: ['jquery']
   },
   deps: ['main']
 });
+
+console.log(requirejs);

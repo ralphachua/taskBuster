@@ -4,7 +4,8 @@ define([
   'vue-resource',
   'vue-router',
   'common/components/ProgressBar/progressBar',
-  'pages'
+  'pages',
+  'auth0'
 ],
 function (
   $,
@@ -12,12 +13,15 @@ function (
   Resource,
   Router,
   ProgressBar,
-  Pages
+  Pages,
+  Auth0
   ) {
 
   Vue.use(Resource);
   Vue.use(Router);
   Vue.component('progress-bar', ProgressBar);
+
+  console.log(Auth0);
 
   var AppView;
 
@@ -35,7 +39,7 @@ function (
     events: {
       'project-details': function (project) {
       console.log("dispatch project-details: ",project);
-    }, 
+    },
       'taskDragged': function (el) {
       console.log("taskDragged");
       this.$broadcast('taskDragged',el);
