@@ -39,11 +39,25 @@ module.exports = {
     };
 
     var tasks = {
-      save: function(next) {
+      findProject: function(next) {
+        Project.findOne({id: params.projectId}, function(err, project) {
+          if (err) {
+            return next(err);
+          }
+
+          if (!project) {
+            return next(new Errors.RecordNotFound("Project does not exist."));
+          }
+
+          return next(null, project);
+        });
+      },
+
+      save: ["findProject", function(next, result) {
         Task.create(params, function(err, task) {
           return next(err, task);
-        });
-      }
+        })
+      }]
     };
 
     async.auto(tasks, function(err, result) {
@@ -84,7 +98,7 @@ module.exports = {
           var doneAt = req.param("doneAt") || moment().toString();
           paramsToUpdate.doneAt = doneAt;
           UserService.taskDone(cres.find, function(err, result){
-            
+
           });
         }
         Task.update({id: req.param("taskId")},paramsToUpdate, function(err, task) {
