@@ -1,6 +1,6 @@
 define({
   API_HOST: (function () {
-    var isLocal = true;
+    var isLocal = false;
     if (isLocal) {
       return 'http://localhost:1337/';
     } else {
@@ -8,9 +8,21 @@ define({
     }
   })(),
   USER_INFO: {
-    ID: 'user001',
-    TITLE: '',
-    NAME: '',
-    LV: 0
+    ID: '56c961053becd0753b5462c2',
+    name: '',
+    avatarUrl: '',
+    level: {
+      name: '',
+      currentPoints: 0,
+      requiredPoints: 50
+    },
+    activeBadge: {
+      badgeUrl: '',
+      badgeName: 'Bug Crusher'
+    },
+    task: {
+      done: 0,
+      total: 0
+    }
   }
 });
