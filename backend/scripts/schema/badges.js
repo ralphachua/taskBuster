@@ -18,5 +18,5 @@ db.badges.insert({
   "badgeId"            : "zxc123",
   "badgeName"          : "Dominator",
   "badgeUrl"           : "dominator",
-  "requiredPoints"     : 40
+  "requiredPoints"     : 100
 });

@@ -81,6 +81,7 @@ module.exports = {
 
   taskDone: function(task, callback) {
     var tasks = {
+
       user: function(next) {
         var params = {
           id: task.assignedTo
@@ -89,6 +90,7 @@ module.exports = {
           return next(err, user);
         });
       },
+
       level: ["user", function(next, cres) {
         var params = {
           levelId: cres.user.levelId
@@ -97,59 +99,69 @@ module.exports = {
           return next(err, level);
         });
       }],
-      updateUser: ["user", "level", function(next, cres) {
-        var totalPointsDone = cres.user.totalPointsDone + task.taskPoints
-        var requiredPoints = cres.level.requiredPoints;
-        var currentPoints =  totalPointsDone - cres.level.accumulatedPoints;
+
+      badge: function(next) {
+        Badge.find({}, function(err, badges) {
+          return next(err, badges);
+        });
+      },
+
+      task: ["user", function(next,cres) {
+        var params = {
+          projectId: task.projectId,
+          assignedTo: cres.user.id,
+          status: "DONE"
+        }
         
+        Task.count(params, function(err, count) {
+          return next(err, count);
+        });
+      }],
+
+      updateUser: ["user", "level", "badge", "task", function(next, cres) {
+        var user = cres.user;
+        var level = cres.level;
+        var badges = cres.badge;
+        var taskCount = cres.task;
+
+        var totalPointsDone = user.totalPointsDone + task.taskPoints
+        var requiredPoints = level.requiredPoints;
+        var currentPoints =  totalPointsDone - level.accumulatedPoints;
+
         var params = {
           totalPointsDone: totalPointsDone
         }
-        
+
         if (currentPoints >= requiredPoints) {
           params.levelId = cres.user.levelId + 1;
         }
-        
+
+        var badges =  _.clone(user.badges);
+
+        if (taskCount == 1) {
+          badges.push("asd765");
+          params.badges = _.uniq(badges);
+        }
+
+        if (totalPointsDone == 100) {
+          badges.push("zxc123");
+          params.badges = _.uniq(badges);
+        }
+
         User.update({ id: task.assignedTo }, params, function(err, user) {
           return next(err, user);
         })
       }],
-      checkForBadges: ["updateUser", function(next, cres) {
-        Badge.find({}, function(err, badges){
-          var user = cres.updateUser
-          badges.forEach(function(badge){
-            if (!_.contains(user.badges, badge.badgeId)) {
-              if (badge.requiredPoints <= user.totalPointsDone) {
-                var paramsToUpdate = {
-                  badges: user.badges.push(badge.badgeId)
-                }
-                User.update(paramsToUpdate, function(err, user) {
-                  user = user
-                  if (err) {
-                    callback(err)
-                  };
-                })
-              };
-            };
-            if (badge == badges[badges.length -1]) {
-              return (null, user.badges)
-            };
-          })
-        })
-      }]
     }
 
     async.auto(tasks, function(err, result){
       if (err) {
-        sails.log("error occurred")
-        sails.log(err)
         callback(err)
       } else {
         var data = {
           updatedUser: result.updateUser,
           updatedBadges: result.checkForBadges
         }
-        sails.log(data)
         callback(null, data)
       }
     })
