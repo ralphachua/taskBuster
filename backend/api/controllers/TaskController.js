@@ -85,7 +85,7 @@ module.exports = {
           paramsToUpdate.doneAt = doneAt;
           UserService.taskDone(cres.find, function(err, result){
             
-          })
+          });
         }
         Task.update({id: req.param("taskId")},paramsToUpdate, function(err, task) {
           return next(err, task);

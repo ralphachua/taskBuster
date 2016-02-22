@@ -138,7 +138,7 @@ module.exports = {
 
         var badges =  _.clone(user.badges);
 
-        if (taskCount == 1) {
+        if (taskCount == 10) {
           badges.push("asd765");
           params.badges = _.uniq(badges);
         }
