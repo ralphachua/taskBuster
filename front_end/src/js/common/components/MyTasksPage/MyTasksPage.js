@@ -15,6 +15,35 @@ define([
     config
   ) {
 
+
+    console.log(config);
+    var getProjects = function (vueComponent, userId, done) {
+      var xhr = {
+        url: config.API_HOST +'users/'+ userId+"/projects" ,
+        method:'GET'
+      };
+
+      console.log(xhr);
+
+      vueComponent.$http(xhr).then(
+        function onSuccess(response) {
+          console.log("getProjects.onSuccess");
+          console.groupEnd();
+          return done(null, response);
+        },
+
+        function onError(response) {
+          console.log("getProjects.onError");
+          console.groupEnd();
+          return done(response);
+        }
+      );
+    };
+
+    var addTask = function (vueComponent, userId, done) {
+
+    };
+
     var getTasks = function(vueComponent, userId, done){
       var xhr = {
         url: config.API_HOST +'users/'+ userId+"/tasks" ,
@@ -72,15 +101,60 @@ define([
       template: Template,
       data: function() {
         return {
-          tasks: {}
+          tasks: {},
+          modalVisible: false,
+          addTasksModel: {
+            name: '',
+            desc: '',
+            point: '',
+            project: ''
+          },
+          projects: []
         };
       },
       components: {
         task: Task,
         battlefield: Battlefield
       },
+      methods: {
+        addTask: function () {
+
+        },
+        modalClose: function () {
+
+        },
+        getUserInfo: function (callback) {
+          var self = this;
+          var xhr = {
+            url: config.API_HOST +'users/'+ config.USER_INFO.ID ,
+            method:'GET'
+          };
+
+          self.$http(xhr).then(
+            function onSuccess(response) {
+              console.log(response);
+              return callback(null, response);
+            },
+            function onError (response) {
+              console.log(response);
+              return callback(response, null);
+            }
+          );
+        }
+      },
       compiled: function(){
         var self = this;
+        this.getUserInfo(function (err, response) {
+          console.log('USER INFO');
+          console.log(response);
+        });
+
+        getProjects(self, config.USER_INFO.ID, function (err, response) {
+          if (response) {
+            console.log(response.data);
+          }
+        });
+
         getTasks(self, config.USER_INFO.ID, function (err, response){
           //TODO: check if has err
           if (response && response.hasOwnProperty('data')) {
