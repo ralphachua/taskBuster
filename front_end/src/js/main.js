@@ -66,7 +66,7 @@ function (
       component: Pages['badge-capsule-page']
     },
     '/leaderboards': {
-      components: Pages.leaderboards
+      component: Pages['homepage']
     }
   });
 

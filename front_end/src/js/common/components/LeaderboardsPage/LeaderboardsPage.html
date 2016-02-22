@@ -1,10 +1,12 @@
 <section class="section leaderboards-section grid">
   <div>
-  LeaderBoards Users
+  <h4 class="leaderboards__title primary" @click="showTaskBusters">TOP TASK BUSTERS</h4>
   <ul class="leaderboards-list">
+    {{var count = 0;}}
     <li class="leaderboards__item" v-for="user in users">
+      {{count++;}}
       <div class="project-list__item__inner">
-        <h3 class="project__name primary">{{user.user_name}}</h3>
+        <h4 class="project__name light">{{user.user_name}}</h4>
         <h3 class="project__name primary">{{user.activeBadge.badgeName}}</h3>
       </div>
       <div class="project-list__item__inner">
@@ -21,11 +23,11 @@
 </div>
 
   <div>
-  LeaderBoards Projects
+  <h4 class="leaderboards__title primary" @click="showProjects">TOP ACTIVE PROJECTS</h4>
   <ul class="leaderboards-list">
     <li class="leaderboards__item" v-for="project in projects">
       <div class="project-list__item__inner">
-        <h3 class="project__name primary">{{project.projectName}}, </h3>
+        <h4 class="project__name light">{{project.projectName}} </h4>
         <progress-bar
           :progress="project.tasksDone"
           :min="0"
