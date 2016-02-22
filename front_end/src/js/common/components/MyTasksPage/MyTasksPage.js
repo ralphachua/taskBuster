@@ -121,14 +121,21 @@ define([
       template: Template,
       data: function() {
         return {
-          tasks: {},
+          tasks: {
+
+            todo: [],
+            ongoing: [],
+            done: []
+
+          },
           modalVisible: false,
           addTasksModel: {
             taskName: '',
             taskDescription: '',
             taskPoints: 0,
             projectId: ''
-          }
+          },
+          projects: []
         };
       },
       components: {
@@ -209,10 +216,18 @@ define([
           //TODO: check if has err
           if (response && response.hasOwnProperty('data')) {
             newresponse = response.data;
-            console.log(newresponse.data.todo);
+            console.log(newresponse.data);
             console.log("status: ",newresponse.status);
 
-            self.tasks = newresponse.data;
+            self.tasks.todo = newresponse.data.filter(function (val) {
+              return (val.status === 'TODO');
+            });
+            self.tasks.ongoing = newresponse.data.filter(function (val) {
+              return (val.status === 'ONGOING');
+            });
+            self.tasks.done = newresponse.data.filter(function (val) {
+              return (val.status === 'DONE');
+            });
 
             console.log("data: ",self.tasks);
             self.$dispatch('tasksLoaded', self.tasks.ongoing);
@@ -221,9 +236,12 @@ define([
 
 
         getProjects(self, config.USER_INFO.ID, function (err, response) {
+          var data;
           if (response) {
+            data = response.data.data;
+            console.log(response);
             console.log(response.data);
-
+            self.projects.concat(data);
           }
           });
 
