@@ -38,7 +38,7 @@ describe(TEST_NAME, function() {
           expect(res.body).to.exist;
           expect(res.body).to.have.deep.property("status").to.be.equal("error");
           expect(res.body).to.have.deep.property("data").to.be.an("object");
-          expect(res.body.data).to.have.deep.property("message").to.be.equal("Name required");
+          expect(res.body.data).to.have.deep.property("message").to.be.equal("Given Name required");
           done();
         });
     });
@@ -74,7 +74,7 @@ describe(TEST_NAME, function() {
           expect(res.body).to.exist;
           expect(res.body).to.have.deep.property("status").to.be.equal("error");
           expect(res.body).to.have.deep.property("data").to.be.an("object");
-          expect(res.body.data).to.have.deep.property("message").to.be.equal("Social ID required");
+          expect(res.body.data).to.have.deep.property("message").to.be.equal("User ID required");
           done();
         });
     });

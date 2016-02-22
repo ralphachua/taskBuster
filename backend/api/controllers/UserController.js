@@ -3,37 +3,53 @@ module.exports = {
 
   create: function(req, res) {
 
-    if (!req.param("name")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Name required"));
-      return res.badRequest(payload);
-    }
-
-    if (!req.param("gender")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Gender required"));
-      return res.badRequest(payload);
-    }
-
-    if (!req.param("socialId")) {
-      var payload = ApiService.toErrorJSON(new Errors.InvalidArgumentError("Social ID required"));
-      return res.badRequest(payload);
-    }
-
-    var params = {
-      name:         req.param("name"),
-      gender:       req.param("gender"),
-      socialId:       req.param("socialId"),
-      avatarUrl:    "/avatar/123",
-      levelId:      1,
-      activeBadge:  "qwe098",
-      badges:       ["qwe098"]
-    }
-
     var tasks = {
-      save: function(next) {
-        User.create(params, function(err, user) {
+
+      exist: function(next) {
+        var params = {
+          socialId: req.param("user_id")
+        }
+        User.findOne(params, function(err, user) {
           return next(err, user);
-        });
-      }
+        })
+      },
+
+      save: ["exist", function(next, cres) {
+        if (_.isEmpty(cres.exist)) {
+          var params = {
+            name:         req.param("given_name"),
+            gender:       req.param("gender"),
+            socialId:     req.param("user_id"),
+            avatarUrl:    "/avatar/123",
+            levelId:      1,
+            activeBadge:  "qwe098",
+            badges:       ["qwe098"]
+          }
+
+          User.create(params, function(err, user) {
+            return next(err, user);
+          });
+        } else {
+          return next(null, cres.exist);
+        }
+      }],
+
+      project: ["save", function(next, cres) {
+        if (_.isEmpty(cres.exist)) {
+          var user = cres.save;
+          var params = {
+            projectName:  "Default Project",
+            createdBy:    user.id,
+            members:      [user.id]
+          };
+
+          Project.create(params, function(err, project) {
+            return next(err, project);
+          });
+        } else{
+          return next(null, cres.exist);
+        }
+      }]
     }
 
     async.auto(tasks, function(err, result) {
