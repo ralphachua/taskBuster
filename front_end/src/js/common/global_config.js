@@ -6,5 +6,11 @@ define({
     } else {
       return 'http://169.45.223.115:1337/';
     }
-  })()
+  })(),
+  USER_INFO: {
+    ID: 'user001',
+    TITLE: '',
+    NAME: '',
+    LV: 0
+  }
 });

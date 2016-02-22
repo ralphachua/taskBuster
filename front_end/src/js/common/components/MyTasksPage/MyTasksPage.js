@@ -84,7 +84,7 @@ define([
         console.log("compile");
 
         // comment if you're going to use mock data
-        getTasks(self,'user001', function updateTasks(err, response){
+        getTasks(self, config.USER_INFO.ID, function updateTasks(err, response){
           var newresponse;
           console.group('@getTasks');
           console.log('err: ', err);

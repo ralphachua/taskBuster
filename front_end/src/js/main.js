@@ -5,6 +5,7 @@ define([
   'vue-router',
   'common/components/ProgressBar/progressBar',
   'pages',
+  'common/global_config',
   'auth0'
 ],
 function (
@@ -14,6 +15,7 @@ function (
   Router,
   ProgressBar,
   Pages,
+  global,
   Auth0
   ) {
 
@@ -28,6 +30,7 @@ function (
   AppView = Vue.extend({
     data: function() {
       return {
+        userData: global.USER_INFO,
         isSidebarOn: false
       };
     },
