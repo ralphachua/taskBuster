@@ -8,6 +8,7 @@ define({
     }
   })(),
   USER_INFO: {
+    loggedIn: false,
     ID: '56ca99394aa1adfc70b3f108',
     name: '',
     avatarUrl: '',
