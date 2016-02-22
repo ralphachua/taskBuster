@@ -1,0 +1,38 @@
+<section class="section leaderboards-section grid">
+  <div>
+  LeaderBoards Users
+  <ul class="leaderboards-list">
+    <li class="leaderboards__item" v-for="user in users">
+      <div class="project-list__item__inner">
+        <h3 class="project__name primary">{{user.user_name}}</h3>
+        <h3 class="project__name primary">{{user.activeBadge.badgeName}}</h3>
+      </div>
+      <div class="project-list__item__inner">
+        <p class="project__name secondary">{{user.level.levelName}}</p>
+        <p class="project__name secondary">TOTAL TASK POINTS: {{user.level.totalPoints}}</p>
+      </div>
+      <ul class="badges-list">
+          <li class="badges__item" v-for="badge in user.badges">
+            {{badge.badgeUrl}}
+          </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+  <div>
+  LeaderBoards Projects
+  <ul class="leaderboards-list">
+    <li class="leaderboards__item" v-for="project in projects">
+      <div class="project-list__item__inner">
+        <h3 class="project__name primary">{{project.projectName}}, </h3>
+        <progress-bar
+          :progress="project.tasksDone"
+          :min="0"
+          :max="project.tasksTotal"
+          text="TASKS DONE "></progress-bar>
+      </div>
+    </li>
+  </ul>
+</div>
+</section>

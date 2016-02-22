@@ -1,13 +1,14 @@
-define(['vue',
+define(['jquery','vue', 'datedropper',
         'text!./ProjectDetailsPage.html',
-        'common/components/BurndownChart/burndownChart'
-      ], function (Vue, Template, Burndown) {
+        'common/components/BurndownChart/burndownChart',
+        'common/global_config'
+      ], function ($, Vue, dateDropper, Template, Burndown, config) {
 
 
   var getTeamMembers = function(vueComponent, projectid, done){
     console.group('@getTeamMembers');
     var xhr = {
-          url: 'http://localhost:1337/projects/' + projectid + '/members' ,
+          url: config.API_HOST +'projects/' + projectid + '/members' ,
           method: 'GET'
     };
 
@@ -28,7 +29,7 @@ define(['vue',
   var getProjectDetails = function(vueComponent, projectid, done){
     console.group('@getProjectDetails');
     var xhr = {
-          url: 'http://localhost:1337/projects/' + projectid ,
+          url: config.API_HOST+'projects/' + projectid ,
           method: 'GET'
     };
 
@@ -56,12 +57,26 @@ define(['vue',
         team:[]
       };
     },
+    ready: function(){
+      console.group("@due");
+      console.log($("#due").length);
+      $("#due").dateDropper(
+        { placeholder:"Add Due Date",
+         color:"#E12299",
+         textColor:"#212B37",
+         bgColor:"#ffffff",
+         borderColor:"#5ED7FF"  });
+
+      console.groupEnd();
+
+    },
     beforeCompile: function () {
       console.log('before compile');
       this.$log();
     },
     compiled: function () {
       console.log('Should get data from query obj');
+
       //use the contents of this.$route.query as parameters for the API call
       var self = this;
       console.log(this.$route.query);

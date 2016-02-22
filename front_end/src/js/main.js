@@ -59,7 +59,7 @@ function (
       component: Pages['badge-capsule-page']
     },
     '/leaderboards': {
-      component: Pages['leaderboard']
+      component: Pages['leaderboards']
     }
   });
 

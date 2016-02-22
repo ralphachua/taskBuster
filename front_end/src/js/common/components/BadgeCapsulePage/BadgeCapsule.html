@@ -1,26 +1,26 @@
 <section class="section badges-section grid">
   <div class="section__title">
     <div class="title primary centered">
-      Badge Capsule
+      Badge Capsule {{badges.length}}
     </div>
   </div>
   <div class="section__content">
     <ul class="badge-container grid">
-      <li class="badge col-4 centered">
+      <li class="badge col-4 centered" v-for="badge in badges">
         <div class="badge__image"></div>
         <div class="badge__description">
           <div class="badge__description__title">
-            "Space Trainee"
+            {{badge.badgeName}}
           </div>
 
           <div class="badge__description__text text">
-            Obtained by signing up as a task buster
+            Obtained {{badge.requiredPoints == 0 ? "by signing up as a task buster" : "completing "+badge.requiredPoints+" tasks."}} 
           </div>
 
           <div class="badge__status">
-            <div class="secondary">
+            <!-- <div class="secondary">
               Activated
-            </div>
+            </div> -->
             <div class="primary">
               Activate
             </div>

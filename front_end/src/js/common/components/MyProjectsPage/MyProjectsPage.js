@@ -1,7 +1,8 @@
 define(['vue',
   'jquery',
-  'text!./MyProjectsPage.html'
-  ],function(Vue, Jquery, Template ){
+  'text!./MyProjectsPage.html',
+  'common/global_config'
+  ],function(Vue, Jquery, Template, config ){
 
   var getProjects = function(vueComponent, xhr, done) {
     console.group('@getProjects');
@@ -41,7 +42,7 @@ define(['vue',
   var getProjectDetails = function(vueComponent, projectid, done){
     console.group('@getProjectDetails');
     var xhr = {
-          url: 'http://localhost:1337/projects/' + projectid ,
+          url: config.API_HOST +'projects/' + projectid ,
           method: 'GET'
     };
 
@@ -88,7 +89,7 @@ define(['vue',
 
         var userId = "user001";
         var xhr = {
-          url: 'http://1localhost:1337/users/' + userId + '/projects',
+          url: config.API_HOST +'users/' + userId + '/projects',
           method: 'GET'
         };
 
