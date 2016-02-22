@@ -30,21 +30,6 @@
 
 */
 
-.battlefield-section {
-  min-height: 300px;
-  background-color: $ash-blue;
-  position: relative;
-}
-  .battlefield-section__bg {
-    position: absolute;
-  }
-  .battlefield-section__fg { //foreground
-    position: absolute;
-  }
-
-  .battlefield-section__mg { //middleground
-    position: absolute;
-  }
 
 .task-table {
   background-color: $task-table-bgcolor;

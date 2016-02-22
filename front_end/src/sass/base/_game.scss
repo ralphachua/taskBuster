@@ -1,3 +1,20 @@
+.battlefield-section {
+  min-height: 300px;
+  background-color: $ash-blue;
+  position: relative;
+  background-image: url(../../img/images/battleground-BG.png);
+}
+  .battlefield-section__bg {
+    position: absolute;
+  }
+  .battlefield-section__fg { //foreground
+    position: absolute;
+  }
+
+  .battlefield-section__mg { //middleground
+    position: absolute;
+  }
+
 .avatar {
   width: 274px;
   height: 140px;
@@ -13,6 +30,14 @@
     	        -ms-animation: avatar-ready .5s steps(6) infinite;
     	         -o-animation: avatar-ready .5s steps(6) infinite;
     	            animation: avatar-ready .5s steps(5) forwards;
+  }
+
+  &.firing {
+    -webkit-animation: avatar-fire 1s steps(9) forwards;
+       -moz-animation: avatar-fire 1s steps(10) infinite;
+        -ms-animation: avatar-fire 1s steps(10) infinite;
+         -o-animation: avatar-fire 1s steps(10) infinite;
+            animation: avatar-fire 1s steps(9) forwards;
   }
 }
 .monster-group {
@@ -38,17 +63,129 @@
   from { background-position:    0px; }
     to { background-position: -1425px; }
 }
+
+
+@-webkit-keyframes avatar-idle {
+   from { background-position:    0px; }
+     to { background-position: -1425px; }
+}
+
+@-moz-keyframes avatar-idle {
+   from { background-position:    0px; }
+     to { background-position: -1425px; }
+}
+
+@-ms-keyframes avatar-idle {
+   from { background-position:    0px; }
+     to { background-position: -1425px; }
+}
+
+@-o-keyframes avatar-idle {
+   from { background-position:    0px; }
+     to { background-position: -1425px; }
+}
+
+
 @keyframes avatar-ready {
   from { background-position:     -1425px; }
         to { background-position: 	-2850px; }
 }
+
+@-webkit-keyframes avatar-ready {
+   from { background-position: -1425px; }
+     to { background-position: -2850px; }
+}
+
+@-moz-keyframes avatar-ready {
+   from { background-position:     -1425px; }
+     to { background-position: -2850px; }
+}
+
+@-ms-keyframes avatar-ready {
+   from { background-position:     -1425px; }
+     to { background-position: -2850px; }
+}
+
+@-o-keyframes avatar-ready {
+   from { background-position:     -1425px; }
+     to { background-position: -2850px; }
+}
+
+
+
+@keyframes avatar-fire {
+  from { background-position: -3135px; }
+    to { background-position: -5700px; }
+}
+
+@-webkit-keyframes avatar-fire {
+   from { background-position: -3135px; }
+     to { background-position: -5700px; }
+}
+
+@-moz-keyframes avatar-fire {
+   from { background-position:     -3135px; }
+     to { background-position: -5985px; }
+}
+
+@-ms-keyframes avatar-fire {
+   from { background-position:     -3135px; }
+     to { background-position: -5985px; }
+}
+
+@-o-keyframes avatar-fire {
+   from { background-position:     -3135px; }
+     to { background-position: -5985px; }
+}
+
+
 
 @keyframes monster-alive {
 from {background-position: 0px 0;}
 to   {background-position: -1080px 0;}
 }
 
+@-webkit-keyframes monster-alive {
+   from { background-position:    0px; }
+     to { background-position: -1080px; }
+}
+
+@-moz-keyframes monster-alive {
+   from { background-position:    0px; }
+     to { background-position: -1080px; }
+}
+
+@-ms-keyframes monster-alive {
+   from { background-position:    0px; }
+     to { background-position: -1080px; }
+}
+
+@-o-keyframes monster-alive {
+   from { background-position:    0px; }
+     to { background-position: -1080px; }
+}
+
 @keyframes monster-dead {
 from {background-position: 0px 0;}
 to   {background-position: -2880px 0;}
+}
+
+@-webkit-keyframes monster-dead {
+   from { background-position: -1120px; }
+     to { background-position: -2880px; }
+}
+
+@-moz-keyframes monster-dead {
+   from { background-position:  -1120px; }
+     to { background-position: -2880px; }
+}
+
+@-ms-keyframes monster-dead {
+   from { background-position:  -1120px; }
+     to { background-position: -2880px; }
+}
+
+@-o-keyframes monster-dead {
+   from { background-position: -1120px; }
+     to { background-position: -2880px; }
 }
