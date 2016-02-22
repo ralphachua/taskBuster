@@ -10,5 +10,8 @@ requirejs.config({
     phaser         : 'vendor/phaser',
     animatesprite  : 'vendor/jquery.animateSprite.min'
   },
+  shim: {
+    animatesprite: ['jquery']
+  },
   deps: ['main']
 });

@@ -1,5 +1,6 @@
 <section class="battlefield-section">
-<div class="battlefield-section__bg">
-</div>
-<div class="monster"></div>
+  <div class="avatar" :class="{'ready' : isReady}"></div>
+  <div class="monster-group">
+    <monster v-for="task in tasks | filterBy 'ONGOING' in 'status'" v-bind:task-data="task"></monster>
+  </div>
 </section>

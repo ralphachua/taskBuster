@@ -1,5 +1,54 @@
+.avatar {
+  width: 274px;
+  height: 140px;
+  background-image: url(../../img/game/avatar_spritesheet.png);
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  animation: avatar-idle 1.5s steps(5) infinite;
+
+  &.ready {
+    -webkit-animation: avatar-ready .5s steps(5) forwards;
+    	       -moz-animation: avatar-ready .5s steps(6) infinite;
+    	        -ms-animation: avatar-ready .5s steps(6) infinite;
+    	         -o-animation: avatar-ready .5s steps(6) infinite;
+    	            animation: avatar-ready .5s steps(5) forwards;
+  }
+}
+.monster-group {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 .monster {
     height: 160px;
     width: 280px;
-    background-image: url(../../img/game/monster_spritesheet_died.png);
+    background-image: url(../../img/game/monster_spritesheet.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-left: -80px;
+    animation: monster-alive 0.6s steps(4) infinite;
+    &.dead {
+      animation: monster-dead 0.6s steps(5) 1;
+
+    }
+}
+
+@keyframes avatar-idle {
+  from { background-position:    0px; }
+    to { background-position: -1425px; }
+}
+@keyframes avatar-ready {
+  from { background-position:     -1425px; }
+        to { background-position: 	-2850px; }
+}
+
+@keyframes monster-alive {
+from {background-position: 0px 0;}
+to   {background-position: -1080px 0;}
+}
+
+@keyframes monster-dead {
+from {background-position: 0px 0;}
+to   {background-position: -2880px 0;}
 }
